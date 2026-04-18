@@ -443,17 +443,37 @@ window.editProgram = function(id) {
   document.getElementById('progCertificate').value = p.certificate || '';
   document.getElementById('progSeats').value = p.seats || '';
   
-  const vArr = (field) => field && field.id ? field : { id: Array.isArray(field)?field:[], ja: [] };
-  document.getElementById('progOverview').value = vArr(p.overview).id.join('\n\n');
-  document.getElementById('progOverviewJa').value = vArr(p.overview).ja.join('\n\n');
-  document.getElementById('progFeatures').value = vArr(p.features).id.join('\n');
-  document.getElementById('progFeaturesJa').value = vArr(p.features).ja.join('\n');
-  document.getElementById('progRequirements').value = vArr(p.requirements).id.join('\n');
-  document.getElementById('progRequirementsJa').value = vArr(p.requirements).ja.join('\n');
+  const vArr = (field) => {
+    if (!field) return { id: [], ja: [] };
+    if (field.id && field.ja) return field;
+    if (Array.isArray(field)) return { id: field, ja: [] };
+    return { id: [], ja: [] };
+  };
+
+  const toCleanArr = (arr) => arr.map(item => (typeof item === 'object' && item !== null) ? (item.id || '') : item);
+
+  document.getElementById('progOverview').value = toCleanArr(vArr(p.overview).id).join('\n\n');
+  document.getElementById('progOverviewJa').value = toCleanArr(vArr(p.overview).ja).join('\n\n');
+  document.getElementById('progFeatures').value = toCleanArr(vArr(p.features).id).join('\n');
+  document.getElementById('progFeaturesJa').value = toCleanArr(vArr(p.features).ja).join('\n');
+  document.getElementById('progRequirements').value = toCleanArr(vArr(p.requirements).id).join('\n');
+  document.getElementById('progRequirementsJa').value = toCleanArr(vArr(p.requirements).ja).join('\n');
+  document.getElementById('progCurriculum').value = toCleanArr(vArr(p.curriculum).id).join('\n');
+  document.getElementById('progCurriculumJa').value = toCleanArr(vArr(p.curriculum).ja).join('\n');
   
-  const parseBen = (b) => `${b.icon || ''}|${b.title || ''}|${b.desc || ''}`;
+  const parseBen = (b) => {
+    const bTitle = (typeof b.title === 'object') ? b.title.id : b.title;
+    const bDesc = (typeof b.desc === 'object') ? b.desc.id : b.desc;
+    return `${b.icon || ''}|${bTitle || ''}|${bDesc || ''}`;
+  };
+  const parseBenJa = (b) => {
+    const bTitle = (typeof b.title === 'object') ? b.title.ja : b.title;
+    const bDesc = (typeof b.desc === 'object') ? b.desc.ja : b.desc;
+    return `${b.icon || ''}|${bTitle || ''}|${bDesc || ''}`;
+  };
+
   document.getElementById('progBenefits').value = vArr(p.benefits).id.map(parseBen).join('\n');
-  document.getElementById('progBenefitsJa').value = vArr(p.benefits).ja.map(parseBen).join('\n');
+  document.getElementById('progBenefitsJa').value = vArr(p.benefits).ja.map(parseBenJa).join('\n');
   
   document.getElementById('progWaText').value = p.whatsappText || '';
   if (p.heroImage) {
@@ -508,6 +528,10 @@ document.getElementById('programForm').addEventListener('submit', async (e) => {
       requirements: { 
         id: document.getElementById('progRequirements').value.split('\n').filter(Boolean),
         ja: document.getElementById('progRequirementsJa').value.split('\n').filter(Boolean)
+      },
+      curriculum: { 
+        id: document.getElementById('progCurriculum').value.split('\n').filter(Boolean),
+        ja: document.getElementById('progCurriculumJa').value.split('\n').filter(Boolean)
       },
       benefits: {
         id: parseBenVal(document.getElementById('progBenefits').value.trim().split('\n').filter(Boolean)),

@@ -69,24 +69,24 @@ async function initProgramDetail() {
     document.getElementById('overviewContent').innerHTML =
       `<p>${curDesc}</p>` + curOverview.map(p => `<p>${p}</p>`).join('');
 
-    // Curriculum
+    // Curriculum & Materi
+    const curCurriculum = tArr(curriculum);
     const curFeatures = tArr(features);
-    if (curriculum.length > 0) {
-      document.getElementById('curriculumContent').innerHTML = curriculum.map(phase => `
+    
+    if (curCurriculum.length > 0) {
+      document.getElementById('curriculumContent').innerHTML = `
         <div class="detail-curriculum-phase">
-          <div class="detail-curriculum-phase__header">
-            <h3 class="detail-curriculum-phase__title">${phase.phase}</h3>
-            <span class="detail-curriculum-phase__duration">${phase.duration}</span>
-          </div>
-          <ul>${phase.items.map(item => `<li>${item}</li>`).join('')}</ul>
+          <ul>${curCurriculum.map(item => `<li>${tVal(item)}</li>`).join('')}</ul>
         </div>
-      `).join('');
+      `;
     } else if (curFeatures.length > 0) {
       document.getElementById('curriculumContent').innerHTML = `
         <div class="detail-curriculum-phase">
-          <ul>${curFeatures.map(f => `<li>${f}</li>`).join('')}</ul>
+          <ul>${curFeatures.map(f => `<li>${tVal(f)}</li>`).join('')}</ul>
         </div>
       `;
+    } else {
+      document.getElementById('curriculumBlock').style.display = 'none';
     }
 
     // Sectors (SSW only)

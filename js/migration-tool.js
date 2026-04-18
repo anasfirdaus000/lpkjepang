@@ -7,25 +7,36 @@ const migrationData = [
     badge: 'Popular',
     title: { id: 'Program Magang', ja: '技能実習プログラム' },
     tagline: { id: 'Ginou Jisshusei', ja: '技能実習' },
-    duration: '1 - 3 Tahun',
-    level: 'N5 - N4',
+    duration: { id: '1 - 3 Tahun', ja: '1〜3年' },
+    level: { id: 'N5 - N4', ja: 'N5〜N4' },
     certificate: 'Sertifikat Magang (JITCO)',
     seats: 'Sesuai Kuota',
     description: { 
       id: 'Program pemagangan Teknis (Ginou Jisshusei) adalah program berlatih sambil bekerja. Program magang berlangsung selama 1 sampai 3 tahun tergantung perjanjian kontrak kerja dengan perusahaan yang memperkerjakan. Program ini tidak hanya menawarkan peluang pekerjaan, tetapi juga belajar sambil meningkatkan skil / keterampilan.', 
       ja: '技能実習制度（技能実習生）は、日本企業での実務を通じて学びながら働くプログラムです。最短1年から最長3年の契約となり、就労機会だけでなく、スキルアップや技術習得も目指せます。' 
     },
-    features: [
-      { id: 'Pria – Wanita', ja: '男性・女性' },
-      { id: 'Usia 18 s/d 28 tahun', ja: '年齢18歳〜28歳' },
-      { id: 'Pendidikan min SMA/K Sederajat', ja: '最終学歴：高校卒業以上' },
-      { id: 'Sehat jasmani dan rohani', ja: '心身ともに健康であること' },
-      { id: 'Belum pernah mengikuti program Magang sebelumnya', ja: '過去に技能実習プログラムに参加したことがないこと' }
-    ],
-    benefits: [
-      { icon: 'payments', title: { id: 'Uang Saku', ja: '手当' }, desc: { id: 'Mendapat uang saku berkala dari perusahaan.', ja: '企業から定期的な手当が支給されます。' } },
-      { icon: 'school', title: { id: 'Meningkatkan Skill', ja: 'スキルアップ' }, desc: { id: 'Belajar budaya kerja langsung dari praktek lapangan.', ja: '現場実習から直接仕事の文化を学びます。' } }
-    ],
+    features: {
+      id: ['Program berlatih sambil bekerja', 'Kontrak 1 - 3 Tahun', 'Meningkatkan skil & keterampilan'],
+      ja: ['実務を通じた学習プログラム', '1〜3年の契約期間', 'スキルと技能の向上']
+    },
+    requirements: {
+      id: ['Pria – Wanita', 'Usia 18 s/d 28 tahun', 'Pendidikan min SMA/K Sederajat', 'Sehat jasmani dan rohani', 'Belum pernah mengikuti program Magang Jepang sebelumnya'],
+      ja: ['男性・女性', '年齢18歳〜28歳', '最終学歴：高校卒業以上', '心身ともに健康であること', '過去に日本の技能実習プログラムに参加したことがないこと']
+    },
+    curriculum: {
+      id: ['Pelatihan Dasar Bahasa Jepang', 'Pembekalan Budaya & Etika Kerja', 'Persiapan Fisik & Mental'],
+      ja: ['基礎日本語研修', '日本文化と労働倫理の研修', '体力およびメンタル面の準備']
+    },
+    benefits: {
+      id: [
+        { icon: 'payments', title: 'Uang Saku', desc: 'Mendapat uang saku berkala dari perusahaan.' },
+        { icon: 'school', title: 'Sertifikasi', desc: 'Mendapat sertifikat keahlian resmi setelah selesai.' }
+      ],
+      ja: [
+        { icon: 'payments', title: '手当', desc: '企業から定期的な手当が支給されます。' },
+        { icon: 'school', title: '認定書', desc: '修了後に公式な技能認定書が授与されます。' }
+      ]
+    },
     whatsappText: 'Halo Fujisaki Gakuin, saya tertarik mendaftar Program Magang.'
   },
   {
@@ -33,25 +44,36 @@ const migrationData = [
     badge: 'Flagship',
     title: { id: 'Program Tokutei Ginou (TG)', ja: '特定技能（TG）プログラム' },
     tagline: { id: 'Specified Skilled Worker (SSW)', ja: '特定技能' },
-    duration: 'Sampai 5 Tahun',
-    level: 'JFT Basic A2 / JLPT N4',
+    duration: { id: 'Hingga 5 Tahun', ja: '最大5年間' },
+    level: { id: 'JFT Basic A2 / JLPT N4', ja: 'JFT A2 / JLPT N4' },
     certificate: 'Sertifikat SSW / Senmonkyu',
     seats: 'Sesuai Kuota',
     description: { 
-      id: 'Program Tokutei Ginou (TG) atau disebut dengan Specified Skilled Worker (SSW) adalah program kerja ke Jepang untuk Orang Asing dengan Visa keahlian khusus guna memenuhi kebutuhan lowongan pekerjaan di Jepang yang semakin meningkat. Program TG berlangsung sejak tahun 2019 hingga sekarang. Pemegang Visa TG dapat bekerja di Jepang selama 5th. Saat ini ada 14 bidang pekerjaan yang terdaftar dan dapat mengajuan Visa TG 2 sehingga dapat bekerja di Jepang lebih dari 5th. Sertifikat Kemampuan Bahasa Jepang (JFT Basic A2 / JLPT N4) serta Sertifikat Keterampilan menjadi syarat wajib sebelum melamar.', 
-      ja: '特定技能（TG/SSW）は、深刻化する人手不足に対応するため、特定の専門技能を持つ外国人に与えられる就労ビザです。2019年から開始され、最大5年間の就労が可能です。現在14職種が対象で、特定技能2号への移行により5年を超えた長期就労や家族の帯同も可能になります。JFT Basic A2またはJLPT N4の合格が必須条件です。' 
+      id: 'Program Tokutei Ginou (TG) atau disebut dengan Specified Skilled Worker (SSW) adalah program kerja ke Jepang untuk Orang Asing dengan Visa keahlian khusus guna memenuhi kebutuhan lowongan pekerjaan di Jepang yang semakin meningkat. Program TG berlangsung sejak tahun 2019 hingga sekarang. Pemegang Visa TG dapat bekerja di Jepang selama 5th. Saat ini ada 14 bidang pekerjaan yang terdaftar dan dapat mengajuan Visa TG 2 sehingga dapat bekerja di Jepang lebih dari 5th.', 
+      ja: '特定技能（TG/SSW）は、深刻化する人手不足に対応するため、特定の専門技能を持つ外国人に与えられる就労ビザです。2019年から開始され、最大5年間の就労が可能です。現在14職種が対象で、特定技能2号への移行により家族の帯同や長期就労も可能になります。' 
     },
-    features: [
-      { id: 'Pria – Wanita', ja: '男性・女性' },
-      { id: 'Usia 18 s/d 35 tahun', ja: '年齢18歳〜35歳' },
-      { id: 'Pendidikan SMA / K Sederajat', ja: '最終学歴：高校卒業以上' },
-      { id: 'Sehat jasmani dan rohani', ja: '心身ともに健康であること' },
-      { id: 'Sertifikat Senmonkyu / 3kyu (bagi eks Magang)', ja: '専門級・3級試験合格（技能実習修了者）' }
-    ],
-    benefits: [
-      { icon: 'payments', title: { id: 'Gaji Karyawan', ja: '給与' }, desc: { id: 'Standar gaji sesuai pekerja di Jepang.', ja: '日本人の従業員と同等の給与水準です。' } },
-      { icon: 'card_travel', title: { id: 'Perpanjangan', ja: '更新可能' }, desc: { id: 'Bisa berlanjut ke TG2.', ja: '特定技能2号への移行も可能です。' } }
-    ],
+    features: {
+      id: ['Visa Keahlian Khusus', 'Berlaku mulai th 2019', 'Tersedia 14 bidang pekerjaan', 'Dapat lanjut ke Visa TG 2'],
+      ja: ['特定技能ビザの取得', '2019年スタートの制度', '現在14の職種が対象', '特定技能2号への移行可能']
+    },
+    requirements: {
+      id: ['Pria – Wanita', 'Usia 18 s/d 35 tahun', 'Pendidikan SMA / K Sederajat', 'Sehat jasmani dan rohani', 'Sertifikat Kemampuan Bahasa (JFT Basic A2 / JLPT N4)', 'Sertifikat Keterampilan Khusus', 'Sertifikat Senmonkyu / 3kyu (bagi eks Magang)'],
+      ja: ['男性・女性', '年齢18歳〜35歳', '高校卒業以上', '心身ともに健康であること', '日本語能力証明（JFT A2 または JLPT N4）', '特定技能評価試験の合格証', '実習3級または随時3級（技能実習修了者の場合）']
+    },
+    curriculum: {
+      id: ['Pemantapan Bahasa Jepang Kerja', 'Latihan Soal Skill Test Sektor', 'Pendampingan Matching Perusahaan'],
+      ja: ['就労のための日本語強化', '各職種別技能試験対策', '企業とのマッチング支援']
+    },
+    benefits: {
+      id: [
+        { icon: 'payments', title: 'Gaji Standar Jepang', desc: 'Mendapat gaji setara dengan pekerja lokal Jepang.' },
+        { icon: 'family_restroom', title: 'TG 2 Support', desc: 'Peluang membawa keluarga di masa depan via TG 2.' }
+      ],
+      ja: [
+        { icon: 'payments', title: '日本人と同等の給与', desc: '日本人の従業員と同等の給与水準です。' },
+        { icon: 'family_restroom', title: '家族帯同の可能性', desc: '特定技能2号に進むことで家族の帯同も可能になります。' }
+      ]
+    },
     whatsappText: 'Halo Fujisaki Gakuin, saya ingin mendaftar Program Tokutei Ginou.'
   },
   {
@@ -64,20 +86,31 @@ const migrationData = [
     certificate: 'D3 / S1 Resmi DIKTI',
     seats: 'Sesuai Lowongan',
     description: { 
-      id: 'Visa Gijinkoku atau yang sering dikenal dengan Engineering adalah Program Kerja ke Jepang dengan keterampilan Profesional. Peserta diwajibkan Lulusan D3 / S1 dari universitas yang terdaftar resmi di DIKTI. Kemampuan Bahasa yang baik menjadi nilai plus untuk para pencari lowongan Gijingkoku / Engineering. Masa kerja Visa Gijinkoku adalah dapat diperpanjang setiap tahunnya selama perusahaan penerima dan pekerja masih bersedia.', 
+      id: 'Visa Gijinkoku atau yang sering dikenal dengan Engineering adalah Program Kerja ke Jepang dengan keterampilan Profesional. Peserta diwajibkan Lulusan D3 / S1 dari universitas yang terdaftar resmi di DIKTI. Kemampuan Bahasa yang baik menjadi nilai plus untuk para pencari lowongan Gijingkoku / Engineering. Masa kerja Visa Gijinkoku adalah dapat dapat diperpanjang setiap tahunnya selama perusahaan penerima dan pekerja masih bersedia.', 
       ja: '技術・人文知識・国際業務ビザ（技人国）は、専門的なスキルを持つ高度人材向けの就労ビザです。DIKTIに登録されている大学のD3またはS1の学位が必須です。高い日本語能力は採用において有利に働きます。契約が続く限り、毎年ビザの更新が可能です。' 
     },
-    features: [
-      { id: 'Pria – Wanita', ja: '男性・女性' },
-      { id: 'Usia 21 – 40 tahun', ja: '年齢21歳〜40歳' },
-      { id: 'Pendidikan Min D3 / S1 (Teknik diutamakan)', ja: 'D3/S1学位保持者（工業系学部優先）' },
-      { id: 'Bahasa Jepang tingkat Mahir', ja: '上級レベルの日本語能力' },
-      { id: 'Sehat Jasmani dan rohani', ja: '心身ともに健康であること' }
-    ],
-    benefits: [
-      { icon: 'engineering', title: { id: 'Professional', ja: 'プロフェッショナル' }, desc: { id: 'Status Visa Pekerja Profesional.', ja: 'プロフェッショナルな就労ビザステータス。' } },
-      { icon: 'work', title: { id: 'Dapat Diperpanjang', ja: '更新可能' }, desc: { id: 'Kontrak dapat selalu diperpanjang.', ja: '契約は常に更新可能です。' } }
-    ],
+    features: {
+      id: ['Program Kerja Keterampilan Profesional', 'Berbasis Ijazah D3 / S1', 'Visa dapat diperpanjang setiap tahun'],
+      ja: ['プロフェッショナルな専門職就労', 'D3/S1学位をベースとした採用', 'ビザの毎年更新が可能']
+    },
+    requirements: {
+      id: ['Pria – Wanita', 'Usia 21 – 40 tahun', 'Pendidikan Min Lulusan D3 / S1 (Teknik diutamakan)', 'Keterampilan Bahasa Jepang tingkat Mahir', 'Sehat Jasmani dan rohani'],
+      ja: ['男性・女性', '年齢21歳〜40歳', 'D3/S1学位保持者（工業系学部優先）', '上級レベルの日本語能力', '心身ともに健康であること']
+    },
+    curriculum: {
+      id: ['Pelatihan Business Japanese', 'Persiapan Interview Profesional', 'Kajian Budaya Kerja Perusahaan Jepang'],
+      ja: ['ビジネス日本語研修', '専門職面接対策', '日本企業の労働文化研究']
+    },
+    benefits: {
+      id: [
+        { icon: 'engineering', title: 'Karir Professional', desc: 'Bekerja sesuai dengan bidang keahlian akademik.' },
+        { icon: 'trending_up', title: 'Jenjang Karir', desc: 'Peluang promosi dan kenaikan gaji periodik.' }
+      ],
+      ja: [
+        { icon: 'engineering', title: '専門的なキャリア', desc: '自分の専門分野を活かした仕事に従事できます。' },
+        { icon: 'trending_up', title: 'キャリアパス', desc: '定期的な昇給や昇進のチャンスがあります。' }
+      ]
+    },
     whatsappText: 'Halo Fujisaki Gakuin, saya lulusan universitas dan tertarik Program Engineering (Gijinkoku).'
   },
   {
@@ -86,42 +119,51 @@ const migrationData = [
     title: { id: 'Program Student / Study', ja: '留学プログラム' },
     tagline: { id: 'Ryugaku', ja: '留学' },
     duration: { id: 'Hingga Lulus', ja: '卒業まで' },
-    level: { id: 'Pemula', ja: '初心者' },
-    certificate: 'Sertifikat Lulus',
+    level: { id: 'Dasar / Pemula', ja: '基礎 / 初心者' },
+    certificate: 'Sertifikat Lulus Language School',
     seats: 'Terbuka',
     description: { 
-      id: 'Program Student / Study atau 留学 Ryugaku adalah Program belajar di Jepang dengan Visa Student / Pelajar asing. Program ini sering dipilih bagi peserta yang berminat untuk mempersiapkan masuk Universitas di Jepang. Pemegang visa Study diizinkan untuk melakukan kerja paruh waktu Max 28 jam / minggu. Setelah dinyatakan LULUS peserta dapat memilih untuk masuk Universitas atau mengambil Visa Kerja di Jepang.', 
+      id: 'Program Student / Study atau 留学 Ryugaku adalah Program belajar di Jepang dengan Visa Student / Pelajar asing. Program ini sering diplih bagi peserta yang berminat untuk mempersiapkan masuk Universitas di Jepang. Pemegang visa Study diijinkan untuk melakukan kerja paruh waktu untuk memenuhi kebutuhan sehati hari dengan ketentuan Max 28jam / minnggu. Setelah dinyatakan LULUS peserta dapat memilih untuk masuk Universitas atau mengambil Visa Kerja di Jepang.', 
       ja: '留学（Ryugaku）ビザは、日本の日本語学校、専門学校、または大学で学ぶためのプログラムです。将来的に日本の大学進学を目指す方に最適です。留学ビザでは、生活費を補うために、週28時間以内のアルバイト（資格外活動）が認められています。卒業後は、進学または就労ビザへの切り替えが可能です。' 
     },
-    features: [
-      { id: 'Pria – Wanita', ja: '男性・女性' },
-      { id: 'Usia 18 s/d 30 tahun', ja: '年齢18歳〜30歳' },
-      { id: 'Pendidikan Min SMA/ K Sederajat', ja: '高校卒業以上' },
-      { id: 'Ekonomi keluarga yang baik', ja: '安定した家庭内経済状況' },
-      { id: 'Bersedia menyelesaikan studi', ja: '卒業まで学習を継続できること' }
-    ],
-    benefits: [
-      { icon: 'schedule', title: { id: 'Kerja Paruh Waktu', ja: 'アルバイト' }, desc: { id: 'Diijinkan Arubaito max 28 jam / minggu.', ja: '週28時間までのアルバイトが許可されます。' } },
-      { icon: 'school', title: { id: 'Lanjut Pendidikan', ja: '進学' }, desc: { id: 'Peluang lolos Universitas Daigaku Jepang.', ja: '日本の大学への進学チャンス。' } }
-    ],
+    features: {
+      id: ['Visa Student / Pelajar Asing', 'Izin kerja paruh waktu 28 jam/minggu', 'Persiapan masuk Universitas di Jepang'],
+      ja: ['留学生用学生ビザの取得', '週28時間までのアルバイト許可', '日本の大学進学準備']
+    },
+    requirements: {
+      id: ['Pria – Wanita', 'Usia 18 s/d 30 tahun', 'Pendidikan Min SMA/ K Sederajat', 'Memiliki perekonomian keluarga yang baik', 'Bersedia untuk menyelesaikan masa study hingga lulus'],
+      ja: ['男性・女性', '年齢18歳〜30歳', '高校卒業以上', '安定した学費支弁能力があること', '卒業まで真面目に学習を継続できること']
+    },
+    curriculum: {
+      id: ['Bahasa Jepang Akademik', 'Persiapan Ujian EJU / JLPT', 'Konsultasi Penjurusan Universitas'],
+      ja: ['アカデミック日本語学習', 'EJU / JLPT 試験対策', '大学・専門学校進学ガイダンス']
+    },
+    benefits: {
+      id: [
+        { icon: 'school', title: 'Pendidikan Lanjutan', desc: 'Membuka jalan masuk ke Universitas terbaik di Jepang.' },
+        { icon: 'work', title: 'Izin Arubaito', desc: 'Dapat bekerja paruh waktu untuk biaya hidup.' }
+      ],
+      ja: [
+        { icon: 'school', title: '高等教育への道', desc: '日本の上位大学への進学に有利になります。' },
+        { icon: 'work', title: 'アルバイト許可', desc: '生活費のための資格外活動が認められます。' }
+      ]
+    },
     whatsappText: 'Halo Fujisaki Gakuin, saya tertarik Program Student (Ryugaku).'
   }
 ];
 
 export async function runMigration(onProgress) {
-  if (onProgress) onProgress('🚀 Memulai migrasi data program khusus...');
+  if (onProgress) onProgress('🚀 Memulai migrasi data program (4 Program Utama)...');
   const collName = 'programs_v2';
   
   for (const item of migrationData) {
     try {
-      // We only update the dynamic fields to not overwrite images if they changed them in admin
-      // But for this case, the user wants me to "masukan ulang", so I'll do a merge update
       await setDoc(doc(db, collName, item.slug), item, { merge: true });
-      if (onProgress) onProgress(`\u2705 Program [${item.slug}] berhasil diperbarui.`);
+      if (onProgress) onProgress(`✅ Program [${item.slug}] berhasil diperbarui.`);
     } catch (e) {
-      if (onProgress) onProgress(`\u274C Error [${item.slug}]: ${e.message}`);
+      if (onProgress) onProgress(`❌ Error [${item.slug}]: ${e.message}`);
     }
   }
   
-  if (onProgress) onProgress('\u2728 Migrasi data selesai!');
+  if (onProgress) onProgress('✨ Migrasi 4 program selesai!');
 }
