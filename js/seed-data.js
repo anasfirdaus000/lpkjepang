@@ -29,6 +29,18 @@ const contactData = {
   email: 'info@fujisakigakuin.id'
 };
 
+const aboutData = {
+  desc1: {
+    id: 'Adalah Lembaga pelatihan Bahasa Jepang yang Fokus Membimbing siswa/ peserta pelatihan dari Level dasar sampai Mahir agar siap untuk bekerja di Jepang. Tidak hanya membimbing siswa dengan kemampuan Bahasa Jepang, kami juga membekali siswa dengan keterampilan kerja, pengetahuan teknologi, budaya, dan etos kerja di Jepang.',
+    ja: '当校は、日本語の習熟度に応じて、基礎から上級レベルまで学生を指導し、日本での就労に向けた準備を行う日本語学校です。日本語だけでなく、日本での仕事に必要なスキル、技術知識、文化、労働倫理も指導します。'
+  },
+  desc2: {
+    id: 'Berdiri sejak th 2019 dengan kapasitas 300 siswa dan saat ini ada 1668 siswa yang saat ini ada di Jepang (tersebar di berbagai kota di Jepang). Melalui program Magang, Tokutei Ginou, Gijinkoku/ engineering & Study dengan berbagai bidang pekerjaan (Konstruksi, pertanian, peternakan, pengolahan makanan, building cleaning, manufaktur, dsb).',
+    ja: '2019年に設立され、定員は300名です。現在、1,668名の学生が日本全国の様々な都市に在籍しています。技能実習、特定技能、技術・人文知識・国際業務、留学などのプログラムを通じて、建設、農業、畜産、食品加工、ビルクリーニング、製造業など様々な分野で活動しています。'
+  },
+  image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDQqT4o-bWl60eYd4g-kF-oWd7Hclz7u5uT90tWf_qYqE2pZ3t3OZyN5g2u7pD7D7Dk-x8C1H2nLq5eJp5zKkQZ3vXw5xT1cZ9U4tXjW-RZmX2K-S7E4tN5wZ9jT9HjX1K1R5U-XnC_5WU8WbIJPZShyNdXji9JeV8S91MFJCDHRKN1SrSL46kmEK33RgLpSPYaIInNfyz8qAkBS3829xKklrJBIHUDolgwgRxmUWDhV1VzDGq4'
+};
+
 const statsData = [
   { icon: 'school', number: 1500, suffix: '+', label: 'Alumni Sukses', order: 0 },
   { icon: 'handshake', number: 45, suffix: '+', label: 'Partner Industri', order: 1 },
@@ -343,6 +355,7 @@ export async function seedAllData(onProgress) {
   if (onProgress) onProgress('🚀 Memulai seed data...');
 
   await seedSettingsDoc('hero', heroData);
+  await seedSettingsDoc('about', aboutData);
   await seedSettingsDoc('contact', contactData);
   await seedIfEmpty('stats', statsData);
   await seedIfEmpty('programs_v2', programsData);

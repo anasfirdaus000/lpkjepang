@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
@@ -30,6 +30,9 @@
       </button>
       <button class="sidebar__link" data-section="hero">
         <span class="material-symbols-outlined">home</span> Hero Section
+      </button>
+      <button class="sidebar__link" data-section="about">
+        <span class="material-symbols-outlined">business</span> Tentang Kami
       </button>
       <button class="sidebar__link" data-section="stats">
         <span class="material-symbols-outlined">bar_chart</span> Pencapaian
@@ -90,6 +93,13 @@
           <div class="overview-stat-card__info">
             <span class="overview-stat-card__value" id="ovHero">—</span>
             <span class="overview-stat-card__label">Hero Section</span>
+          </div>
+        </div>
+        <div class="overview-stat-card">
+          <span class="material-symbols-outlined">business</span>
+          <div class="overview-stat-card__info">
+            <span class="overview-stat-card__value" id="ovAbout">—</span>
+            <span class="overview-stat-card__label">Tentang Kami</span>
           </div>
         </div>
         <div class="overview-stat-card">
@@ -201,6 +211,48 @@
               <span>Klik untuk upload gambar</span>
             </div>
             <input type="file" id="heroImageFile" accept="image/*" hidden />
+          </div>
+        </div>
+        <button type="submit" class="btn-admin-primary"><span class="material-symbols-outlined">save</span> Simpan</button>
+      </form>
+    </div>
+
+    <!-- TENTANG KAMI -->
+    <div class="admin-panel" id="panel-about" style="display:none;">
+      <div class="panel-header">
+        <h2 class="panel-title">Tentang Kami</h2>
+        <p class="panel-desc">Kelola profil deskripsi perusahaan dan gambar Tentang Kami (Mendukung Bahasa Indonesia & Jepang).</p>
+      </div>
+      <form class="admin-form" id="aboutForm">
+        <div class="form-group">
+          <label>Gambar Tentang Kami</label>
+          <div class="image-upload" id="aboutImageUpload">
+            <img id="aboutImagePreview" src="" alt="" style="display:none;" />
+            <div class="image-upload__placeholder" id="aboutImagePlaceholder">
+              <span class="material-symbols-outlined">cloud_upload</span>
+              <span>Klik untuk upload gambar</span>
+            </div>
+            <input type="file" id="aboutImageFile" accept="image/*" hidden />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Paragraf 1 (Bahasa Indonesia)</label>
+            <textarea id="aboutDesc1Id" rows="4"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Paragraf 1 (Bahasa Jepang)</label>
+            <textarea id="aboutDesc1Ja" rows="4"></textarea>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Paragraf 2 (Bahasa Indonesia)</label>
+            <textarea id="aboutDesc2Id" rows="4"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Paragraf 2 (Bahasa Jepang)</label>
+            <textarea id="aboutDesc2Ja" rows="4"></textarea>
           </div>
         </div>
         <button type="submit" class="btn-admin-primary"><span class="material-symbols-outlined">save</span> Simpan</button>

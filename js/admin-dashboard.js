@@ -97,6 +97,7 @@ sidebarToggle.addEventListener('click', () => sidebar.classList.toggle('open'));
 
 // ---- Setup Image Uploads ----
 setupImageUpload('heroImageUpload', 'heroImagePreview', 'heroImagePlaceholder', 'heroImageFile');
+setupImageUpload('aboutImageUpload', 'aboutImagePreview', 'aboutImagePlaceholder', 'aboutImageFile');
 setupImageUpload('progImageUpload', 'progImagePreview', 'progImagePlaceholder', 'progImageFile');
 setupImageUpload('testiImageUpload', 'testiImagePreview', 'testiImagePlaceholder', 'testiImageFile');
 setupImageUpload('galImageUpload', 'galImagePreview', 'galImagePlaceholder', 'galImageFile');
@@ -109,7 +110,7 @@ async function loadAllData() {
   showLoading(true);
   try {
     await Promise.all([
-      loadHero(), loadStats(), loadPrograms(), loadAdvantages(),
+      loadHero(), loadAbout(), loadStats(), loadPrograms(), loadAdvantages(),
       loadTestimonials(), loadGallery(), loadActivities(), loadContact()
     ]);
     updateOverviewStats();
@@ -123,6 +124,8 @@ async function loadAllData() {
 function updateOverviewStats() {
   const hero = document.getElementById('heroBadge')?.value;
   document.getElementById('ovHero').textContent = hero ? '✅ Aktif' : '❌ Kosong';
+  const about = document.getElementById('aboutDesc1Id')?.value;
+  document.getElementById('ovAbout').textContent = about ? '✅ Aktif' : '❌ Kosong';
   document.getElementById('ovStats').textContent = statsData.length;
   document.getElementById('ovPrograms').textContent = programsData.length;
   document.getElementById('ovAdvantages').textContent = advantagesData.length;
@@ -196,6 +199,47 @@ document.getElementById('heroForm').addEventListener('submit', async (e) => {
       image
     });
     showToast('Hero section berhasil disimpan!');
+  } catch (e) { showToast('Gagal menyimpan: ' + e.message, true); }
+  showLoading(false);
+});
+
+// ====================================================
+// 1.5 TENTANG KAMI SECTION
+// ====================================================
+async function loadAbout() {
+  const snap = await getDoc(doc(db, 'settings', 'about'));
+  if (snap.exists()) {
+    const d = snap.data();
+    document.getElementById('aboutDesc1Id').value = d.desc1?.id || '';
+    document.getElementById('aboutDesc1Ja').value = d.desc1?.ja || '';
+    document.getElementById('aboutDesc2Id').value = d.desc2?.id || '';
+    document.getElementById('aboutDesc2Ja').value = d.desc2?.ja || '';
+    if (d.image) {
+      document.getElementById('aboutImagePreview').src = d.image;
+      document.getElementById('aboutImagePreview').style.display = 'block';
+      document.getElementById('aboutImagePlaceholder').style.display = 'none';
+    }
+  }
+}
+
+document.getElementById('aboutForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  showLoading(true);
+  try {
+    const existing = (await getDoc(doc(db, 'settings', 'about'))).data() || {};
+    const image = await handleImageUpload('aboutImageFile', existing.image || '');
+    await setDoc(doc(db, 'settings', 'about'), {
+      desc1: {
+        id: document.getElementById('aboutDesc1Id').value,
+        ja: document.getElementById('aboutDesc1Ja').value
+      },
+      desc2: {
+        id: document.getElementById('aboutDesc2Id').value,
+        ja: document.getElementById('aboutDesc2Ja').value
+      },
+      image
+    });
+    showToast('Tentang Kami berhasil disimpan!');
   } catch (e) { showToast('Gagal menyimpan: ' + e.message, true); }
   showLoading(false);
 });

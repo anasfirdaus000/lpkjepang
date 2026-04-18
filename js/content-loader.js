@@ -61,6 +61,26 @@ export async function loadContact() {
 }
 
 // ====================================================
+// ABOUT TENTANG KAMI
+// ====================================================
+export async function loadAbout() {
+  const data = await fetchDoc('settings', 'about');
+  if (!data) return;
+
+  const { updateTranslation } = await import('./i18n.js');
+
+  if (data.desc1) updateTranslation('about.desc1', data.desc1.id, data.desc1.ja);
+  if (data.desc2) updateTranslation('about.desc2', data.desc2.id, data.desc2.ja);
+
+  const wrapper = document.getElementById('aboutImageWrapper');
+  const img = document.getElementById('aboutImage');
+  if (data.image && wrapper && img) {
+    img.src = data.image;
+    wrapper.style.display = 'block';
+  }
+}
+
+// ====================================================
 // HERO SECTION
 // ====================================================
 export async function loadHero() {

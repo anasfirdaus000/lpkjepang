@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
@@ -156,12 +156,19 @@
         <!-- TENTANG KAMI -->
         <h2 class="section-title" data-i18n="about.section_title">LPKS FUJISAKI GAKUIN CENTER</h2>
         <div class="section-underline"></div>
-        <p class="about-text">
-          Adalah Lembaga pelatihan Bahasa Jepang yang Fokus Membimbing siswa/ peserta pelatihan dari Level dasar sampai Mahir agar siap untuk bekerja di Jepang. Tidak hanya membimbing siswa dengan kemampuan Bahasa Jepang, kami juga membekali siswa dengan keterampilan kerja, pengetahuan teknologi, budaya, dan etos kerja di Jepang.
-        </p>
-        <p class="about-text">
-          Berdiri sejak th 2019 dengan kapasitas 300 siswa dan saat ini ada 1668 siswa yang saat ini ada di Jepang (tersebar di berbagai kota di Jepang). Melalui program Magang, Tokutei Ginou, Gijinkoku/ engineering & Study dengan berbagai bidang pekerjaan (Konstruksi, pertanian, peternakan, pengolahan makanan, building cleaning, manufaktur, dsb).
-        </p>
+        <div class="about-grid">
+          <div class="about-grid__text">
+            <p class="about-text" id="aboutDesc1" data-i18n="about.desc1">
+              Adalah Lembaga pelatihan Bahasa Jepang yang Fokus Membimbing siswa/ peserta pelatihan dari Level dasar sampai Mahir agar siap untuk bekerja di Jepang. Tidak hanya membimbing siswa dengan kemampuan Bahasa Jepang, kami juga membekali siswa dengan keterampilan kerja, pengetahuan teknologi, budaya, dan etos kerja di Jepang.
+            </p>
+            <p class="about-text" id="aboutDesc2" data-i18n="about.desc2">
+              Berdiri sejak th 2019 dengan kapasitas 300 siswa dan saat ini ada 1668 siswa yang saat ini ada di Jepang (tersebar di berbagai kota di Jepang). Melalui program Magang, Tokutei Ginou, Gijinkoku/ engineering & Study dengan berbagai bidang pekerjaan (Konstruksi, pertanian, peternakan, pengolahan makanan, building cleaning, manufaktur, dsb).
+            </p>
+          </div>
+          <div class="about-grid__image" id="aboutImageWrapper" style="display:none;">
+            <img id="aboutImage" src="" alt="Tentang LPK Fujisaki Gakuin Center" />
+          </div>
+        </div>
 
         <!-- DATA PROFIL -->
         <div class="about-profile reveal-up">
@@ -352,9 +359,10 @@
 
   <!-- Custom script check -->
   <script type="module">
-    import { loadHomePage } from './js/content-loader.js';
-    import { loadContact } from './js/content-loader.js';
-    document.addEventListener('DOMContentLoaded', () => {
+    import { loadHomePage, loadContact, loadAbout } from './js/content-loader.js';
+    import { initI18n, setLang, getLang } from './js/i18n.js';
+    
+    document.addEventListener('DOMContentLoaded', async () => {
       // Basic initialization for scroll reveals
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -369,10 +377,12 @@
       // Load contact dynamically
       loadContact().catch(() => {});
       
-      // We need to init i18n
-      import('./js/i18n.js').then(module => {
-        module.initI18n();
-      });
+      // Load dynamic about section data
+      await loadAbout().catch(() => {});
+      
+      // Initialize i18n AFTER dynamic texts are injected
+      initI18n();
+      setLang(getLang());
     });
   </script>
 </body>
