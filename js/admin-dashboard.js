@@ -7,6 +7,30 @@ import {
   collection, doc, getDocs, getDoc, setDoc, addDoc, updateDoc, deleteDoc, orderBy, query
 } from 'firebase/firestore';
 import { seedAllData } from './seed-data.js';
+import { setLang, getLang } from './i18n.js';
+
+// ---- Admin Language Toggle ----
+function applyAdminLang(lang) {
+  setLang(lang);
+  document.body.setAttribute('data-admin-lang', lang);
+  
+  // Re-sync sidebar text if active
+  const activeLink = document.querySelector('.sidebar__link.active');
+  if (activeLink && topbarTitle) {
+    topbarTitle.textContent = activeLink.textContent.trim();
+  }
+}
+
+document.querySelectorAll('.admin-lang-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    applyAdminLang(btn.dataset.lang);
+  });
+});
+
+// Initialize on load
+document.addEventListener('DOMContentLoaded', () => {
+  applyAdminLang(getLang());
+});
 
 // ---- Auth Guard ----
 onAuthStateChanged(auth, (user) => {
@@ -136,28 +160,30 @@ function updateOverviewStats() {
   document.getElementById('ovContact').textContent = contactWa ? '✅ Aktif' : '❌ Kosong';
 }
 
-// ---- Seed Data Button ----
-document.getElementById('seedBtn').addEventListener('click', async () => {
-  if (!confirm('Apakah Anda yakin ingin mengisi database dengan data awal? Data yang sudah ada TIDAK akan ditimpa.')) return;
+// ---- Repair/Sync Database Button ----
+document.getElementById('repairDbBtn').addEventListener('click', async () => {
+  if (!confirm('Apakah Anda yakin ingin menyinkronkan ulang seluruh database? Data lama Anda akan diperbarui ke format bilingual (ID/JA) sesuai standar sistem baru. Pastikan Anda telah mencadangkan data penting jika ada.')) return;
+  
   showLoading(true);
   const logEl = document.getElementById('seedLog');
-  logEl.style.display = 'block';
   logEl.innerHTML = '';
 
   try {
-    await seedAllData((msg) => {
+    const result = await seedAllData((msg) => {
       const line = document.createElement('div');
-      line.className = 'seed-log-line';
       line.textContent = msg;
       logEl.appendChild(line);
       logEl.scrollTop = logEl.scrollHeight;
-    });
+    }, true); // true = overwrite mode
 
-    // Reload all data after seeding
-    await loadAllData();
-    showToast('Data awal berhasil di-seed! Semua panel sekarang terisi.');
+    if (result.errors.length > 0) {
+      showToast('Sinkronisasi selesai dengan beberapa error', true);
+    } else {
+      showToast('Database berhasil disinkronkan & diperbaiki!');
+      await loadAllData();
+    }
   } catch (e) {
-    showToast('Gagal seed: ' + e.message, true);
+    showToast('Gagal sinkronisasi: ' + e.message, true);
   }
   showLoading(false);
 });

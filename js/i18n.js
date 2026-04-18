@@ -156,6 +156,20 @@ const translations = {
     'profile.telp_label': 'Telp:',
     'profile.jam_label': 'Jam Operasional:',
     'profile.jam_val': 'Senin – Jumat : 08:00 s/d 16:00 <br> Sabtu : 08:00 s/d 12.00 <br> Minggu / Libur Nasional : Libur',
+
+    // Admin UI
+    'admin.sidebar.overview': 'Overview',
+    'admin.sidebar.hero': 'Hero Section',
+    'admin.sidebar.about': 'Tentang Kami',
+    'admin.sidebar.stats': 'Pencapaian',
+    'admin.sidebar.programs': 'Program Unggulan',
+    'admin.sidebar.advantages': 'Keunggulan',
+    'admin.sidebar.testimonials': 'Testimoni',
+    'admin.sidebar.gallery': 'Galeri',
+    'admin.sidebar.activities': 'Kegiatan / Berita',
+    'admin.sidebar.contact': 'WhatsApp & Kontak',
+    'admin.panel.title': 'Fujisaki Admin',
+    'admin.panel.sub': 'Content Manager',
   },
 
   ja: {
@@ -311,6 +325,20 @@ const translations = {
     'profile.telp_label': '電話:',
     'profile.jam_label': '営業時間:',
     'profile.jam_val': '月曜〜金曜 : 08:00〜16:00 <br> 土曜 : 08:00〜12.00 <br> 日曜・祝日 : 休み',
+
+    // Admin UI
+    'admin.sidebar.overview': '概要',
+    'admin.sidebar.hero': 'ヒーローセクション',
+    'admin.sidebar.about': '私たちについて',
+    'admin.sidebar.stats': '実績',
+    'admin.sidebar.programs': '主要プログラム',
+    'admin.sidebar.advantages': '強み',
+    'admin.sidebar.testimonials': 'お客様の声',
+    'admin.sidebar.gallery': 'ギャラリー',
+    'admin.sidebar.activities': '活動・ニュース',
+    'admin.sidebar.contact': '連絡先',
+    'admin.panel.title': '藤崎アドミン',
+    'admin.panel.sub': 'コンテンツ管理',
   }
 };
 
@@ -352,7 +380,7 @@ export function setLang(lang) {
   });
 
   // Update lang switcher active state
-  document.querySelectorAll('.lang-btn').forEach(btn => {
+  document.querySelectorAll('.lang-btn, .admin-lang-btn').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.lang === lang);
   });
 }

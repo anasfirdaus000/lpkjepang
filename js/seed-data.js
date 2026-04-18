@@ -4,27 +4,27 @@
    ================================================ */
 import { db } from './firebase-config.js';
 import {
-  collection, doc, setDoc, addDoc, getDocs
+  collection, doc, setDoc, addDoc, getDocs, deleteDoc
 } from 'firebase/firestore';
 
 // ====================================================
-// ALL INITIAL DATA
+// ALL INITIAL DATA (BILINGUAL)
 // ====================================================
 
 const heroData = {
-  badge: 'Your Journey Starts Here',
-  title: 'Wujudkan Karir ke Jepang Bersama Fujisaki Gakuin Center',
-  highlight: 'Jepang',
-  subtitle: 'Raih peluang karir di Jepang dengan program pelatihan bahasa dan persiapan kerja profesional. Kami mengkurasi masa depan Anda melalui filosofi Modern Ikigai.',
+  badge: { id: 'Your Journey Starts Here', ja: 'あなたの旅が始まる' },
+  title: { id: 'Wujudkan Karir ke Jepang Bersama Fujisaki Gakuin Center', ja: '藤崎学院センターで日本でのキャリアを実現しましょう' },
+  highlight: { id: 'Jepang', ja: '日本' },
+  subtitle: { id: 'Raih peluang karir di Jepang dengan program pelatihan bahasa dan persiapan kerja profesional. Kami mengkurasi masa depan Anda melalui filosofi Modern Ikigai.', ja: '日本語研修と専門的な就職準備プログラムで、日本でのキャリアチャンスを掴みましょう。モダン生きがいの哲学であなたの未来をサポートします。' },
   statNumber: '98%',
-  statLabel: 'Lulus Sertifikasi JLPT N3-N1',
+  statLabel: { id: 'Lulus Sertifikasi JLPT N3-N1', ja: 'JLPT N3-N1 合格率' },
   image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCqtGwEyPQcbWyP4cqPTr1PUF0YVwRSH7Rht3rcwctA4q5xyriX1ffQ9IjNGZoTIZSk1nwE9aBXe7zbwCEQL6TuMIjniLdK-GloG271i4cBOGSkzZ-DAM-tPv_YtJ3gaQR0bzTY8mU3Q5L1Xvz_gHTZDuA24x04rsIfqF1QsR-058yvGJgUyJZoY84fuDR_493w_EpM1C8sEfKEg8D-oXFKewcCvsfq3TWC_vSovesVIzYTegJspOGzwwQTfMcLjc5TR2E0EXS2Bxs'
 };
 
 const contactData = {
   whatsapp: '6285858000088',
-  whatsappText: 'Halo Fujisaki Gakuin, saya tertarik untuk mendaftar',
-  address: 'Jl. Modern Ikigai No. 8, Jakarta Selatan',
+  whatsappText: { id: 'Halo Fujisaki Gakuin, saya tertarik untuk mendaftar', ja: 'こんにちは、藤崎学院です。入学に興味があります。' },
+  address: { id: 'Jl. Modern Ikigai No. 8, Jakarta Selatan', ja: 'ジャカルタ南部、モダン生きがい通り8番' },
   phone: '0858-5800-0088',
   email: 'info@fujisakigakuin.id'
 };
@@ -42,309 +42,190 @@ const aboutData = {
 };
 
 const statsData = [
-  { icon: 'school', number: 1500, suffix: '+', label: 'Alumni Sukses', order: 0 },
-  { icon: 'handshake', number: 45, suffix: '+', label: 'Partner Industri', order: 1 },
-  { icon: 'verified_user', number: 100, suffix: '%', label: 'Legalitas Terjamin', order: 2 },
-  { icon: 'language', number: 12, suffix: '+', label: 'Tahun Pengalaman', order: 3 }
+  { icon: 'school', number: 1500, suffix: '+', label: { id: 'Alumni Sukses', ja: '卒業生実績' }, order: 0 },
+  { icon: 'handshake', number: 45, suffix: '+', label: { id: 'Partner Industri', ja: '産業パートナー' }, order: 1 },
+  { icon: 'verified_user', number: 100, suffix: '%', label: { id: 'Legalitas Terjamin', ja: '法的保証' }, order: 2 },
+  { icon: 'language', number: 12, suffix: '+', label: { id: 'Tahun Pengalaman', ja: '年の経験' }, order: 3 }
 ];
 
 const programsData = [
   {
     slug: 'magang',
     badge: 'Popular',
-    title: 'Program Magang',
-    tagline: 'Ginou Jisshusei',
+    title: { id: 'Program Magang', ja: '技能実習プログラム' },
+    tagline: { id: 'Ginou Jisshusei', ja: '技能実習' },
     heroImage: 'https://lh3.googleusercontent.com/aida-public/AB6AXuA_AUDswQFlIH3at2G6lY784MJUjNi6TM2iskwV7bTVxyOjhjmLk71UbhYF1fwBTYs9GLvQF8bycqUJv1c2ZJuMA3DKh_lnWqrjx35Fe_Z6UODym-jpt5kyQ0AmHvIDvdKeT47NW3pB7TVyZ71YCDcocxIwQTXnMFZ7e0MSxp6uCUJR0nH0Mc4DZMGm-XSKm1n3GkFtU0jDRwQX9l83sVubNML2PDp7kxeS31XIh9rRdlv0kmw-g2pYHtV3pNPS8h4f_xbFccdJUP4',
     duration: '1 - 3 Tahun',
     level: 'N5 - N4',
     certificate: 'Sertifikat Magang (JITCO)',
     seats: 'Sesuai Kuota',
-    description: 'Program pemagangan Teknis (Ginou Jisshusei) adalah program berlatih sambil bekerja. Program magang berlangsung selama 1 sampai 3 tahun tergantung perjanjian kontrak kerja dengan perusahaan yang memperkerjakan.',
-    overview: [
-      'Program ini tidak hanya menawarkan peluang pekerjaan, tetapi juga belajar sambil meningkatkan skil / keterampilan dasar bagi peserta yang baru mengenal dunia kerja Jepang.'
-    ],
+    description: { id: 'Program pemagangan Teknis (Ginou Jisshusei) adalah program berlatih sambil bekerja. Program magang berlangsung selama 1 sampai 3 tahun tergantung perjanjian kontrak kerja dengan perusahaan yang memperkerjakan.', ja: '技能実習制度は、学んだ技能、技術または知識を日本で実務を通じて学ぶ、最長3年間のプログラムです。' },
     features: [
-      'Pelatihan Dasar Bahasa Jepang',
-      'Pembekalan Budaya Jepang',
-      'Pendidikan Etos Kerja',
-      'Simulasi Area Kerja'
-    ],
-    requirements: [
-      'Pria – Wanita',
-      'Usia 18 s/d 28 tahun',
-      'Pendidikan min SMA/K Sederajad',
-      'Sehat jasmani dan rohani',
-      'Belum pernah mengikuti program Magang Jepang sebelumnya'
+      { id: 'Pelatihan Dasar Bahasa Jepang', ja: '初級日本語研修' },
+      { id: 'Pembekalan Budaya Jepang', ja: '日本文化研修' },
+      { id: 'Pendidikan Etos Kerja', ja: '労働倫理教育' },
+      { id: 'Simulasi Area Kerja', ja: '職場シミュレーション' }
     ],
     benefits: [
-      { icon: 'payments', title: 'Uang Saku', desc: 'Mendapat uang saku berkala dari perusahaan.' },
-      { icon: 'school', title: 'Meningkatkan Skill', desc: 'Belajar budaya kerja langsung dari praktek lapangan.' }
+      { icon: 'payments', title: { id: 'Uang Saku', ja: '手当' }, desc: { id: 'Mendapat uang saku berkala dari perusahaan.', ja: '企業から定期的な手当が支給されます。' } },
+      { icon: 'school', title: { id: 'Meningkatkan Skill', ja: 'スキルアップ' }, desc: { id: 'Belajar budaya kerja langsung dari praktek lapangan.', ja: '現場実習から直接仕事の文化を学びます。' } }
     ],
     whatsappText: 'Halo Fujisaki Gakuin, saya tertarik mendaftar Program Magang.'
   },
   {
     slug: 'tokutei_ginou',
     badge: 'Flagship',
-    title: 'Program Tokutei Ginou (TG)',
-    tagline: 'Specified Skilled Worker (SSW)',
+    title: { id: 'Program Tokutei Ginou (TG)', ja: '特定技能（TG）プログラム' },
+    tagline: { id: 'Specified Skilled Worker (SSW)', ja: '特定技能' },
     heroImage: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD6wpOHgGTgakp-tqrpQeTaYf6ZQCawNLGnnt_ebmV0ZtAaLOBb4o4iCdhETLfPyRZvj1yVnBxy-C_W3SBWqtVFBZIEA7RX-OsVQEP8ZvULOErJBiUeM-6TA_LZFTaNJt6_fShLrumNLhHyL97sC8kI6X_Ql8QEeRMAj-0wHdivDf_G0-VV0NfKjVcxD3OuivhtZRJyl_0rdDoUDenE8t1spXGP5uJfsWA8Qr5QP_5eWbhfsdSj11hn2RTBemq4PsorcC__LpyQ47E',
     duration: 'Sampai 5 Tahun',
     level: 'JFT Basic A2 / JLPT N4',
     certificate: 'Sertifikat SSW / Senmonkyu',
     seats: 'Sesuai Kuota',
-    description: 'Program kerja ke Jepang untuk Orang Asing dengan Visa keahlian khusus guna memenuhi kebutuhan lowongan pekerjaan di Jepang yang semakin meningkat.',
-    overview: [
-      'Program TG berlangsung sejak tahun 2019 hingga sekarang. Pemegang Visa TG dapat bekerja di Jepang selama 5th.',
-      'Saat ini ada 14 bidang pekerjaan yang terdaftar dan dapat mengajuan Visa TG 2 sehingga dapat bekerja di Jepang lebih dari 5th.',
-      'Sertifikat Kemampuan Bahasa Jepang (JFT Basic A2 / JLPT N4) serta Sertifikat Keterampilan menjadi syarat wajib yang harus dipenuhi sebelum melamar ke perusahaan penerima di Jepang. Program ini berlaku untuk New Comer / Pemula atau Eks Magang yang telah selesai masa kontrak magang 3 / 5 th.'
-    ],
+    description: { id: 'Program kerja ke Jepang untuk Orang Asing dengan Visa keahlian khusus guna memenuhi kebutuhan lowongan pekerjaan di Jepang yang semakin meningkat.', ja: '初心者または技能実習修了者向けの特定技能（SSW）ビザ。日本で最大5年間、専門職として働けます。' },
     features: [
-      'Persiapan Ujian JFT Basic A2',
-      'Persiapan Ujian JLPT N4',
-      'Ujian Keterampilan SSW',
-      'Pendampingan Matching'
-    ],
-    requirements: [
-      'Pria – Wanita',
-      'Usia 18 s/d 35 tahun',
-      'Pendidikan SMA / K Sederajad',
-      'Sehat jasmani dan rohani',
-      'Sertifikat Senmonkyu / 3kyu (bagi eks Magang)'
+      { id: 'Persiapan Ujian JFT Basic A2', ja: 'JFT Basic A2 試験対策' },
+      { id: 'Persiapan Ujian JLPT N4', ja: 'JLPT N4 試験対策' },
+      { id: 'Ujian Keterampilan SSW', ja: '特定技能評価試験対策' },
+      { id: 'Pendampingan Matching', ja: '企業マッチング支援' }
     ],
     benefits: [
-      { icon: 'payments', title: 'Gaji Karyawan', desc: 'Standar gaji sesuai pekerja di Jepang.' },
-      { icon: 'card_travel', title: 'Perpanjangan', desc: 'Bisa berlanjut ke TG2.' }
+      { icon: 'payments', title: { id: 'Gaji Karyawan', ja: '給与' }, desc: { id: 'Standar gaji sesuai pekerja di Jepang.', ja: '日本人の従業員と同等の給与水準です。' } },
+      { icon: 'card_travel', title: { id: 'Perpanjangan', ja: '更新可能' }, desc: { id: 'Bisa berlanjut ke TG2.', ja: '特定技能2号への移行も可能です。' } }
     ],
     whatsappText: 'Halo Fujisaki Gakuin, saya ingin mendaftar Program Tokutei Ginou.'
   },
   {
     slug: 'engineering',
     badge: 'Specialized',
-    title: 'Program Engineering / Gijinkoku',
-    tagline: 'Keterampilan Profesional',
+    title: { id: 'Program Engineering / Gijinkoku', ja: '技術・人文知識・国際業務' },
+    tagline: { id: 'Keterampilan Profesional', ja: 'プロフェッショナル' },
     heroImage: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAW5KsSWdj9UN3RaJQG6Ztf-3QSAlSMh1f2UTL5LEMEv5UkPDlFL0whnCUgesgmsW8b0xHdNwNl2GLKsphmMzqPma0nNwiZYQXCI0yHO8rI1PvqIkcsoOLVfsS4zuiYxBXiCYNDb6DuKKLxLVhTJQ4RqnYtgRA8DszgCUyoTQHrdFk9UUxjlbJc9PJGcc1xy4y9CDc_nyeLIkfZt7FDN_Ho89VrfrUhUgAflq3q5bbrfoUSkd33FBDjzmHQUvQhW7fBCwaa7dArIKE',
-    duration: 'Dapat Diperpanjang',
-    level: 'Mahir (N3/N2)',
+    duration: { id: 'Dapat Diperpanjang', ja: '更新可能' },
+    level: { id: 'Mahir (N3/N2)', ja: '上級 (N3/N2)' },
     certificate: 'D3 / S1 Resmi DIKTI',
     seats: 'Sesuai Lowongan',
-    description: 'Visa Gijinkoku atau yang sering dikenal dengan Engineering adalah Program Kerja ke Jepang dengan keterampilan Profesional. Peserta diwajibkan Lulusan D3 / S1 dari universitas yang terdaftar resmi di DIKTI.',
-    overview: [
-      'Kemampuan Bahasa yang baik menjadi nilai plus untuk para pencari lowongan Gijingkoku / Engineering.',
-      'Masa kerja Visa Gijinkoku adalah dapat diperpanjang setiap tahunnya selama perusahaan penerima dan pekerja masih bersedia untuk bekerja / memperkerjakan.'
-    ],
+    description: { id: 'Visa Gijinkoku atau yang sering dikenal dengan Engineering adalah Program Kerja ke Jepang dengan keterampilan Profesional. Peserta diwajibkan Lulusan D3 / S1 dari universitas yang terdaftar resmi di DIKTI.', ja: '専修学校や大学の卒業生（D3/S1）向けのビザ。日本で専門家として働き、毎年更新が可能です。' },
     features: [
-      'Pelatihan Business Japanese',
-      'Persiapan Interview',
-      'Pengurusan Dokumen',
-      'Pendampingan Penempatan'
-    ],
-    requirements: [
-      'Pria – Wanita',
-      'Usia 21 – 40th',
-      'Pendidikan Min Lulusan D3/ S1 (jurusan Teknik Lebih diutamakan)',
-      'Keterampilan Bahasa Jepang tingkat Mahir',
-      'Sehat Jasmani dan rohani'
+      { id: 'Pelatihan Business Japanese', ja: 'ビジネス日本語研修' },
+      { id: 'Persiapan Interview', ja: '面接対策' },
+      { id: 'Pengurusan Dokumen', ja: '書類作成支援' },
+      { id: 'Pendampingan Penempatan', ja: '配属支援' }
     ],
     benefits: [
-      { icon: 'engineering', title: 'Professional', desc: 'Status Visa Pekerja Profesional.' },
-      { icon: 'work', title: 'Dapat Diperpanjang', desc: 'Kontrak dapat selalu diperpanjang.' }
+      { icon: 'engineering', title: { id: 'Professional', ja: 'プロフェッショナル' }, desc: { id: 'Status Visa Pekerja Profesional.', ja: 'プロフェッショナルな就労ビザステータス。' } },
+      { icon: 'work', title: { id: 'Dapat Diperpanjang', ja: '更新可能' }, desc: { id: 'Kontrak dapat selalu diperpanjang.', ja: '契約は常に更新可能です。' } }
     ],
     whatsappText: 'Halo Fujisaki Gakuin, saya lulusan universitas dan tertarik Program Engineering (Gijinkoku).'
   },
   {
     slug: 'study',
     badge: 'Education',
-    title: 'Program Student / Study',
-    tagline: 'Ryugaku',
+    title: { id: 'Program Student / Study', ja: '留学プログラム' },
+    tagline: { id: 'Ryugaku', ja: '留学' },
     heroImage: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBZb96K1b0F7zCpqZJeMU7EYL3iXzHtgMITUme-yfcZgccsupf32N1jThDdKUarbC0_H5Jsy2CvAK3QJBEeOg2dGQLCuL4hJQlnLz5UpmTshcWITqCd5OtrwxYsxTnogcz3onbL2Y3ma4iwPMis3AgOdPbuXTwsaB1GNqCW8_v5kgGDX8jvIPFRyu6c3JopSs4pqDyQJXFtWRWptsmLFi-nvl_6apIpsDXicLbFkf0fkMzQKM6Qf1w7p17EbN8Qx6ujNP-qhSICFGY',
-    duration: 'Hingga Lulus',
-    level: 'Pemula',
+    duration: { id: 'Hingga Lulus', ja: '卒業まで' },
+    level: { id: 'Pemula', ja: '初心者' },
     certificate: 'Sertifikat Lulus',
     seats: 'Terbuka',
-    description: 'Program Student / Study atau 留学 Ryugaku adalah Program belajar di Jepang dengan Visa Student / Pelajar asing. Program ini sering diplih bagi peserta yang berminat untuk mempersiapkan masuk Universitas di Jepang.',
-    overview: [
-      'Pemegang visa Study diijinkan untuk melakukan kerja paruh waktu untuk memenuhi kebutuhan sehari hari dengan ketentuan Max 28jam / minggu.',
-      'Setelah dinyatakan LULUS peserta dapat memilih untuk masuk Universitas atau mengambil Visa Kerja di Jepang.'
-    ],
+    description: { id: 'Program Student / Study atau 留学 Ryugaku adalah Program belajar di Jepang dengan Visa Student / Pelajar asing. Program ini sering diplih bagi peserta yang berminat untuk mempersiapkan masuk Universitas di Jepang.', ja: '日本の大学や専門学校への進学を目指すための留学ビザプログラム。' },
     features: [
-      'Bimbingan Studi Bahasa 1-2 Tahun',
-      'Persiapan Pemilihan Universitas',
-      'Panduan Kerja Paruh Waktu (Arubaito)',
-      'Konsultasi Lanjut Studi / Kerja'
-    ],
-    requirements: [
-      'Pria – Wanita',
-      'Usia 18 s/d 30th',
-      'Pendidikan Min SMA/ K Sederajad',
-      'Memiliki perekonomian keluarga yang baik',
-      'Bersedia untuk menyelesaikan masa study hingga lulus'
+      { id: 'Bimbingan Studi Bahasa 1-2 Tahun', ja: '1〜2年の日本語学習指導' },
+      { id: 'Persiapan Pemilihan Universitas', ja: '大学進学準備' },
+      { id: 'Panduan Kerja Paruh Waktu (Arubaito)', ja: 'アルバイトガイド' },
+      { id: 'Konsultasi Lanjut Studi / Kerja', ja: '進学・就職コンサルタント' }
     ],
     benefits: [
-      { icon: 'schedule', title: 'Kerja Paruh Waktu', desc: 'Diijinkan Arubaito max 28 jam / minggu.' },
-      { icon: 'school', title: 'Lanjut Pendidikan', desc: 'Peluang lolos Universitas Daigaku Jepang.' }
+      { icon: 'schedule', title: { id: 'Kerja Paruh Waktu', ja: 'アルバイト' }, desc: { id: 'Diijinkan Arubaito max 28 jam / minggu.', ja: '週28時間までのアルバイトが許可されます。' } },
+      { icon: 'school', title: { id: 'Lanjut Pendidikan', ja: '進学' }, desc: { id: 'Peluang lolos Universitas Daigaku Jepang.', ja: '日本の大学への進学チャンス。' } }
     ],
     whatsappText: 'Halo Fujisaki Gakuin, saya tertarik Program Student (Ryugaku).'
   }
 ];
 
 const advantagesData = [
-  { icon: 'verified', title: 'Kurikulum Terakreditasi', description: 'Kurikulum kami disesuaikan dengan standar industri di Jepang dan kebutuhan ujian resmi JLPT & JFT.', order: 0 },
-  { icon: 'diversity_3', title: 'Mentor Native & Berpengalaman', description: 'Belajar langsung dari penutur asli dan alumni yang telah sukses berkarir di Jepang.', order: 1 },
-  { icon: 'corporate_fare', title: 'Koneksi Perusahaan Luas', description: 'Kami memiliki jaringan luas dengan Kumiai dan Perusahaan Penerima (Sento) di berbagai prefektur Jepang.', order: 2 },
-  { icon: 'workspace_premium', title: 'Garansi Penempatan Kerja', description: 'Kami memberikan jaminan penempatan kerja bagi lulusan yang memenuhi kualifikasi dan lulus ujian.', order: 3 }
-];
-
-const testimonialsData = [
-  {
-    name: 'Siti Rahma',
-    role: 'Caregiver, Osaka',
-    quote: 'Persiapan di Fujisaki sangat matang, tidak hanya bahasa tapi juga budaya kerja. Sekarang saya sudah 2 tahun di Osaka dan merasa sangat terbantu.',
-    rating: 5,
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDVU3s8nWxgwULrqjCf1ZBZQHd2sfDFYdb5GLiVvZ4XGN3yYz2vrq2HGylThzHtNbVrVcEekHrGmQ3LftTuICo1JYhAZ7NwOW7k0APcCETWYvvhAm60RFSm1pueqKAA_x-W-dGxIOiWcsH8gi70yASIBKKbfZ4eMBLrOTdbZHsHoyExe58SvoLCW022vRr5dxxXLCb8S6WwHu-17r_eFC_Bhro9kF1FPDmUEZdffw6Z-hQmSL2oVVYTB_I02LydJQkcCCmDViLicnc'
-  },
-  {
-    name: 'Budi Santoso',
-    role: 'Engineer, Tokyo',
-    quote: 'Materi SSW Konstruksi yang diajarkan sangat akurat dengan apa yang diujikan. Fujisaki Gakuin adalah jembatan terbaik menuju karir di Jepang.',
-    rating: 5,
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBp6AcCwMMjh1a77tdBPn9a5XvQezbbKnrO50RuNLOZDFscDejzlE4kJVugzuVpCRoMnFkUptn4L_kdyPITnaVsBOlocBF-JrJo6ETpCHlvbVY0nVum2c_QD4EjmZIyVG-a_tWYlGCwPVYUZRboZhj1Damg23Vkwu6FPrIl6bUbdAsDLQftV8vLh0-KosrNp9Zq8iIVXcXErkHp3QDcEMPlo8VlMF64EOlPj8apu5LDg2U7VLA8q-jHrf54-GYvL7aEkKdGM8Zx_V8'
-  },
-  {
-    name: 'Dewi Anggraini',
-    role: 'Food Processing, Hokkaido',
-    quote: 'Awalnya saya ragu, tapi setelah bergabung dengan Fujisaki semua keraguan hilang. Tim pengajar sangat supportif dan prosesnya sangat transparan.',
-    rating: 5,
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD_nb-iD_Ny-tm7afYO8sj9GReUW8mm-Rvv8Oqjr354i1QiBrbexpF5jiYNswBGHalTmCxOup6ETYlUaZur8OjVXp_wF7Cp5v2pxjaxA0LyWVBwgi_FUCMLo1sVVoAyWnUK98ZjliVl3lGiiRjwS0AEJPF1tdeSBWNJKcW4hzhrHJ4osDghvZMUDt5F7CO0obCQSJhUTpeyWMbVO73O4r60oLZBHq1HAAbWZH2q0U5rDljQXJvm4FmsjsTsy3uAa1TorHQsGjfrViw'
-  }
-];
-
-const galleryData = [
-  {
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBZb96K1b0F7zCpqZJeMU7EYL3iXzHtgMITUme-yfcZgccsupf32N1jThDdKUarbC0_H5Jsy2CvAK3QJBEeOg2dGQLCuL4hJQlnLz5UpmTshcWITqCd5OtrwxYsxTnogcz3onbL2Y3ma4iwPMis3AgOdPbuXTwsaB1GNqCW8_v5kgGDX8jvIPFRyu6c3JopSs4pqDyQJXFtWRWptsmLFi-nvl_6apIpsDXicLbFkf0fkMzQKM6Qf1w7p17EbN8Qx6ujNP-qhSICFGY',
-    caption: 'Alumni Batch 12 @ Kyoto',
-    layout: 'wide'
-  },
-  {
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCiC4i9fzqysNXxR9N7SCq0VJEkmqRT7upHgmvfxK0_7sKl3s0MBHVpb-D1yvDNV76Y-DTwquCRoXJbgzhwxPofaclTaFAft1Wb8RSJm7nnSoIzqnvN829XMWWTq5zu2IAgsAhlpc_obRAv_guh0BEJfAY_A6uutViyZyI7l6Ab771K8lX4ZIlheHJIT54VsIg6Z8x1NLRnVmJhdzyHlNHIDXJzEBwbfYYgKZbVxDR_aqBmVxZJyEb4x3cy-RQ5T_68LEx5fSSgoKY',
-    caption: 'Workshop Budaya: Chado',
-    layout: 'normal'
-  },
-  {
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAvjATrRe_8EugucnFDEJt-N7UIuCWfpoKFZD7al3sa_T9WEm9veV3AKLu32fxVA3spw1UGdzScnRHLZpZsPkd8E-I41A9DCC8H7jzcu5VFXlajx_HLiKrOOXloBGypjB1ZtVmqF2B093Qc0X0YWR8r86SQvgctfOuOFwxPIIxF85qJgkqpDXaY997Qq7GreP3us4myGFG6WpFj96LkiNO5tl719Ep2j-IK85yodLY2LQEb3hZCBNdi4uVZqo8wK-kBaLY9qVbl5Ds',
-    caption: 'Seni Kaligrafi Shodo',
-    layout: 'tall'
-  },
-  {
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuA2Bn2JMwizK2xG-PSHmNxqfzkA4gTX9kwiaCPq3DrX85HL17JaJNabi2xjkUnt_Y0weYkiZc8h1cK820N62B6V_uIr03CONsl_bCWBV2AKEGn8-3dK0jr64ivkPRIV2q147xBc4YgxYpfOmBOMem1IvKfpUD29YOcVnC_5WU8WbIJPZShyNdXji9JeV8S91MFJCDHRKN1SrSL46kmEK33RgLpSPYaIInNfyz8qAkBS3829xKklrJBIHUDolgwgRxmUWDhV1VzDGq4',
-    caption: 'Interaksi Kelas Seru',
-    layout: 'normal'
-  },
-  {
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCevWjioc6J5uIny3oqEPIgxTqBgLTXo4mNbus0YotvkTdEhBKfR9IjP6JUnAicw0OZnwdkYb5aXTBmFREeMYjoH43fCEH4jCHr6tlm26_wHl-BL0cjzWIibsEWBBal5vNC8HhXeyhJkG1n96h4wBK7lRh0l3bXy234I6Gmd6d1WFwjYcytu1oYyJ3DwkFuf3lHONQ2O3Lm7gAvLsXucXESLyHVelNS73uyG6G3WFUL_WwJ_doB0WHs6KeD1BCJXt4mu0_L9xqsUkQ',
-    caption: 'Peluang Karir Global',
-    layout: 'wide'
-  }
+  { icon: 'verified', title: { id: 'Kurikulum Terakreditasi', ja: '認定カリキュラム' }, description: { id: 'Kurikulum kami disesuaikan dengan standar industri di Jepang dan kebutuhan ujian resmi JLPT & JFT.', ja: '日本の業界基準やJLPT・JFT試験に合わせたカリキュラム。' }, order: 0 },
+  { icon: 'diversity_3', title: { id: 'Mentor Native & Berpengalaman', ja: 'ネイティブ講師' }, description: { id: 'Belajar langsung dari penutur asli dan alumni yang telah sukses berkarir di Jepang.', ja: '日本人講師や日本での就業経験を持つ卒業生から直接学びます。' }, order: 1 },
+  { icon: 'corporate_fare', title: { id: 'Koneksi Perusahaan Luas', ja: '広範なネットワーク' }, description: { id: 'Kami memiliki jaringan luas dengan Kumiai dan Perusahaan Penerima (Sento) di berbagai prefektur Jepang.', ja: '日本の各都道府県にある監理団体や受入れ企業との強力なネットワーク。' }, order: 2 },
+  { icon: 'workspace_premium', title: { id: 'Garansi Penempatan Kerja', ja: '就職支援保証' }, description: { id: 'Kami memberikan jaminan penempatan kerja bagi lulusan yang memenuhi kualifikasi dan lulus ujian.', ja: '資格を満たし試験に合格した卒業生への確実な就職支援。' }, order: 3 }
 ];
 
 const activitiesData = [
   {
-    title: 'Workshop Persiapan Wawancara Perusahaan Jepang',
+    title: { id: 'Workshop Persiapan Wawancara Perusahaan Jepang', ja: '日本企業面接対策ワークショップ' },
     category: 'Event',
     dateRaw: '2026-04-12',
     date: '12 April 2026',
     image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAW5KsSWdj9UN3RaJQG6Ztf-3QSAlSMh1f2UTL5LEMEv5UkPDlFL0whnCUgesgmsW8b0xHdNwNl2GLKsphmMzqPma0nNwiZYQXCI0yHO8rI1PvqIkcsoOLVfsS4zuiYxBXiCYNDb6DuKKLxLVhTJQ4RqnYtgRA8DszgCUyoTQHrdFk9UUxjlbJc9PJGcc1xy4y9CDc_nyeLIkfZt7FDN_Ho89VrfrUhUgAflq3q5bbrfoUSkd33FBDjzmHQUvQhW7fBCwaa7dArIKE',
-    summary: 'Pelajari etika dan cara menjawab pertanyaan mensesu (wawancara) dengan lancar bersama sensei native.',
+    summary: { id: 'Pelajari etika dan cara menjawab pertanyaan mensesu (wawancara) dengan lancar bersama sensei native.', ja: '日本人講師と一緒に、面接（面接）の答え方やマナーを学びましょう。' },
     content: [
-      'Workshop Persiapan Wawancara Perusahaan Jepang merupakan salah satu kegiatan rutin yang diselenggarakan oleh LPK Fujisaki Gakuin Center. Kegiatan ini bertujuan untuk mempersiapkan peserta pelatihan menghadapi proses wawancara kerja (mensesu) dengan perusahaan-perusahaan di Jepang.',
-      'Dalam workshop kali ini, peserta mendapatkan kesempatan berharga untuk belajar langsung dari Tanaka-sensei, seorang native speaker Jepang yang memiliki pengalaman lebih dari 15 tahun di bidang Human Resources di beberapa perusahaan besar di Tokyo dan Osaka.',
-      'Workshop berlangsung selama satu hari penuh dari pukul 09.00 hingga 16.00 WIB dengan istirahat makan siang. Di akhir sesi, setiap peserta mendapatkan feedback individual dari Tanaka-sensei mengenai kekuatan dan area yang perlu diperbaiki.'
+      { id: 'Workshop Persiapan Wawancara Perusahaan Jepang merupakan salah satu kegiatan rutin yang diselenggarakan oleh LPK Fujisaki Gakuin Center.', ja: '日本企業面接対策ワークショップは、LPK藤崎学院センターが定期的に開催している活動の一つです。' },
+      { id: 'Kegiatan ini bertujuan untuk mempersiapkan peserta pelatihan menghadapi proses wawancara kerja (mensesu) dengan perusahaan-perusahaan di Jepang.', ja: 'この活動は、研修生が日本企業との採用面接（面接）に備えることを目的としています。' }
     ],
     highlights: [
-      'Praktek wawancara langsung dengan native speaker',
-      'Materi etika bisnis Jepang (Business Manner)',
-      'Tips menjawab pertanyaan umum mensesu',
-      'Feedback individual dari sensei',
-      'Sertifikat keikutsertaan'
+      { id: 'Praktek wawancara langsung dengan native speaker', ja: '日本人ネイティブとの模擬面接' },
+      { id: 'Materi etika bisnis Jepang (Business Manner)', ja: '日本のビジネスマナー研修' }
     ]
   },
   {
-    title: 'Pengenalan Budaya: Upacara Minum Teh di Kampus',
+    title: { id: 'Pengenalan Budaya: Upacara Minum Teh di Kampus', ja: '文化紹介：キャンパスでの茶道体験' },
     category: 'Culture',
     dateRaw: '2026-04-08',
     date: '8 April 2026',
     image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBrjnG8_Ef4rwT-ihqGIkUDtGIl_XwJo8QpVGbwAWMSuDQCH2BJsDUMcGW0MkhFFlMp3ayRY3PD7ZhuR_9eubsi-O_ZJ1tSMduUH27EDlpsmump891bAkuloPB70y1o5-_Fx9jsYeXGmQsYFaDRgm_qyHH1VOLi8eIR212cXWIIpvaUKM5IZE6p8tYnD_umtWEybvsufH2n92PfVFreh1j0nAN7lYbugWfjWBYn3585PIxKiFG1dyhxZ3VcYUuMRZKTlB6Q4RcgBE4',
-    summary: "Mengenal lebih dalam filosofi 'Omotenashi' melalui praktek langsung Chado bersama instruktur tamu.",
+    summary: { id: "Mengenal lebih dalam filosofi 'Omotenashi' melalui praktek langsung Chado bersama instruktur tamu.", ja: '外部講師を招いた茶道の実践を通じて、「おもてなし」の心を学びます。' },
     content: [
-      'Sebagai bagian dari program pemahaman budaya Jepang, LPK Fujisaki Gakuin Center mengadakan sesi khusus pengenalan Upacara Minum Teh Jepang (Chado / 茶道).',
-      'Upacara minum teh bukan sekadar minum teh biasa. Ini adalah seni yang mengajarkan prinsip-prinsip fundamental budaya Jepang: Wa (和 - Harmoni), Kei (敬 - Rasa Hormat), Sei (清 - Kemurnian), dan Jaku (寂 - Ketenangan).',
-      'Para peserta juga berkesempatan mencoba menyiapkan teh sendiri menggunakan chasen (whisk bambu) dan chawan (mangkuk teh).'
+      { id: 'Sebagai bagian dari program pemahaman budaya Jepang, LPK Fujisaki Gakuin Center mengadakan sesi khusus pengenalan Upacara Minum Teh Jepang (Chado / 茶道).', ja: '日本文化理解プログラムの一環として、LPK藤崎学院センターでは茶道体験セッションを開催しました。' }
     ],
     highlights: [
-      'Praktek langsung Upacara Minum Teh (Chado)',
-      'Bimbingan dari instruktur bersertifikasi Urasenke',
-      'Memahami filosofi Wa, Kei, Sei, Jaku',
-      'Pengalaman menyiapkan matcha sendiri',
-      'Pemahaman mendalam tentang Omotenashi'
-    ]
-  },
-  {
-    title: 'Pembukaan Pendaftaran Batch Baru SSW Food Processing',
-    category: 'Update',
-    dateRaw: '2026-04-01',
-    date: '1 April 2026',
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBQyw7ButzlX7NBgbTBL68zb-U4GzT5ftCbulhG6xJvw9d9rJwCT-hA6SW6yD0rGo6faNuiwEF4MWWo5kshMEV0plRP21SY8RJBuboQ3yHGPEeEBZakVtX9REXpzQkAXJ88k7kNTqRTwh_R1zWjPwkdYQwacmCobuYlqoLh3ELl3ihze3qZ2OrRns5nFGik45gp0iI19blY7QBxz-7eDm1F2gSV_WtSGNWmjdrmDRS4wQTrXGCglybhj8vCG4kL5w8koxCsPpTV91M',
-    summary: 'Segera daftar untuk kuota terbatas pengolahan makanan untuk keberangkatan musim gugur tahun depan.',
-    content: [
-      'LPK Fujisaki Gakuin Center dengan bangga mengumumkan pembukaan pendaftaran Batch terbaru untuk program Specified Skilled Worker (SSW) sektor Pengolahan Makanan.',
-      'Batch kali ini memiliki kuota terbatas hanya untuk 30 peserta, dengan target keberangkatan pada musim gugur (Oktober - November).',
-      'Untuk informasi lebih lanjut mengenai biaya, jadwal, dan persyaratan pendaftaran, silakan menghubungi kami melalui WhatsApp atau kunjungi kantor kami langsung.'
-    ],
-    highlights: [
-      'Kuota terbatas: 30 peserta',
-      'Target keberangkatan: Musim Gugur 2026',
-      'Pelatihan 6 bulan intensif',
-      'Penempatan di berbagai prefektur Jepang',
-      'Termasuk persiapan ujian SSW'
+      { id: 'Praktek langsung Upacara Minum Teh (Chado)', ja: '茶道の実践体験' },
+      { id: 'Bimbingan dari instruktur bersertifikasi', ja: '認定講師による指導' }
     ]
   }
 ];
 
 // ====================================================
-// SEED FUNCTION
+// SEED FUNCTION (UPGRADED)
 // ====================================================
-export async function seedAllData(onProgress) {
+export async function seedAllData(onProgress, overwrite = false) {
   const report = { success: 0, skipped: 0, errors: [] };
 
-  async function seedIfEmpty(collName, items, useSetDoc = false) {
-    const snap = await getDocs(collection(db, collName));
-    if (snap.size > 0) {
-      if (onProgress) onProgress(`⏭️ ${collName}: sudah ada ${snap.size} item, di-skip.`);
-      report.skipped++;
-      return;
+  async function seedCollection(collName, items, useSlug = false) {
+    if (!overwrite) {
+      const snap = await getDocs(collection(db, collName));
+      if (snap.size > 0) {
+        if (onProgress) onProgress(`⏭️ ${collName}: sudah ada, di-skip.`);
+        report.skipped++;
+        return;
+      }
+    } else {
+      // Clear existing first
+      const snap = await getDocs(collection(db, collName));
+      for (const d of snap.docs) {
+        await deleteDoc(doc(db, collName, d.id));
+      }
+      if (onProgress) onProgress(`🧹 Membersihkan ${collName}...`);
     }
 
     for (const item of items) {
       try {
-        await addDoc(collection(db, collName), item);
+        if (useSlug && item.slug) {
+          await setDoc(doc(db, collName, item.slug), item);
+        } else {
+          await addDoc(collection(db, collName), item);
+        }
       } catch (e) {
         report.errors.push(`${collName}: ${e.message}`);
       }
     }
-    if (onProgress) onProgress(`✅ ${collName}: ${items.length} item berhasil ditambahkan.`);
+    if (onProgress) onProgress(`✅ ${collName}: ${items.length} item berhasil disinkronkan.`);
     report.success++;
   }
 
   async function seedSettingsDoc(docId, data) {
-    const snap = await getDocs(collection(db, 'settings'));
-    const docExist = snap.docs.find(d => d.id === docId);
-    if (docExist) {
-      if (onProgress) onProgress(`⏭️ settings/${docId}: sudah ada, di-skip.`);
-      report.skipped++;
-      return;
-    }
     try {
       await setDoc(doc(db, 'settings', docId), data);
-      if (onProgress) onProgress(`✅ settings/${docId}: berhasil disimpan.`);
+      if (onProgress) onProgress(`✅ settings/${docId}: berhasil disinkronkan.`);
       report.success++;
     } catch (e) {
       report.errors.push(`settings/${docId}: ${e.message}`);
@@ -352,19 +233,16 @@ export async function seedAllData(onProgress) {
   }
 
   // Seed all collections
-  if (onProgress) onProgress('🚀 Memulai seed data...');
+  if (onProgress) onProgress('🚀 Memulai sinkronisasi database...');
 
   await seedSettingsDoc('hero', heroData);
   await seedSettingsDoc('about', aboutData);
   await seedSettingsDoc('contact', contactData);
-  await seedIfEmpty('stats', statsData);
-  await seedIfEmpty('programs_v2', programsData);
-  await seedIfEmpty('advantages', advantagesData);
-  await seedIfEmpty('testimonials', testimonialsData);
-  await seedIfEmpty('gallery', galleryData);
-  await seedIfEmpty('activities', activitiesData);
+  await seedCollection('stats', statsData);
+  await seedCollection('programs_v2', programsData, true);
+  await seedCollection('advantages', advantagesData);
+  await seedCollection('activities', activitiesData);
 
-  if (onProgress) onProgress('🎉 Seed data selesai!');
-
+  if (onProgress) onProgress('🎉 Sinkronisasi database selesai!');
   return report;
 }
