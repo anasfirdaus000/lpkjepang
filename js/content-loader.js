@@ -187,7 +187,7 @@ export async function loadHomePrograms() {
             <p class="programs__card-desc" data-i18n="home.prog.${p.slug}.desc">${pDesc}</p>
             <ul class="programs__card-features">
               ${tArr(p.features).slice(0, 3).map(f => `
-                <li><span class="material-symbols-outlined">check_circle</span> ${f}</li>
+                <li><span class="material-symbols-outlined">check_circle</span> ${tVal(f)}</li>
               `).join('')}
             </ul>
             <a href="/program-detail.html?id=${p.slug}" class="programs__card-link">
@@ -226,7 +226,7 @@ export async function loadHomePrograms() {
               ${tArr(p.benefits).slice(0, 2).map(b => `
                 <div class="programs__tag">
                   <span class="material-symbols-outlined">${b.icon}</span>
-                  ${b.title}
+                  ${tVal(b.title)}
                 </div>
               `).join('')}
             </div>

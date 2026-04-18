@@ -58,9 +58,9 @@ async function initProgramDetail() {
 
     // Meta badges
     document.getElementById('heroMeta').innerHTML = `
-      <div class="detail-hero__meta-item"><span class="material-symbols-outlined">schedule</span> ${duration}</div>
-      <div class="detail-hero__meta-item"><span class="material-symbols-outlined">translate</span> ${level}</div>
-      <div class="detail-hero__meta-item"><span class="material-symbols-outlined">group</span> ${seats}</div>
+      <div class="detail-hero__meta-item"><span class="material-symbols-outlined">schedule</span> ${tVal(duration)}</div>
+      <div class="detail-hero__meta-item"><span class="material-symbols-outlined">translate</span> ${tVal(level)}</div>
+      <div class="detail-hero__meta-item"><span class="material-symbols-outlined">group</span> ${tVal(seats)}</div>
     `;
 
     // Overview
@@ -99,7 +99,7 @@ async function initProgramDetail() {
 
     // Requirements
     document.getElementById('requirementsContent').innerHTML = tArr(requirements).map(req => `
-      <li><span class="material-symbols-outlined">task_alt</span> ${req}</li>
+      <li><span class="material-symbols-outlined">task_alt</span> ${tVal(req)}</li>
     `).join('');
 
     // Sidebar info
@@ -110,15 +110,15 @@ async function initProgramDetail() {
     document.getElementById('sidebarInfo').innerHTML = `
       <div class="detail-sidebar__info-item">
         <span class="material-symbols-outlined">schedule</span>
-        <div><strong>Durasi:</strong><br>${duration}</div>
+        <div><strong>Durasi:</strong><br>${tVal(duration)}</div>
       </div>
       <div class="detail-sidebar__info-item">
         <span class="material-symbols-outlined">translate</span>
-        <div><strong>Level JP:</strong><br>${level}</div>
+        <div><strong>Level JP:</strong><br>${tVal(level)}</div>
       </div>
       <div class="detail-sidebar__info-item">
         <span class="material-symbols-outlined">workspace_premium</span>
-        <div><strong>Sertifikat:</strong><br>${certificate}</div>
+        <div><strong>Sertifikat:</strong><br>${tVal(certificate)}</div>
       </div>
     `;
 
@@ -128,8 +128,8 @@ async function initProgramDetail() {
         <div class="benefit-item">
           <div class="benefit-item__icon"><span class="material-symbols-outlined">${b.icon || 'star'}</span></div>
           <div class="benefit-item__text">
-            <h4>${b.title}</h4>
-            <p>${b.desc}</p>
+            <h4>${tVal(b.title)}</h4>
+            <p>${tVal(b.desc)}</p>
           </div>
         </div>
       `).join('');

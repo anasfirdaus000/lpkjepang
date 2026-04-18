@@ -314,6 +314,7 @@ function renderStats() {
       <span class="material-symbols-outlined admin-item__icon">${s.icon}</span>
       <div class="admin-item__info">
         <div class="admin-item__title">${s.number}${s.suffix} — ${sLabel}</div>
+      </div>
       <div class="admin-item__actions">
         <button class="btn-admin-icon btn-admin-icon--edit" onclick="editStat('${s.id}')"><span class="material-symbols-outlined">edit</span></button>
         <button class="btn-admin-icon btn-admin-icon--delete" onclick="deleteStat('${s.id}')"><span class="material-symbols-outlined">delete</span></button>

@@ -174,6 +174,10 @@
             <span class="material-symbols-outlined">sync</span>
             <span>Sinkronisasi & Perbaiki Database</span>
           </button>
+          <button class="btn-system-sync" onclick="handleMigration()" style="background: linear-gradient(135deg, #9333ea, #7e22ce); border-color: #a855f7; margin-top: 12px;">
+            <span class="material-symbols-outlined">auto_fix_high</span>
+            <span>Perbaiki & Migrasi Data Program Detail</span>
+          </button>
         </div>
 
         <div id="seedLog" class="system-control-log"></div>
@@ -688,5 +692,24 @@
   </div>
 
   <script type="module" src="/js/admin-dashboard.js"></script>
+  <script type="module">
+    import { runMigration } from './js/migration-tool.js';
+    window.handleMigration = async function() {
+      const logger = document.getElementById('seedLog');
+      logger.innerHTML = '';
+      
+      const onProgress = (msg) => {
+        const div = document.createElement('div');
+        div.textContent = msg;
+        logger.appendChild(div);
+      };
+
+      try {
+        await runMigration(onProgress);
+      } catch (e) {
+        onProgress('❌ Fatal Error: ' + e.message);
+      }
+    };
+  </script>
 </body>
 </html>

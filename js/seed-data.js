@@ -8,7 +8,7 @@ import {
 } from 'firebase/firestore';
 
 // ====================================================
-// ALL INITIAL DATA (BILINGUAL)
+// ALL INITIAL DATA (BILINGUAL) — CLEAN VERSION
 // ====================================================
 
 const heroData = {
@@ -59,20 +59,13 @@ const programsData = [
     level: 'N5 - N4',
     certificate: 'Sertifikat Magang (JITCO)',
     seats: 'Sesuai Kuota',
-    description: { 
-      id: 'Program pemagangan Teknis (Ginou Jisshusei) adalah program berlatih sambil bekerja. Program magang berlangsung selama 1 sampai 3 tahun tergantung perjanjian kontrak kerja dengan perusahaan yang memperkerjakan. Program ini tidak hanya menawarkan peluang pekerjaan, tetapi juga belajar sambil meningkatkan skil / keterampilan.', 
-      ja: '技能実習制度（技能実習生）は、日本企業での実務を通じて学びながら働くプログラムです。最短1年から最長3年の契約となり、就労機会だけでなく、スキルアップや技術習得も目指せます。' 
-    },
+    description: { id: 'Program pemagangan Teknis (Ginou Jisshusei) adalah program berlatih sambil bekerja.', ja: '技能実習制度は、学んだ技能、技術または知識を日本で実務を通じて学ぶプログラムです。' },
     features: [
-      { id: 'Pria – Wanita', ja: '男性・女性' },
-      { id: 'Usia 18 s/d 28 tahun', ja: '年齢18歳〜28歳' },
-      { id: 'Pendidikan min SMA/K Sederajat', ja: '最終学歴：高校卒業以上' },
-      { id: 'Sehat jasmani dan rohani', ja: '心身ともに健康であること' },
-      { id: 'Belum pernah mengikuti program Magang sebelumnya', ja: '過去に技能実習プログラムに参加したことがないこと' }
+      { id: 'Pelatihan Dasar Bahasa Jepang', ja: '初級日本語研修' },
+      { id: 'Pembekalan Budaya Jepang', ja: '日本文化研修' }
     ],
     benefits: [
-      { icon: 'payments', title: { id: 'Uang Saku', ja: '手当' }, desc: { id: 'Mendapat uang saku berkala dari perusahaan.', ja: '企業から定期的な手当が支給されます。' } },
-      { icon: 'school', title: { id: 'Meningkatkan Skill', ja: 'スキルアップ' }, desc: { id: 'Belajar budaya kerja langsung dari praktek lapangan.', ja: '現場実習から直接仕事の文化を学びます。' } }
+      { icon: 'payments', title: { id: 'Uang Saku', ja: '手当' }, desc: { id: 'Mendapat uang saku berkala dari perusahaan.', ja: '企業から定期的な手当が支給されます。' } }
     ],
     whatsappText: 'Halo Fujisaki Gakuin, saya tertarik mendaftar Program Magang.'
   },
@@ -81,25 +74,18 @@ const programsData = [
     badge: 'Flagship',
     title: { id: 'Program Tokutei Ginou (TG)', ja: '特定技能（TG）プログラム' },
     tagline: { id: 'Specified Skilled Worker (SSW)', ja: '特定技能' },
-    heroImage: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD6wpOHgGTgakp-tqrpQeTaYf6ZQCawNLGnnt_ebmV0ZtAaLOBb4o4iCdhETLfPyRZvj1yVnBxy-C_W3SBWqtVFBZIEA7RX-OsVQEP8ZvULOErJBiUeM-6TA_LZFTaNJt6_fShLrumNLhHyL97sC8kI6X_Ql8QEeRMAj-0wHdivDf_G0-VV0NfKjVcxD3OuivhtZRJyl_0rdDoUDenE8t1spXGP5uJfsWA8Qr5QP_5eWbhfsdSj11hn2RTBemq4PsorcC__LpyQ47E',
+    heroImage: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD6wpOHgGTgakp-tqrpQeTaYf6ZQCawNLGnt_ebmV0ZtAaLOBb4o4iCdhETLfPyRZvj1yVnBxy-C_W3SBWqtVFBZIEA7RX-OsVQEP8ZvULOErJBiUeM-6TA_LZFTaNJt6_fShLrumNLhHyL97sC8kI6X_Ql8QEeRMAj-0wHdivDf_G0-VV0NfKjVcxD3OuivhtZRJyl_0rdDoUDenE8t1spXGP5uJfsWA8Qr5QP_5eWbhfsdSj11hn2RTBemq4PsorcC__LpyQ47E',
     duration: 'Sampai 5 Tahun',
     level: 'JFT Basic A2 / JLPT N4',
     certificate: 'Sertifikat SSW / Senmonkyu',
     seats: 'Sesuai Kuota',
-    description: { 
-      id: 'Program Tokutei Ginou (TG) atau disebut dengan Specified Skilled Worker (SSW) adalah program kerja ke Jepang untuk Orang Asing dengan Visa keahlian khusus guna memenuhi kebutuhan lowongan pekerjaan di Jepang yang semakin meningkat. Program TG berlangsung sejak tahun 2019 hingga sekarang. Pemegang Visa TG dapat bekerja di Jepang selama 5th. Saat ini ada 14 bidang pekerjaan yang terdaftar dan dapat mengajuan Visa TG 2 sehingga dapat bekerja di Jepang lebih dari 5th.', 
-      ja: '特定技能（TG/SSW）は、深刻化する人手不足に対応するため、特定の専門技能を持つ外国人に与えられる就労ビザです。2019年から開始され、最大5年間の就労が可能です。現在14職種が対象で、特定技能2号への移行により5年を超えた長期就労や家族の帯同も可能になります。' 
-    },
+    description: { id: 'Program kerja ke Jepang untuk Orang Asing dengan Visa keahlian khusus.', ja: '特定技能（SSW）ビザで日本で最大5年間働けます。' },
     features: [
-      { id: 'Pria – Wanita', ja: '男性・女性' },
-      { id: 'Usia 18 s/d 35 tahun', ja: '年齢18歳〜35歳' },
-      { id: 'Pendidikan SMA / K Sederajat', ja: '高校卒業以上' },
-      { id: 'Sertifikat Bahasa (JFT Basic A2 / JLPT N4)', ja: '日本語能力試験（JFT A2 / JLPT N4）' },
-      { id: 'Sertifikat Senmonkyu / 3kyu (eks Magang)', ja: '専門級・3級試験合格（技能実習修了者）' }
+      { id: 'Persiapan Ujian JFT Basic A2', ja: 'JFT Basic A2 試験対策' },
+      { id: 'Persiapan Ujian JLPT N4', ja: 'JLPT N4 試験対策' }
     ],
     benefits: [
-      { icon: 'payments', title: { id: 'Gaji Karyawan', ja: '給与' }, desc: { id: 'Standar gaji sesuai pekerja di Jepang.', ja: '日本人の従業員と同等の給与水準です。' } },
-      { icon: 'card_travel', title: { id: 'Perpanjangan', ja: '更新可能' }, desc: { id: 'Bisa berlanjut ke TG2.', ja: '特定技能2号への移行 juga可能です。' } }
+      { icon: 'payments', title: { id: 'Gaji Karyawan', ja: '給与' }, desc: { id: 'Standar gaji sesuai pekerja di Jepang.', ja: '日本人の従業員と同等の給与水準です。' } }
     ],
     whatsappText: 'Halo Fujisaki Gakuin, saya ingin mendaftar Program Tokutei Ginou.'
   },
@@ -113,20 +99,13 @@ const programsData = [
     level: { id: 'Mahir (N3/N2)', ja: '上級 (N3/N2)' },
     certificate: 'D3 / S1 Resmi DIKTI',
     seats: 'Sesuai Lowongan',
-    description: { 
-      id: 'Visa Gijinkoku atau yang sering dikenal dengan Engineering adalah Program Kerja ke Jepang dengan keterampilan Profesional. Peserta diwajibkan Lulusan D3 / S1 dari universitas yang terdaftar resmi di DIKTI. Kemampuan Bahasa yang baik menjadi nilai plus untuk para pencari lowongan Gijingkoku / Engineering. Masa kerja Visa Gijinkoku adalah dapat diperpanjang setiap tahunnya.', 
-      ja: '技術・人文知識・国際業務ビザ（技人国）は、専門的なスキルを持つ高度人材向けの就労ビザです。DIKTIに登録されている大学のD3またはS1（大卒・短大卒）の学位が必須です。高い日本語能力は採用において有利に働きます。契約が続く限り、毎年ビザの更新が可能です。' 
-    },
+    description: { id: 'Program Kerja ke Jepang dengan keterampilan Profesional untuk lulusan D3 / S1.', ja: '専修学校や大学の卒業生（D3/S1）向けの就労ビザ。' },
     features: [
-      { id: 'Pria – Wanita', ja: '男性・女性' },
-      { id: 'Usia 21 – 40 tahun', ja: '年齢21歳〜40歳' },
-      { id: 'Pendidikan Min D3 / S1 (Teknik diutamakan)', ja: 'D3/S1学位保持者（工業系学部優先）' },
-      { id: 'Keterampilan Bahasa Jepang tingkat Mahir', ja: '上級レベルの日本語能力' },
-      { id: 'Sehat Jasmani dan rohani', ja: '心身ともに健康であること' }
+      { id: 'Pelatihan Business Japanese', ja: 'ビジネス日本語研修' },
+      { id: 'Persiapan Interview', ja: '面接対策' }
     ],
     benefits: [
-      { icon: 'engineering', title: { id: 'Professional', ja: 'プロフェッショナル' }, desc: { id: 'Status Visa Pekerja Profesional.', ja: 'プロフェッショナルな就労ビザステータス。' } },
-      { icon: 'work', title: { id: 'Dapat Diperpanjang', ja: '更新可能' }, desc: { id: 'Kontrak dapat selalu diperpanjang.', ja: '契約は常に更新可能です。' } }
+      { icon: 'engineering', title: { id: 'Professional', ja: 'プロフェッショナル' }, desc: { id: 'Status Visa Pekerja Profesional.', ja: 'プロフェッショナルな就労ビザステータス。' } }
     ],
     whatsappText: 'Halo Fujisaki Gakuin, saya lulusan universitas dan tertarik Program Engineering (Gijinkoku).'
   },
@@ -140,20 +119,13 @@ const programsData = [
     level: { id: 'Pemula', ja: '初心者' },
     certificate: 'Sertifikat Lulus',
     seats: 'Terbuka',
-    description: { 
-      id: 'Program Student / Study atau 留学 Ryugaku adalah Program belajar di Jepang dengan Visa Student / Pelajar asing. Program ini sering dipilih bagi peserta yang berminat untuk mempersiapkan masuk Universitas di Jepang. Pemegang visa Study diizinkan untuk melakukan kerja paruh waktu Max 28 jam / minggu. Setelah dinyatakan LULUS peserta dapat memilih untuk masuk Universitas atau mengambil Visa Kerja di Jepang.', 
-      ja: '留学（Ryugaku）ビザは、日本の日本語学校、専門学校、または大学で学ぶためのプログラムです。将来的に日本の大学進学を目指す方に最適です。留学ビザでは、生活費を補うために、週28時間以内のアルバイト（資格外活動）が認められています。卒業後は、進学または就労ビザへの切り替えが可能です。' 
-    },
+    description: { id: 'Program belajar di Jepang dengan Visa Student / Pelajar asing.', ja: '日本の大学や専門学校への進学を目指すための留学ビザプログラム。' },
     features: [
-      { id: 'Pria – Wanita', ja: '男性・女性' },
-      { id: 'Usia 18 s/d 30 tahun', ja: '年齢18歳〜30歳' },
-      { id: 'Pendidikan Min SMA/ K Sederajat', ja: '高校卒業以上' },
-      { id: 'Ekonomi keluarga yang baik', ja: '安定した家庭内経済状況' },
-      { id: 'Bersedia menyelesaikan studi hingga lulus', ja: '卒業まで真面目に学習を継続できること' }
+      { id: 'Bimbingan Studi Bahasa 1-2 Tahun', ja: '1〜2年の日本語学習指導' },
+      { id: 'Persiapan Pemilihan Universitas', ja: '大学進学準備' }
     ],
     benefits: [
-      { icon: 'schedule', title: { id: 'Kerja Paruh Waktu', ja: 'アルバイト' }, desc: { id: 'Diijinkan Arubaito max 28 jam / minggu.', ja: '週28時間までのアルバイトが許可されます。' } },
-      { icon: 'school', title: { id: 'Lanjut Pendidikan', ja: '進学' }, desc: { id: 'Peluang lolos Universitas Daigaku Jepang.', ja: '日本の大学への進学チャンス。' } }
+      { icon: 'schedule', title: { id: 'Kerja Paruh Waktu', ja: 'アルバイト' }, desc: { id: 'Diijinkan Arubaito max 28 jam / minggu.', ja: '週28時間までのアルバイトが許可されます。' } }
     ],
     whatsappText: 'Halo Fujisaki Gakuin, saya tertarik Program Student (Ryugaku).'
   }
@@ -179,7 +151,7 @@ const activitiesData = [
       { id: 'Kegiatan ini bertujuan untuk mempersiapkan peserta pelatihan menghadapi proses wawancara kerja (mensesu) dengan perusahaan-perusahaan di Jepang.', ja: 'この活動は、研修生が日本企業との採用面接（面接）に備えることを目的としています。' }
     ],
     highlights: [
-      { id: 'Praktek wawancara langsung dengan native speaker', ja: '日本人ネイティブとの模擬面接' },
+      { id: 'Praktek wawancara langsung with native speaker', ja: '日本人ネイティブとの模擬面接' },
       { id: 'Materi etika bisnis Jepang (Business Manner)', ja: '日本のビジネスマナー研修' }
     ]
   },
