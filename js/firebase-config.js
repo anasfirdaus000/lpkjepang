@@ -2,7 +2,7 @@
    FIREBASE CONFIG — LPK Fujisaki Gakuin
    ================================================ */
 import { initializeApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
+import { getFirestore, enableIndexedDbPersistence } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
@@ -18,6 +18,11 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const auth = getAuth(app);
+
+// Enable offline persistence to severely reduce lag on subsequent visits
+enableIndexedDbPersistence(db).catch((err) => {
+  console.warn("Firebase persistence error:", err.code);
+});
 
 // Cloudinary config
 export const cloudinaryConfig = {

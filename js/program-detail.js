@@ -25,7 +25,9 @@ async function initProgramDetail() {
     return;
   }
 
-  // Normalize field names (Firebase uses different field names)
+  const tVal = (obj) => typeof obj === 'string' ? obj : (obj ? obj[getLang()] || obj.id || '' : '');
+  const tArr = (obj) => Array.isArray(obj) && typeof obj[0] === 'string' ? obj : (obj ? obj[getLang()] || obj.id || [] : []);
+
   const title = program.title || '';
   const tagline = program.tagline || '';
   const heroImage = program.heroImage || '';
@@ -34,102 +36,120 @@ async function initProgramDetail() {
   const level = program.level || '';
   const seats = program.seats || '';
   const certificate = program.certificate || '';
-  const description = program.description || '';
   const overview = program.overview || [];
   const curriculum = program.curriculum || [];
   const sectors = program.sectors || [];
-  const benefits = program.benefits || [];
   const requirements = program.requirements || [];
   const features = program.features || [];
-  const whatsappText = program.whatsappText || `Halo Fujisaki Gakuin, saya tertarik dengan program ${title}`;
+  const benefits = program.benefits || [];
+  const whatsappText = program.whatsappText || `Halo Fujisaki Gakuin, saya tertarik...`;
 
-  // Update page title
-  document.title = `${title} — LPK Fujisaki Gakuin Center`;
+  function renderDOM() {
+    const curTitle = tVal(title);
+    
+    // Update page title
+    document.title = `${curTitle} — LPK Fujisaki Gakuin Center`;
 
-  // Hero
-  document.getElementById('heroBg').style.backgroundImage = `url(${heroImage})`;
-  document.getElementById('heroBadge').textContent = badge;
-  document.getElementById('heroTitle').textContent = title;
-  document.getElementById('heroTagline').textContent = tagline;
+    // Hero
+    document.getElementById('heroBg').style.backgroundImage = `url(${heroImage})`;
+    document.getElementById('heroBadge').textContent = badge;
+    document.getElementById('heroTitle').textContent = curTitle;
+    document.getElementById('heroTagline').textContent = tVal(tagline);
 
-  // Meta badges
-  document.getElementById('heroMeta').innerHTML = `
-    <div class="detail-hero__meta-item"><span class="material-symbols-outlined">schedule</span> ${duration}</div>
-    <div class="detail-hero__meta-item"><span class="material-symbols-outlined">translate</span> ${level}</div>
-    <div class="detail-hero__meta-item"><span class="material-symbols-outlined">group</span> ${seats}</div>
-  `;
+    // Meta badges
+    document.getElementById('heroMeta').innerHTML = `
+      <div class="detail-hero__meta-item"><span class="material-symbols-outlined">schedule</span> ${duration}</div>
+      <div class="detail-hero__meta-item"><span class="material-symbols-outlined">translate</span> ${level}</div>
+      <div class="detail-hero__meta-item"><span class="material-symbols-outlined">group</span> ${seats}</div>
+    `;
 
-  // Overview
-  document.getElementById('overviewContent').innerHTML =
-    `<p>${description}</p>` + overview.map(p => `<p>${p}</p>`).join('');
+    // Overview
+    const curDesc = tVal(program.description);
+    const curOverview = tArr(overview);
+    document.getElementById('overviewContent').innerHTML =
+      `<p>${curDesc}</p>` + curOverview.map(p => `<p>${p}</p>`).join('');
 
-  // Curriculum
-  if (curriculum.length > 0) {
-    document.getElementById('curriculumContent').innerHTML = curriculum.map(phase => `
-      <div class="detail-curriculum-phase">
-        <div class="detail-curriculum-phase__header">
-          <h3 class="detail-curriculum-phase__title">${phase.phase}</h3>
-          <span class="detail-curriculum-phase__duration">${phase.duration}</span>
+    // Curriculum
+    const curFeatures = tArr(features);
+    if (curriculum.length > 0) {
+      document.getElementById('curriculumContent').innerHTML = curriculum.map(phase => `
+        <div class="detail-curriculum-phase">
+          <div class="detail-curriculum-phase__header">
+            <h3 class="detail-curriculum-phase__title">${phase.phase}</h3>
+            <span class="detail-curriculum-phase__duration">${phase.duration}</span>
+          </div>
+          <ul>${phase.items.map(item => `<li>${item}</li>`).join('')}</ul>
         </div>
-        <ul>${phase.items.map(item => `<li>${item}</li>`).join('')}</ul>
-      </div>
+      `).join('');
+    } else if (curFeatures.length > 0) {
+      document.getElementById('curriculumContent').innerHTML = `
+        <div class="detail-curriculum-phase">
+          <ul>${curFeatures.map(f => `<li>${f}</li>`).join('')}</ul>
+        </div>
+      `;
+    }
+
+    // Sectors (SSW only)
+    if (sectors.length > 0) {
+      document.getElementById('sectorsBlock').style.display = 'block';
+      document.getElementById('sectorsContent').innerHTML = sectors.map(s => `
+        <div class="detail-sector-chip"><span class="material-symbols-outlined">check_circle</span> ${s}</div>
+      `).join('');
+    }
+
+    // Requirements
+    document.getElementById('requirementsContent').innerHTML = tArr(requirements).map(req => `
+      <li><span class="material-symbols-outlined">task_alt</span> ${req}</li>
     `).join('');
-  } else if (features.length > 0) {
-    // Firebase format — use features as simple list
-    document.getElementById('curriculumContent').innerHTML = `
-      <div class="detail-curriculum-phase">
-        <ul>${features.map(f => `<li>${f}</li>`).join('')}</ul>
+
+    // Sidebar info
+    const waLink = `https://wa.me/6285858000088?text=${encodeURIComponent(whatsappText)}`;
+    document.getElementById('sidebarCta').href = waLink;
+    document.getElementById('bottomCta').href = waLink;
+
+    document.getElementById('sidebarInfo').innerHTML = `
+      <div class="detail-sidebar__info-item">
+        <span class="material-symbols-outlined">schedule</span>
+        <div><strong>Durasi:</strong><br>${duration}</div>
+      </div>
+      <div class="detail-sidebar__info-item">
+        <span class="material-symbols-outlined">translate</span>
+        <div><strong>Level JP:</strong><br>${level}</div>
+      </div>
+      <div class="detail-sidebar__info-item">
+        <span class="material-symbols-outlined">workspace_premium</span>
+        <div><strong>Sertifikat:</strong><br>${certificate}</div>
       </div>
     `;
+
+    const curBenefits = tArr(benefits);
+    if (curBenefits && curBenefits.length > 0) {
+      document.getElementById('benefitsContent').innerHTML = curBenefits.map(b => `
+        <div class="benefit-item">
+          <div class="benefit-item__icon"><span class="material-symbols-outlined">${b.icon || 'star'}</span></div>
+          <div class="benefit-item__text">
+            <h4>${b.title}</h4>
+            <p>${b.desc}</p>
+          </div>
+        </div>
+      `).join('');
+    } else {
+      document.getElementById('benefitsCard').style.display = 'none';
+    }
   }
 
-  // Sectors (SSW only)
-  if (sectors.length > 0) {
-    document.getElementById('sectorsBlock').style.display = 'block';
-    document.getElementById('sectorsContent').innerHTML = sectors.map(s => `
-      <div class="detail-sector-chip"><span class="material-symbols-outlined">check_circle</span> ${s}</div>
-    `).join('');
-  }
+  // Initial render
+  renderDOM();
 
-  // Requirements
-  document.getElementById('requirementsContent').innerHTML = requirements.map(req => `
-    <li><span class="material-symbols-outlined">task_alt</span> ${req}</li>
-  `).join('');
+  // Re-render when language switches (we tap into the body click event, or re-bind)
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      setTimeout(renderDOM, 50); // small delay to let i18n change the getLang state
+    });
+  });
 
-  // Sidebar info
-  const waLink = `https://wa.me/6285858000088?text=${encodeURIComponent(whatsappText)}`;
-  document.getElementById('sidebarInfo').innerHTML = `
-    <div class="detail-sidebar__info-item">
-      <div class="detail-sidebar__info-icon"><span class="material-symbols-outlined">schedule</span></div>
-      <div><div class="detail-sidebar__info-label">Durasi</div><div class="detail-sidebar__info-value">${duration}</div></div>
-    </div>
-    <div class="detail-sidebar__info-item">
-      <div class="detail-sidebar__info-icon"><span class="material-symbols-outlined">translate</span></div>
-      <div><div class="detail-sidebar__info-label">Level Bahasa</div><div class="detail-sidebar__info-value">${level}</div></div>
-    </div>
-    <div class="detail-sidebar__info-item">
-      <div class="detail-sidebar__info-icon"><span class="material-symbols-outlined">workspace_premium</span></div>
-      <div><div class="detail-sidebar__info-label">Sertifikat</div><div class="detail-sidebar__info-value">${certificate}</div></div>
-    </div>
-    <div class="detail-sidebar__info-item">
-      <div class="detail-sidebar__info-icon"><span class="material-symbols-outlined">group</span></div>
-      <div><div class="detail-sidebar__info-label">Kapasitas</div><div class="detail-sidebar__info-value">${seats}</div></div>
-    </div>
-  `;
-  document.getElementById('sidebarCta').href = waLink;
-
-  // Benefits
-  document.getElementById('benefitsContent').innerHTML = benefits.map(b => `
-    <div class="detail-benefit">
-      <div class="detail-benefit__icon"><span class="material-symbols-outlined">${b.icon}</span></div>
-      <div><div class="detail-benefit__title">${b.title}</div><div class="detail-benefit__desc">${b.desc}</div></div>
-    </div>
-  `).join('');
-
-  // Bottom CTA
-  document.getElementById('bottomCta').href = waLink;
-
-  // Update WA links with contact data
+  // Ensure contact variables are loaded so whatsapp links work
+  await loadContact();
   await loadContact();
   setLang(getLang());
 }

@@ -2090,3 +2090,18 @@ button {
     --container-max: 1320px;
   }
 }
+
+/* GLOBAL MOBILE OVERRIDES */
+@media (max-width: 768px) {
+  .footer__grid { grid-template-columns: 1fr !important; gap: 32px !important; text-align: center; justify-items: center; }
+  .footer__socials { justify-content: center; width: 100%; }
+  .footer__links ul { align-items: center; display: flex; flex-direction: column; }
+  .programs__grid, .trust__grid, .advantages__list, .activities__grid, .about-grid { grid-template-columns: 1fr !important; justify-items: center; text-align: center; }
+  .advantages__item { flex-direction: column; text-align: center; align-items: center; }
+  .hero__title { font-size: 2.2rem !important; }
+  .hero__image-wrapper { right: auto !important; position: static !important; margin-top: 32px !important; animation: none !important; width: 100%; }
+  .hero__stat-card { display: none !important; }
+  .hero__buttons { flex-direction: column; }
+  .section-title { font-size: 2rem !important; }
+}
+

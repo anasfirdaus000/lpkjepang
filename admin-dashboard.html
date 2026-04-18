@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="/css/admin.css" />
   <link rel="icon" type="image/png" href="/favicon.png" />
 </head>
-<body class="admin-body">
+<body class="admin-body" data-admin-lang="id">
 
   <!-- SIDEBAR -->
   <aside class="sidebar" id="sidebar">
@@ -78,6 +78,12 @@
 
   <!-- MAIN CONTENT -->
   <main class="admin-main" id="adminMain">
+    
+    <!-- Admin Language Switcher -->
+    <div class="admin-lang-switcher" style="margin-bottom: 24px; max-width: max-content;">
+      <button class="admin-lang-btn active" data-lang="id">🇮🇩 Mode Indonesia</button>
+      <button class="admin-lang-btn" data-lang="ja">🇯🇵 Mode Jepang</button>
+    </div>
 
     <!-- OVERVIEW / SEED -->
     <div class="admin-panel" id="panel-overview">
@@ -235,25 +241,22 @@
             <input type="file" id="aboutImageFile" accept="image/*" hidden />
           </div>
         </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Paragraf 1 (Bahasa Indonesia)</label>
-            <textarea id="aboutDesc1Id" rows="4"></textarea>
-          </div>
-          <div class="form-group">
-            <label>Paragraf 1 (Bahasa Jepang)</label>
-            <textarea id="aboutDesc1Ja" rows="4"></textarea>
-          </div>
+        <div class="form-group lang-group-id">
+          <label>Paragraf 1</label>
+          <textarea id="aboutDesc1Id" rows="4"></textarea>
         </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Paragraf 2 (Bahasa Indonesia)</label>
-            <textarea id="aboutDesc2Id" rows="4"></textarea>
-          </div>
-          <div class="form-group">
-            <label>Paragraf 2 (Bahasa Jepang)</label>
-            <textarea id="aboutDesc2Ja" rows="4"></textarea>
-          </div>
+        <div class="form-group lang-group-ja">
+          <label>Paragraf 1</label>
+          <textarea id="aboutDesc1Ja" rows="4"></textarea>
+        </div>
+        
+        <div class="form-group lang-group-id">
+          <label>Paragraf 2</label>
+          <textarea id="aboutDesc2Id" rows="4"></textarea>
+        </div>
+        <div class="form-group lang-group-ja">
+          <label>Paragraf 2</label>
+          <textarea id="aboutDesc2Ja" rows="4"></textarea>
         </div>
         <button type="submit" class="btn-admin-primary"><span class="material-symbols-outlined">save</span> Simpan</button>
       </form>
@@ -320,17 +323,31 @@
               <input type="text" id="progBadge" placeholder="Flagship" />
             </div>
           </div>
-          <div class="form-group">
+          <div class="form-group lang-group-id">
             <label>Nama Program</label>
             <input type="text" id="progTitle" placeholder="Specified Skilled Worker (SSW)" />
           </div>
-          <div class="form-group">
+          <div class="form-group lang-group-ja">
+            <label>Nama Program (Jepang)</label>
+            <input type="text" id="progTitleJa" placeholder="" />
+          </div>
+          
+          <div class="form-group lang-group-id">
             <label>Tagline</label>
             <input type="text" id="progTagline" placeholder="Program Kerja Profesional ke Jepang" />
           </div>
-          <div class="form-group">
+          <div class="form-group lang-group-ja">
+            <label>Tagline (Jepang)</label>
+            <input type="text" id="progTaglineJa" placeholder="" />
+          </div>
+          
+          <div class="form-group lang-group-id">
             <label>Deskripsi</label>
             <textarea id="progDesc" rows="3"></textarea>
+          </div>
+          <div class="form-group lang-group-ja">
+            <label>Deskripsi (Jepang)</label>
+            <textarea id="progDescJa" rows="3"></textarea>
           </div>
           <div class="form-group">
             <label>Gambar Program</label>
@@ -349,21 +366,40 @@
             <div class="form-group"><label>Sertifikat</label><input type="text" id="progCertificate" placeholder="SSW Certificate" /></div>
             <div class="form-group"><label>Kapasitas</label><input type="text" id="progSeats" placeholder="30 Peserta/Batch" /></div>
           </div>
-          <div class="form-group">
+          <div class="form-group lang-group-id">
             <label>Overview (pisah paragraf dengan Enter 2x)</label>
             <textarea id="progOverview" rows="4"></textarea>
           </div>
-          <div class="form-group">
+          <div class="form-group lang-group-ja">
+            <label>Overview (Jepang, pisah paragraf dengan Enter 2x)</label>
+            <textarea id="progOverviewJa" rows="4"></textarea>
+          </div>
+          
+          <div class="form-group lang-group-id">
             <label>Fitur Utama (1 per baris)</label>
             <textarea id="progFeatures" rows="4" placeholder="Pelatihan Bahasa Level N4&#10;Persiapan Ujian Skill Sektor&#10;Pendampingan Wawancara"></textarea>
           </div>
-          <div class="form-group">
+          <div class="form-group lang-group-ja">
+            <label>Fitur Utama (Jepang, 1 per baris)</label>
+            <textarea id="progFeaturesJa" rows="4"></textarea>
+          </div>
+          
+          <div class="form-group lang-group-id">
             <label>Persyaratan (1 per baris)</label>
             <textarea id="progRequirements" rows="4" placeholder="Usia 18-35 tahun&#10;Pendidikan min SMA/SMK"></textarea>
           </div>
-          <div class="form-group">
+          <div class="form-group lang-group-ja">
+            <label>Persyaratan (Jepang, 1 per baris)</label>
+            <textarea id="progRequirementsJa" rows="4"></textarea>
+          </div>
+          
+          <div class="form-group lang-group-id">
             <label>Benefits (format: icon|judul|deskripsi — 1 per baris)</label>
             <textarea id="progBenefits" rows="4" placeholder="payments|Gaji Kompetitif|Gaji mulai dari ¥170,000/bulan"></textarea>
+          </div>
+          <div class="form-group lang-group-ja">
+            <label>Benefits (Jepang, format tipe sama)</label>
+            <textarea id="progBenefitsJa" rows="4"></textarea>
           </div>
           <div class="form-group">
             <label>WhatsApp Text</label>
@@ -500,9 +536,13 @@
         <h3 class="form-modal-title" id="activityFormTitle">Tambah Kegiatan</h3>
         <form id="activityForm" class="admin-form">
           <input type="hidden" id="actId" />
-          <div class="form-group">
+          <div class="form-group lang-group-id">
             <label>Judul</label>
             <input type="text" id="actTitle" />
+          </div>
+          <div class="form-group lang-group-ja">
+            <label>Judul (Jepang)</label>
+            <input type="text" id="actTitleJa" />
           </div>
           <div class="form-row">
             <div class="form-group">
@@ -519,17 +559,31 @@
               <input type="file" id="actImageFile" accept="image/*" hidden />
             </div>
           </div>
-          <div class="form-group">
+          <div class="form-group lang-group-id">
             <label>Ringkasan (1-2 kalimat)</label>
             <textarea id="actSummary" rows="2"></textarea>
           </div>
-          <div class="form-group">
+          <div class="form-group lang-group-ja">
+            <label>Ringkasan (Jepang)</label>
+            <textarea id="actSummaryJa" rows="2"></textarea>
+          </div>
+          
+          <div class="form-group lang-group-id">
             <label>Konten Artikel (pisah paragraf dengan Enter 2x)</label>
             <textarea id="actContent" rows="6"></textarea>
           </div>
-          <div class="form-group">
+          <div class="form-group lang-group-ja">
+            <label>Konten Artikel (Jepang)</label>
+            <textarea id="actContentJa" rows="6"></textarea>
+          </div>
+          
+          <div class="form-group lang-group-id">
             <label>Highlights (1 per baris)</label>
             <textarea id="actHighlights" rows="4"></textarea>
+          </div>
+          <div class="form-group lang-group-ja">
+            <label>Highlights (Jepang)</label>
+            <textarea id="actHighlightsJa" rows="4"></textarea>
           </div>
           <div class="form-actions">
             <button type="submit" class="btn-admin-primary"><span class="material-symbols-outlined">save</span> Simpan</button>

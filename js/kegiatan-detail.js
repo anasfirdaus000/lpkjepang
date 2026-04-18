@@ -33,56 +33,77 @@ async function initKegiatanDetail() {
     return;
   }
 
-  // Update page title
-  document.title = `${activity.title} — LPK Fujisaki Gakuin Center`;
+  const tVal = (obj) => typeof obj === 'string' ? obj : (obj ? obj[getLang()] || obj.id || '' : '');
+  const tArr = (obj) => Array.isArray(obj) && typeof obj[0] === 'string' ? obj : (obj ? obj[getLang()] || obj.id || [] : []);
 
-  // Hero
-  document.getElementById('heroBg').style.backgroundImage = `url(${activity.image})`;
-  document.getElementById('heroBadge').textContent = activity.category;
-  document.getElementById('heroTitle').textContent = activity.title;
-  document.getElementById('heroMeta').innerHTML = `
-    <span class="material-symbols-outlined">calendar_today</span> ${activity.date}
-  `;
+  function renderDOM() {
+    const curTitle = tVal(activity.title);
 
-  // Article content
-  const content = activity.content || [];
-  document.getElementById('articleContent').innerHTML = content.map(p => `<p>${p}</p>`).join('');
+    // Update page title
+    document.title = `${curTitle} — LPK Fujisaki Gakuin Center`;
 
-  // Highlights
-  const highlights = activity.highlights || [];
-  document.getElementById('highlightsContent').innerHTML = highlights.map(h => `
-    <li><span class="material-symbols-outlined">check_circle</span> ${h}</li>
-  `).join('');
+    // Hero
+    document.getElementById('heroBg').style.backgroundImage = `url(${activity.image})`;
+    document.getElementById('heroBadge').textContent = activity.category;
+    document.getElementById('heroTitle').textContent = curTitle;
+    document.getElementById('heroMeta').innerHTML = `
+      <span class="material-symbols-outlined">calendar_today</span> ${activity.date}
+    `;
 
-  // Related activities
-  const related = (allActivities || []).filter(a => a.id !== activity.id).slice(0, 3);
-  document.getElementById('relatedActivities').innerHTML = related.map(a => `
-    <a href="/kegiatan-detail.html?id=${a.id}" class="detail-related">
-      <div class="detail-related__image">
-        <img src="${a.image}" alt="${a.title}" loading="lazy" />
-      </div>
-      <div>
-        <div class="detail-related__title">${a.title}</div>
-        <div class="detail-related__date">${a.date}</div>
-      </div>
-    </a>
-  `).join('');
+    // Article content
+    const content = tArr(activity.content);
+    document.getElementById('articleContent').innerHTML = content.map(p => `<p>${p}</p>`).join('');
 
-  // Share buttons
-  const shareUrl = window.location.href;
-  const shareText = `${activity.title} — LPK Fujisaki Gakuin Center`;
+    // Highlights
+    const highlights = tArr(activity.highlights);
+    document.getElementById('highlightsContent').innerHTML = highlights.map(h => `
+      <li><span class="material-symbols-outlined">check_circle</span> ${h}</li>
+    `).join('');
 
-  document.getElementById('shareWa').addEventListener('click', () => {
-    window.open(`https://wa.me/?text=${encodeURIComponent(shareText + '\n' + shareUrl)}`, '_blank');
-  });
+    // Related activities
+    const related = (allActivities || []).filter(a => a.id !== activity.id).slice(0, 3);
+    document.getElementById('relatedActivities').innerHTML = related.map(a => `
+      <a href="/kegiatan-detail.html?id=${a.id}" class="detail-related">
+        <div class="detail-related__image">
+          <img src="${a.image}" alt="${tVal(a.title)}" loading="lazy" />
+        </div>
+        <div>
+          <div class="detail-related__title">${tVal(a.title)}</div>
+          <div class="detail-related__date">${a.date}</div>
+        </div>
+      </a>
+    `).join('');
 
-  document.getElementById('shareCopy').addEventListener('click', () => {
-    navigator.clipboard.writeText(shareUrl).then(() => {
-      const btn = document.getElementById('shareCopy');
-      btn.innerHTML = '<span class="material-symbols-outlined">check</span> Tersalin!';
-      setTimeout(() => {
-        btn.innerHTML = '<span class="material-symbols-outlined">content_copy</span> Salin Link';
-      }, 2000);
+    // Share buttons
+    const shareUrl = window.location.href;
+    const shareText = `${curTitle} — LPK Fujisaki Gakuin Center`;
+
+    // Replace old event listeners by cloning node to avoid dupes (since renderDOM runs multiple times)
+    const shareWaBtn = document.getElementById('shareWa');
+    const newShareWa = shareWaBtn.cloneNode(true);
+    shareWaBtn.parentNode.replaceChild(newShareWa, shareWaBtn);
+    newShareWa.addEventListener('click', () => {
+      window.open(`https://wa.me/?text=${encodeURIComponent(shareText + '\\n' + shareUrl)}`, '_blank');
+    });
+
+    const shareCopyBtn = document.getElementById('shareCopy');
+    const newShareCopy = shareCopyBtn.cloneNode(true);
+    shareCopyBtn.parentNode.replaceChild(newShareCopy, shareCopyBtn);
+    newShareCopy.addEventListener('click', () => {
+      navigator.clipboard.writeText(shareUrl).then(() => {
+        newShareCopy.innerHTML = '<span class="material-symbols-outlined">check</span> Tersalin!';
+        setTimeout(() => {
+          newShareCopy.innerHTML = '<span class="material-symbols-outlined">content_copy</span> Salin Link';
+        }, 2000);
+      });
+    });
+  }
+
+  renderDOM();
+
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      setTimeout(renderDOM, 50);
     });
   });
 

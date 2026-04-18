@@ -368,17 +368,31 @@ window.editProgram = function(id) {
   document.getElementById('progId').value = p.id;
   document.getElementById('progSlug').value = p.slug || '';
   document.getElementById('progBadge').value = p.badge || '';
-  document.getElementById('progTitle').value = p.title || '';
-  document.getElementById('progTagline').value = p.tagline || '';
-  document.getElementById('progDesc').value = p.description || '';
+  const v = (field) => typeof field === 'object' && field !== null ? field : { id: field || '', ja: '' };
+  document.getElementById('progBadge').value = p.badge || '';
+  document.getElementById('progTitle').value = v(p.title).id;
+  document.getElementById('progTitleJa').value = v(p.title).ja;
+  document.getElementById('progTagline').value = v(p.tagline).id;
+  document.getElementById('progTaglineJa').value = v(p.tagline).ja;
+  document.getElementById('progDesc').value = v(p.description).id;
+  document.getElementById('progDescJa').value = v(p.description).ja;
   document.getElementById('progDuration').value = p.duration || '';
   document.getElementById('progLevel').value = p.level || '';
   document.getElementById('progCertificate').value = p.certificate || '';
   document.getElementById('progSeats').value = p.seats || '';
-  document.getElementById('progOverview').value = (p.overview || []).join('\n\n');
-  document.getElementById('progFeatures').value = (p.features || []).join('\n');
-  document.getElementById('progRequirements').value = (p.requirements || []).join('\n');
-  document.getElementById('progBenefits').value = (p.benefits || []).map(b => `${b.icon}|${b.title}|${b.desc}`).join('\n');
+  
+  const vArr = (field) => field && field.id ? field : { id: Array.isArray(field)?field:[], ja: [] };
+  document.getElementById('progOverview').value = vArr(p.overview).id.join('\n\n');
+  document.getElementById('progOverviewJa').value = vArr(p.overview).ja.join('\n\n');
+  document.getElementById('progFeatures').value = vArr(p.features).id.join('\n');
+  document.getElementById('progFeaturesJa').value = vArr(p.features).ja.join('\n');
+  document.getElementById('progRequirements').value = vArr(p.requirements).id.join('\n');
+  document.getElementById('progRequirementsJa').value = vArr(p.requirements).ja.join('\n');
+  
+  const parseBen = (b) => `${b.icon || ''}|${b.title || ''}|${b.desc || ''}`;
+  document.getElementById('progBenefits').value = vArr(p.benefits).id.map(parseBen).join('\n');
+  document.getElementById('progBenefitsJa').value = vArr(p.benefits).ja.map(parseBen).join('\n');
+  
   document.getElementById('progWaText').value = p.whatsappText || '';
   if (p.heroImage) {
     document.getElementById('progImagePreview').src = p.heroImage;
@@ -405,25 +419,38 @@ document.getElementById('programForm').addEventListener('submit', async (e) => {
     const id = document.getElementById('progId').value;
     const existing = id ? (programsData.find(x => x.id === id) || {}) : {};
     const heroImage = await handleImageUpload('progImageFile', existing.heroImage || '');
-    const benefitsRaw = document.getElementById('progBenefits').value.trim().split('\n').filter(Boolean);
+    const parseBenVal = (raw) => raw.map(line => {
+      const [icon, title, desc] = line.split('|');
+      return { icon: icon?.trim(), title: title?.trim(), desc: desc?.trim() };
+    });
+    
     const data = {
       slug: document.getElementById('progSlug').value,
       badge: document.getElementById('progBadge').value,
-      title: document.getElementById('progTitle').value,
-      tagline: document.getElementById('progTagline').value,
-      description: document.getElementById('progDesc').value,
+      title: { id: document.getElementById('progTitle').value, ja: document.getElementById('progTitleJa').value },
+      tagline: { id: document.getElementById('progTagline').value, ja: document.getElementById('progTaglineJa').value },
+      description: { id: document.getElementById('progDesc').value, ja: document.getElementById('progDescJa').value },
       heroImage,
       duration: document.getElementById('progDuration').value,
       level: document.getElementById('progLevel').value,
       certificate: document.getElementById('progCertificate').value,
       seats: document.getElementById('progSeats').value,
-      overview: document.getElementById('progOverview').value.split('\n\n').filter(Boolean),
-      features: document.getElementById('progFeatures').value.split('\n').filter(Boolean),
-      requirements: document.getElementById('progRequirements').value.split('\n').filter(Boolean),
-      benefits: benefitsRaw.map(line => {
-        const [icon, title, desc] = line.split('|');
-        return { icon: icon?.trim(), title: title?.trim(), desc: desc?.trim() };
-      }),
+      overview: { 
+        id: document.getElementById('progOverview').value.split('\n\n').filter(Boolean),
+        ja: document.getElementById('progOverviewJa').value.split('\n\n').filter(Boolean)
+      },
+      features: { 
+        id: document.getElementById('progFeatures').value.split('\n').filter(Boolean),
+        ja: document.getElementById('progFeaturesJa').value.split('\n').filter(Boolean)
+      },
+      requirements: { 
+        id: document.getElementById('progRequirements').value.split('\n').filter(Boolean),
+        ja: document.getElementById('progRequirementsJa').value.split('\n').filter(Boolean)
+      },
+      benefits: {
+        id: parseBenVal(document.getElementById('progBenefits').value.trim().split('\n').filter(Boolean)),
+        ja: parseBenVal(document.getElementById('progBenefitsJa').value.trim().split('\n').filter(Boolean))
+      },
       whatsappText: document.getElementById('progWaText').value
     };
     if (id) { await updateDoc(doc(db, 'programs_v2', id), data); }
@@ -722,12 +749,19 @@ window.editActivity = function(id) {
   const a = activitiesData.find(x => x.id === id);
   if (!a) return;
   document.getElementById('actId').value = a.id;
-  document.getElementById('actTitle').value = a.title;
-  document.getElementById('actCategory').value = a.category;
+  const v = (field) => typeof field === 'object' && field !== null ? field : { id: field || '', ja: '' };
+  document.getElementById('actTitle').value = v(a.title).id;
+  document.getElementById('actTitleJa').value = v(a.title).ja;
+  document.getElementById('actCategory').value = a.category || '';
   document.getElementById('actDate').value = a.dateRaw || '';
-  document.getElementById('actSummary').value = a.summary || '';
-  document.getElementById('actContent').value = (a.content || []).join('\n\n');
-  document.getElementById('actHighlights').value = (a.highlights || []).join('\n');
+  document.getElementById('actSummary').value = v(a.summary).id;
+  document.getElementById('actSummaryJa').value = v(a.summary).ja;
+  
+  const vArr = (field) => field && field.id ? field : { id: Array.isArray(field)?field:[], ja: [] };
+  document.getElementById('actContent').value = vArr(a.content).id.join('\n\n');
+  document.getElementById('actContentJa').value = vArr(a.content).ja.join('\n\n');
+  document.getElementById('actHighlights').value = vArr(a.highlights).id.join('\n');
+  document.getElementById('actHighlightsJa').value = vArr(a.highlights).ja.join('\n');
   if (a.image) {
     document.getElementById('actImagePreview').src = a.image;
     document.getElementById('actImagePreview').style.display = 'block';
@@ -762,14 +796,20 @@ document.getElementById('activityForm').addEventListener('submit', async (e) => 
     const image = await handleImageUpload('actImageFile', existing.image || '');
     const dateRaw = document.getElementById('actDate').value;
     const data = {
-      title: document.getElementById('actTitle').value,
+      title: { id: document.getElementById('actTitle').value, ja: document.getElementById('actTitleJa').value },
       category: document.getElementById('actCategory').value,
       dateRaw,
       date: formatDate(dateRaw),
       image,
-      summary: document.getElementById('actSummary').value,
-      content: document.getElementById('actContent').value.split('\n\n').filter(Boolean),
-      highlights: document.getElementById('actHighlights').value.split('\n').filter(Boolean)
+      summary: { id: document.getElementById('actSummary').value, ja: document.getElementById('actSummaryJa').value },
+      content: { 
+        id: document.getElementById('actContent').value.split('\n\n').filter(Boolean),
+        ja: document.getElementById('actContentJa').value.split('\n\n').filter(Boolean)
+      },
+      highlights: { 
+        id: document.getElementById('actHighlights').value.split('\n').filter(Boolean),
+        ja: document.getElementById('actHighlightsJa').value.split('\n').filter(Boolean)
+      }
     };
     if (id) { await updateDoc(doc(db, 'activities', id), data); }
     else { await addDoc(collection(db, 'activities'), data); }
@@ -810,3 +850,13 @@ document.getElementById('contactForm').addEventListener('submit', async (e) => {
   } catch (e) { showToast('Gagal: ' + e.message, true); }
   showLoading(false);
 });
+
+/* Admin Language Switcher Logic */
+document.querySelectorAll('.admin-lang-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.admin-lang-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.body.setAttribute('data-admin-lang', btn.dataset.lang);
+  });
+});
+

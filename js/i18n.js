@@ -315,7 +315,7 @@ const translations = {
 };
 
 // Current language
-let currentLang = localStorage.getItem('lpk_lang') || 'id';
+let currentLang = localStorage.getItem('lpk_lang') || 'ja';
 
 /**
  * Get translation by key
