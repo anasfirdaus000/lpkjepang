@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LPK Fujisaki Gakuin Center — Wujudkan Karir ke Jepang</title>
+  <meta name="description" content="LPK Fujisaki Gakuin Center - Lembaga Pelatihan Kerja terpercaya untuk belajar bahasa Jepang dan mempersiapkan karir profesional di Jepang. Program SSW, JLPT, dan Magang." />
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="LPK Fujisaki Gakuin Center — Wujudkan Karir ke Jepang" />
+  <meta property="og:description" content="Raih peluang karir di Jepang dengan program pelatihan bahasa dan kerja profesional." />
+  <meta property="og:type" content="website" />
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+  <!-- ============================================ -->
+  <!-- NAVBAR -->
+  <!-- ============================================ -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar__container">
+      <a href="#hero" class="navbar__logo">
+        <span class="navbar__logo-icon">🏯</span>
+        <span class="navbar__logo-text">LPK Fujisaki Gakuin</span>
+      </a>
+      
+      <ul class="navbar__menu" id="navMenu">
+        <li><a href="#hero" class="navbar__link active" data-i18n="nav.home">Home</a></li>
+        <li><a href="/program.html" class="navbar__link" data-i18n="nav.program">Program</a></li>
+        <li><a href="/about.html" class="navbar__link" data-i18n="nav.about">Tentang</a></li>
+        <li><a href="/kegiatan.html" class="navbar__link" data-i18n="nav.activities">Kegiatan</a></li>
+        <li><a href="#footer" class="navbar__link" data-i18n="nav.contact">Kontak</a></li>
+      </ul>
+
+      <!-- Language Switcher -->
+      <div class="lang-switcher" id="langSwitcher">
+        <button class="lang-btn active" data-lang="id" aria-label="Bahasa Indonesia">🇮🇩</button>
+        <button class="lang-btn" data-lang="ja" aria-label="日本語">🇯🇵</button>
+      </div>
+      
+      <a href="https://wa.me/6285640090444?text=Halo%20Fujisaki%20Gakuin,%20saya%20tertarik%20untuk%20mendaftar" class="btn btn--primary navbar__cta" target="_blank" rel="noopener" id="navCta">
+        <span data-i18n="nav.cta">Daftar Sekarang</span>
+      </a>
+      
+      <button class="navbar__hamburger" id="hamburgerBtn" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    
+    <!-- Mobile menu overlay -->
+    <div class="navbar__mobile-overlay" id="mobileOverlay">
+      <div class="navbar__mobile-menu">
+        <ul>
+          <li><a href="#hero" class="navbar__mobile-link" data-nav-close data-i18n="nav.home">Home</a></li>
+          <li><a href="/program.html" class="navbar__mobile-link" data-nav-close data-i18n="nav.program">Program</a></li>
+          <li><a href="/about.html" class="navbar__mobile-link" data-nav-close data-i18n="nav.about">Tentang</a></li>
+          <li><a href="/kegiatan.html" class="navbar__mobile-link" data-nav-close data-i18n="nav.activities">Kegiatan</a></li>
+          <li><a href="#footer" class="navbar__mobile-link" data-nav-close data-i18n="nav.contact">Kontak</a></li>
+        </ul>
+        <!-- Mobile Language Switcher -->
+        <div class="lang-switcher lang-switcher--mobile">
+          <button class="lang-btn active" data-lang="id" aria-label="Bahasa Indonesia">🇮🇩 ID</button>
+          <button class="lang-btn" data-lang="ja" aria-label="日本語">🇯🇵 JP</button>
+        </div>
+        <a href="https://wa.me/6285640090444?text=Halo%20Fujisaki%20Gakuin,%20saya%20tertarik%20untuk%20mendaftar" class="btn btn--primary btn--full" target="_blank" rel="noopener">
+          <span data-i18n="nav.cta">Daftar Sekarang</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- ============================================ -->
+    <!-- HERO SECTION -->
+    <!-- ============================================ -->
+    <section class="hero" id="hero">
+      <!-- Sakura petals decoration -->
+      <div class="hero__sakura-container" aria-hidden="true">
+        <div class="sakura-petal sakura-1"></div>
+        <div class="sakura-petal sakura-2"></div>
+        <div class="sakura-petal sakura-3"></div>
+        <div class="sakura-petal sakura-4"></div>
+        <div class="sakura-petal sakura-5"></div>
+        <div class="sakura-petal sakura-6"></div>
+      </div>
+      
+      <div class="container hero__grid">
+        <div class="hero__content reveal-up">
+          <div class="hero__badge">
+            <span class="material-symbols-outlined" style="font-size:16px">auto_awesome</span>
+            <span data-i18n="hero.badge">Your Journey Starts Here</span>
+          </div>
+          <h1 class="hero__title" data-i18n="hero.title" data-i18n-html>
+            Wujudkan Karir ke <span class="text-gradient">Jepang</span> Bersama Fujisaki Gakuin Center
+          </h1>
+          <p class="hero__subtitle" data-i18n="hero.subtitle">
+            Raih peluang karir di Jepang dengan program pelatihan bahasa dan persiapan kerja profesional. Kami mengkurasi masa depan Anda melalui filosofi Modern Ikigai.
+          </p>
+          <div class="hero__buttons">
+            <a href="https://wa.me/6285640090444?text=Halo%20Fujisaki%20Gakuin,%20saya%20ingin%20konsultasi%20program" class="btn btn--primary btn--lg" target="_blank" rel="noopener">
+              <span data-i18n="hero.btn.wa">Konsultasi WhatsApp</span>
+              <span class="material-symbols-outlined">arrow_forward</span>
+            </a>
+            <a href="#program" class="btn btn--outline btn--lg">
+              <span data-i18n="hero.btn.programs">Lihat Program</span>
+            </a>
+          </div>
+        </div>
+        
+        <div class="hero__visual reveal-right">
+          <div class="hero__image-wrapper">
+            <img 
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqtGwEyPQcbWyP4cqPTr1PUF0YVwRSH7Rht3rcwctA4q5xyriX1ffQ9IjNGZoTIZSk1nwE9aBXe7zbwCEQL6TuMIjniLdK-GloG271i4cBOGSkzZ-DAM-tPv_YtJ3gaQR0bzTY8mU3Q5L1Xvz_gHTZDuA24x04rsIfqF1QsR-058yvGJgUyJZoY84fuDR_493w_EpM1C8sEfKEg8D-oXFKewcCvsfq3TWC_vSovesVIzYTegJspOGzwwQTfMcLjc5TR2E0EXS2Bxs" 
+              alt="Torii gate Jepang saat sunset — simbol perjalanan karir ke Jepang"
+              class="hero__image"
+              loading="eager"
+            />
+            <div class="hero__image-overlay"></div>
+          </div>
+          <!-- Floating stat card -->
+          <div class="hero__stat-card glass-card">
+            <span class="hero__stat-number">98%</span>
+            <span class="hero__stat-label">Lulus Sertifikasi JLPT N3-N1</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- TRUST / STATS SECTION -->
+    <!-- ============================================ -->
+    <section class="trust" id="trust">
+      <div class="container">
+        <div class="trust__grid">
+          <div class="trust__card reveal-up">
+            <span class="material-symbols-outlined trust__icon">school</span>
+            <div class="trust__value">
+              <span class="trust__number" data-target="1500">0</span><span class="trust__suffix">+</span>
+            </div>
+            <p class="trust__label" data-i18n="stats.alumni">Alumni Sukses</p>
+          </div>
+          <div class="trust__card reveal-up" style="--delay: 0.1s">
+            <span class="material-symbols-outlined trust__icon">handshake</span>
+            <div class="trust__value">
+              <span class="trust__number" data-target="45">0</span><span class="trust__suffix">+</span>
+            </div>
+            <p class="trust__label" data-i18n="stats.partner">Partner Industri</p>
+          </div>
+          <div class="trust__card reveal-up" style="--delay: 0.2s">
+            <span class="material-symbols-outlined trust__icon">verified_user</span>
+            <div class="trust__value">
+              <span class="trust__number" data-target="100">0</span><span class="trust__suffix">%</span>
+            </div>
+            <p class="trust__label" data-i18n="stats.legal">Legalitas Terjamin</p>
+          </div>
+          <div class="trust__card reveal-up" style="--delay: 0.3s">
+            <span class="material-symbols-outlined trust__icon">language</span>
+            <div class="trust__value">
+              <span class="trust__number" data-target="12">0</span><span class="trust__suffix">+</span>
+            </div>
+            <p class="trust__label" data-i18n="stats.experience">Tahun Pengalaman</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- PROGRAM SECTION -->
+    <!-- ============================================ -->
+    <section class="programs" id="program">
+      <div class="container">
+        <div class="section-header reveal-up">
+          <h2 class="section-title" data-i18n="programs.title">Program Unggulan</h2>
+          <div class="section-underline"></div>
+        </div>
+        
+        <div class="programs__bento">
+          <!-- Magang Program - Large Card -->
+          <div class="programs__card programs__card--large reveal-up">
+            <div class="programs__card-content">
+              <div class="programs__card-icon-wrap programs__card-icon-wrap--blue">
+                <span class="material-symbols-outlined">work_history</span>
+              </div>
+              <h3 class="programs__card-title" data-i18n="programs.magang.title">Program Magang</h3>
+              <p class="programs__card-desc" data-i18n="programs.magang.desc">Program pemagangan Teknis (Ginou Jisshusei) adalah program berlatih sambil bekerja selama 1 sampai 3 tahun untuk belajar budaya dan etos kerja Jepang.</p>
+              <ul class="programs__card-features">
+                <li>
+                  <span class="material-symbols-outlined">check_circle</span>
+                  <span data-i18n="programs.magang.feature1">Belajar & Praktek Budaya</span>
+                </li>
+                <li>
+                  <span class="material-symbols-outlined">check_circle</span>
+                  <span data-i18n="programs.magang.feature2">Simulasi Area Kerja</span>
+                </li>
+                <li>
+                  <span class="material-symbols-outlined">check_circle</span>
+                  <span data-i18n="programs.magang.feature3">Uang Saku & Akomodasi</span>
+                </li>
+              </ul>
+              <a href="/program-detail.html?id=magang" class="programs__card-link">
+                <span data-i18n="programs.learn_more">Pelajari Selengkapnya</span> <span class="material-symbols-outlined">trending_flat</span>
+              </a>
+            </div>
+            <div class="programs__card-bg-image">
+              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_AUDswQFlIH3at2G6lY784MJUjNi6TM2iskwV7bTVxyOjhjmLk71UbhYF1fwBTYs9GLvQF8bycqUJv1c2ZJuMA3DKh_lnWqrjx35Fe_Z6UODym-jpt5kyQ0AmHvIDvdKeT47NW3pB7TVyZ71YCDcocxIwQTXnMFZ7e0MSxp6uCUJR0nH0Mc4DZMGm-XSKm1n3GkFtU0jDRwQX9l83sVubNML2PDp7kxeS31XIh9rRdlv0kmw-g2pYHtV3pNPS8h4f_xbFccdJUP4" alt="Program Magang" loading="lazy" />
+            </div>
+          </div>
+          
+          <!-- Tokutei Ginou Program - Accent Card -->
+          <div class="programs__card programs__card--accent reveal-up" style="--delay: 0.15s">
+            <div class="programs__card-content">
+              <div class="programs__card-icon-wrap programs__card-icon-wrap--white">
+                <span class="material-symbols-outlined">workspace_premium</span>
+              </div>
+              <h3 class="programs__card-title" data-i18n="programs.tg.title">Program Tokutei Ginou (TG)</h3>
+              <p class="programs__card-desc" data-i18n="programs.tg.desc">Visa keahlian khusus (SSW) untuk pemula atau eks-magang. Bekerja profesional di Jepang hingga 5 tahun.</p>
+              
+              <div class="programs__avatars">
+                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_nb-iD_Ny-tm7afYO8sj9GReUW8mm-Rvv8Oqjr354i1QiBrbexpF5jiYNswBGHalTmCxOup6ETYlUaZur8OjVXp_wF7Cp5v2pxjaxA0LyWVBwgi_FUCMLo1sVVoAyWnUK98ZjliVl3lGiiRjwS0AEJPF1tdeSBWNJKcW4hzhrHJ4osDghvZMUDt5F7CO0obCQSJhUTpeyWMbVO73O4r60oLZBHq1HAAbWZH2q0U5rDljQXJvm4FmsjsTsy3uAa1TorHQsGjfrViw" alt="Student" class="programs__avatar" loading="lazy" />
+                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZ2H3NkNO_sIfV7rKPUS6zMzTC4e4ITSJiOP7HJZd4h39cGq6TjIV27ymXjMb5w0ShSZ6z-ZdNEex_jN0mCWno_eJ4ZPiGngRcdDxwBz-xAeSmvMEkfANV5eZTQmmB59VOthTvxWsHB91Ip3dnE7-B6G4E7RUxR2i9F0RMFSI5esJ20EWCCYh-KCWpH0ngTJ6kiAAUYTMB8PvyjqBfNlrJADTW1U6TBJL19PE5me8hqRYfoH5glzI27Utm1ljC4MQPJJZXaEWdCps" alt="Student" class="programs__avatar" loading="lazy" />
+                <div class="programs__avatar programs__avatar--count">+200</div>
+              </div>
+              
+              <a href="/program-detail.html?id=tokutei_ginou" class="btn btn--white btn--full">
+                <span data-i18n="programs.join">Join Program</span>
+              </a>
+            </div>
+            <div class="programs__card-glow"></div>
+          </div>
+          
+          <!-- Engineering Program - Full Width -->
+          <div class="programs__card programs__card--wide reveal-up" style="--delay: 0.25s">
+            <div class="programs__card-content">
+              <span class="programs__badge">Specialized</span>
+              <h3 class="programs__card-title" data-i18n="programs.engineering.title">Engineering / Gijinkoku</h3>
+              <p class="programs__card-desc" data-i18n="programs.engineering.desc">Visa Gijinkoku untuk lulusan D3 / S1 dari universitas DIKTI yang ingin bekerja sebagai profesional dan dapat diperpanjang setiap tahunnya.</p>
+              <div class="programs__card-tags">
+                <div class="programs__tag">
+                  <span class="material-symbols-outlined">engineering</span>
+                  <span data-i18n="programs.engineering.tag1">Karir Profesional</span>
+                </div>
+                <div class="programs__tag">
+                  <span class="material-symbols-outlined">work</span>
+                  <span data-i18n="programs.engineering.tag2">Dapat Diperpanjang</span>
+                </div>
+              </div>
+              <a href="/program-detail.html?id=engineering" class="programs__card-link">
+                <span data-i18n="programs.learn_more">Pelajari Selengkapnya</span> <span class="material-symbols-outlined">trending_flat</span>
+              </a>
+            </div>
+            <div class="programs__card-image">
+              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAW5KsSWdj9UN3RaJQG6Ztf-3QSAlSMh1f2UTL5LEMEv5UkPDlFL0whnCUgesgmsW8b0xHdNwNl2GLKsphmMzqPma0nNwiZYQXCI0yHO8rI1PvqIkcsoOLVfsS4zuiYxBXiCYNDb6DuKKLxLVhTJQ4RqnYtgRA8DszgCUyoTQHrdFk9UUxjlbJc9PJGcc1xy4y9CDc_nyeLIkfZt7FDN_Ho89VrfrUhUgAflq3q5bbrfoUSkd33FBDjzmHQUvQhW7fBCwaa7dArIKE" alt="Program Engineering" loading="lazy" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- KEUNGGULAN SECTION -->
+    <!-- ============================================ -->
+    <section class="advantages" id="keunggulan">
+      <div class="container advantages__grid">
+        <div class="advantages__content reveal-up">
+          <h2 class="section-title">
+            <span data-i18n="advantages.title">Kenapa Memilih</span> <br/><span class="text-gradient" data-i18n="advantages.title_highlight">Fujisaki Gakuin?</span>
+          </h2>
+          
+          <div class="advantages__list">
+            <div class="advantages__item" style="--delay: 0.1s">
+              <div class="advantages__item-icon">
+                <span class="material-symbols-outlined">verified</span>
+              </div>
+              <div>
+                <h4 class="advantages__item-title" data-i18n="home.advantages.item1.title">Kurikulum Terakreditasi</h4>
+                <p class="advantages__item-desc" data-i18n="home.advantages.item1.desc">Kurikulum kami disesuaikan dengan standar industri di Jepang dan kebutuhan ujian resmi JLPT & JFT.</p>
+              </div>
+            </div>
+            
+            <div class="advantages__item" style="--delay: 0.2s">
+              <div class="advantages__item-icon">
+                <span class="material-symbols-outlined">diversity_3</span>
+              </div>
+              <div>
+                <h4 class="advantages__item-title" data-i18n="home.advantages.item2.title">Mentor Native & Berpengalaman</h4>
+                <p class="advantages__item-desc" data-i18n="home.advantages.item2.desc">Belajar langsung dari penutur asli dan alumni yang telah sukses berkarir di Jepang.</p>
+              </div>
+            </div>
+            
+            <div class="advantages__item" style="--delay: 0.3s">
+              <div class="advantages__item-icon">
+                <span class="material-symbols-outlined">corporate_fare</span>
+              </div>
+              <div>
+                <h4 class="advantages__item-title" data-i18n="home.advantages.item3.title">Koneksi Perusahaan Luas</h4>
+                <p class="advantages__item-desc" data-i18n="home.advantages.item3.desc">Kami memiliki jaringan luas dengan Kumiai dan Perusahaan Penerima (Sento) di berbagai prefektur Jepang.</p>
+              </div>
+            </div>
+            
+            <div class="advantages__item" style="--delay: 0.4s">
+              <div class="advantages__item-icon">
+                <span class="material-symbols-outlined">workspace_premium</span>
+              </div>
+              <div>
+                <h4 class="advantages__item-title" data-i18n="home.advantages.item4.title">Garansi Penempatan Kerja</h4>
+                <p class="advantages__item-desc" data-i18n="home.advantages.item4.desc">Kami memberikan jaminan penempatan kerja bagi lulusan yang memenuhi kualifikasi dan lulus ujian.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="advantages__visual reveal-right">
+          <div class="advantages__image-wrapper">
+            <img 
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAonVwklo5jsP0V34kZpCfjwm_-IkGw_9ZvT4knfkyPedMMIqpnz_ZllLTikmVKqlnHSBeqAh6dtpUPfJN5Q9zPB3LUjx0D9lNicZbfM10HinWEnBCA5xOgQkTdu_SiDJHQ1QNkohkoSbvCb_GB5MEvROgW4WPvbLSGa0TgSB3UG2N-n5AWmhaGjyNIK4d2jWG4HMYMa9_j0l_ClJ952WiGCmHnORVbE0EC5zlFYj_PRFS0ZXw0lKH87qApPX1v-_jiIWssrHRvkDk" 
+              alt="Gedung modern kampus Fujisaki Gakuin dengan sakura"
+              loading="lazy"
+              class="advantages__image"
+            />
+          </div>
+          <div class="advantages__deco-circle" aria-hidden="true"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- TESTIMONI SECTION -->
+    <!-- ============================================ -->
+    <section class="testimonials" id="testimoni">
+      <div class="container">
+        <div class="section-header section-header--center reveal-up">
+          <h2 class="section-title" data-i18n="testimonials.title">Kisah Sukses Alumni</h2>
+          <p class="section-subtitle" data-i18n="testimonials.subtitle">Mereka yang telah menemukan 'Ikigai' di Negeri Sakura.</p>
+        </div>
+        
+        <div class="testimonials__carousel" id="testimonialCarousel">
+          <div class="testimonials__track" id="testimonialTrack">
+            <!-- Testimonial 1 -->
+            <div class="testimonials__card glass-card">
+              <div class="testimonials__header">
+                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVU3s8nWxgwULrqjCf1ZBZQHd2sfDFYdb5GLiVvZ4XGN3yYz2vrq2HGylThzHtNbVrVcEekHrGmQ3LftTuICo1JYhAZ7NwOW7k0APcCETWYvvhAm60RFSm1pueqKAA_x-W-dGxIOiWcsH8gi70yASIBKKbfZ4eMBLrOTdbZHsHoyExe58SvoLCW022vRr5dxxXLCb8S6WwHu-17r_eFC_Bhro9kF1FPDmUEZdffw6Z-hQmSL2oVVYTB_I02LydJQkcCCmDViLicnc" alt="Siti Rahma" class="testimonials__avatar" loading="lazy" />
+                <div>
+                  <h4 class="testimonials__name">Siti Rahma</h4>
+                  <p class="testimonials__role">Caregiver, Osaka</p>
+                </div>
+              </div>
+              <p class="testimonials__quote">
+                "Persiapan di Fujisaki sangat matang, tidak hanya bahasa tapi juga budaya kerja. Sekarang saya sudah 2 tahun di Osaka dan merasa sangat terbantu."
+              </p>
+              <div class="testimonials__stars">
+                <span class="material-symbols-outlined">star</span>
+                <span class="material-symbols-outlined">star</span>
+                <span class="material-symbols-outlined">star</span>
+                <span class="material-symbols-outlined">star</span>
+                <span class="material-symbols-outlined">star</span>
+              </div>
+            </div>
+            
+            <!-- Testimonial 2 -->
+            <div class="testimonials__card">
+              <div class="testimonials__header">
+                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBp6AcCwMMjh1a77tdBPn9a5XvQezbbKnrO50RuNLOZDFscDejzlE4kJVugzuVpCRoMnFkUptn4L_kdyPITnaVsBOlocBF-JrJo6ETpCHlvbVY0nVum2c_QD4EjmZIyVG-a_tWYlGCwPVYUZRboZhj1Damg23Vkwu6FPrIl6bUbdAsDLQftV8vLh0-KosrNp9Zq8iIVXcXErkHp3QDcEMPlo8VlMF64EOlPj8apu5LDg2U7VLA8q-jHrf54-GYvL7aEkKdGM8Zx_V8" alt="Budi Santoso" class="testimonials__avatar" loading="lazy" />
+                <div>
+                  <h4 class="testimonials__name">Budi Santoso</h4>
+                  <p class="testimonials__role">Engineer, Tokyo</p>
+                </div>
+              </div>
+              <p class="testimonials__quote">
+                "Materi SSW Konstruksi yang diajarkan sangat akurat dengan apa yang diujikan. Fujisaki Gakuin adalah jembatan terbaik menuju karir di Jepang."
+              </p>
+              <div class="testimonials__stars">
+                <span class="material-symbols-outlined">star</span>
+                <span class="material-symbols-outlined">star</span>
+                <span class="material-symbols-outlined">star</span>
+                <span class="material-symbols-outlined">star</span>
+                <span class="material-symbols-outlined">star</span>
+              </div>
+            </div>
+
+            <!-- Testimonial 3 -->
+            <div class="testimonials__card">
+              <div class="testimonials__header">
+                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_nb-iD_Ny-tm7afYO8sj9GReUW8mm-Rvv8Oqjr354i1QiBrbexpF5jiYNswBGHalTmCxOup6ETYlUaZur8OjVXp_wF7Cp5v2pxjaxA0LyWVBwgi_FUCMLo1sVVoAyWnUK98ZjliVl3lGiiRjwS0AEJPF1tdeSBWNJKcW4hzhrHJ4osDghvZMUDt5F7CO0obCQSJhUTpeyWMbVO73O4r60oLZBHq1HAAbWZH2q0U5rDljQXJvm4FmsjsTsy3uAa1TorHQsGjfrViw" alt="Dewi Anggraini" class="testimonials__avatar" loading="lazy" />
+                <div>
+                  <h4 class="testimonials__name">Dewi Anggraini</h4>
+                  <p class="testimonials__role">Food Processing, Hokkaido</p>
+                </div>
+              </div>
+              <p class="testimonials__quote">
+                "Awalnya saya ragu, tapi setelah bergabung dengan Fujisaki semua keraguan hilang. Tim pengajar sangat supportif dan prosesnya sangat transparan."
+              </p>
+              <div class="testimonials__stars">
+                <span class="material-symbols-outlined">star</span>
+                <span class="material-symbols-outlined">star</span>
+                <span class="material-symbols-outlined">star</span>
+                <span class="material-symbols-outlined">star</span>
+                <span class="material-symbols-outlined">star</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Carousel controls -->
+          <div class="testimonials__controls">
+            <button class="testimonials__arrow testimonials__arrow--prev" id="prevBtn" aria-label="Previous">
+              <span class="material-symbols-outlined">chevron_left</span>
+            </button>
+            <div class="testimonials__dots" id="testimonialDots"></div>
+            <button class="testimonials__arrow testimonials__arrow--next" id="nextBtn" aria-label="Next">
+              <span class="material-symbols-outlined">chevron_right</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- GALERI SECTION -->
+    <!-- ============================================ -->
+    <section class="gallery" id="galeri">
+      <div class="container">
+        <div class="section-header section-header--center reveal-up">
+          <span class="section-label" data-i18n="gallery.label">Visual Experience</span>
+          <h2 class="section-title" data-i18n="gallery.title">Galeri Kampus & Karir</h2>
+          <div class="section-underline section-underline--center"></div>
+        </div>
+        
+        <div class="gallery__grid">
+          <div class="gallery__item gallery__item--tall gallery__item--wide reveal-up" data-caption="Alumni Batch 12 @ Kyoto">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZb96K1b0F7zCpqZJeMU7EYL3iXzHtgMITUme-yfcZgccsupf32N1jThDdKUarbC0_H5Jsy2CvAK3QJBEeOg2dGQLCuL4hJQlnLz5UpmTshcWITqCd5OtrwxYsxTnogcz3onbL2Y3ma4iwPMis3AgOdPbuXTwsaB1GNqCW8_v5kgGDX8jvIPFRyu6c3JopSs4pqDyQJXFtWRWptsmLFi-nvl_6apIpsDXicLbFkf0fkMzQKM6Qf1w7p17EbN8Qx6ujNP-qhSICFGY" alt="Alumni Batch 12 di Kyoto" loading="lazy" />
+            <div class="gallery__overlay">
+              <p>Alumni Batch 12 @ Kyoto</p>
+            </div>
+          </div>
+          
+          <div class="gallery__item reveal-up" style="--delay:0.1s" data-caption="Workshop Budaya: Chado">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiC4i9fzqysNXxR9N7SCq0VJEkmqRT7upHgmvfxK0_7sKl3s0MBHVpb-D1yvDNV76Y-DTwquCRoXJbgzhwxPofaclTaFAft1Wb8RSJm7nnSoIzqnvN829XMWWTq5zu2IAgsAhlpc_obRAv_guh0BEJfAY_A6uutViyZyI7l6Ab771K8lX4ZIlheHJIT54VsIg6Z8x1NLRnVmJhdzyHlNHIDXJzEBwbfYYgKZbVxDR_aqBmVxZJyEb4x3cy-RQ5T_68LEx5fSSgoKY" alt="Workshop Budaya Chado" loading="lazy" />
+            <div class="gallery__overlay">
+              <p>Workshop Budaya: Chado</p>
+            </div>
+          </div>
+          
+          <div class="gallery__item gallery__item--tall reveal-up" style="--delay:0.15s" data-caption="Seni Kaligrafi Shodo">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvjATrRe_8EugucnFDEJt-N7UIuCWfpoKFZD7al3sa_T9WEm9veV3AKLu32fxVA3spw1UGdzScnRHLZpZsPkd8E-I41A9DCC8H7jzcu5VFXlajx_HLiKrOOXloBGypjB1ZtVmqF2B093Qc0X0YWR8r86SQvgctfOuOFwxPIIxF85qJgkqpDXaY997Qq7GreP3us4myGFG6WpFj96LkiNO5tl719Ep2j-IK85yodLY2LQEb3hZCBNdi4uVZqo8wK-kBaLY9qVbl5Ds" alt="Seni Kaligrafi Shodo" loading="lazy" />
+            <div class="gallery__overlay">
+              <p>Seni Kaligrafi Shodo</p>
+            </div>
+          </div>
+          
+          <div class="gallery__item reveal-up" style="--delay:0.2s" data-caption="Interaksi Kelas Seru">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2Bn2JMwizK2xG-PSHmNxqfzkA4gTX9kwiaCPq3DrX85HL17JaJNabi2xjkUnt_Y0weYkiZc8h1cK820N62B6V_uIr03CONsl_bCWBV2AKEGn8-3dK0jr64ivkPRIV2q147xBc4YgxYpfOmBOMem1IvKfpUD29YOcVnC_5WU8WbIJPZShyNdXji9JeV8S91MFJCDHRKN1SrSL46kmEK33RgLpSPYaIInNfyz8qAkBS3829xKklrJBIHUDolgwgRxmUWDhV1VzDGq4" alt="Suasana kelas interaktif" loading="lazy" />
+            <div class="gallery__overlay">
+              <p>Interaksi Kelas Seru</p>
+            </div>
+          </div>
+          
+          <div class="gallery__item gallery__item--wide reveal-up" style="--delay:0.25s" data-caption="Peluang Karir Global">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCevWjioc6J5uIny3oqEPIgxTqBgLTXo4mNbus0YotvkTdEhBKfR9IjP6JUnAicw0OZnwdkYb5aXTBmFREeMYjoH43fCEH4jCHr6tlm26_wHl-BL0cjzWIibsEWBBal5vNC8HhXeyhJkG1n96h4wBK7lRh0l3bXy234I6Gmd6d1WFwjYcytu1oYyJ3DwkFuf3lHONQ2O3Lm7gAvLsXucXESLyHVelNS73uyG6G3WFUL_WwJ_doB0WHs6KeD1BCJXt4mu0_L9xqsUkQ" alt="Peluang karir global di Jepang" loading="lazy" />
+            <div class="gallery__overlay gallery__overlay--gradient">
+              <p>Peluang Karir Global</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- KEGIATAN SECTION -->
+    <!-- ============================================ -->
+    <section class="activities" id="kegiatan">
+      <div class="container">
+        <div class="section-header reveal-up">
+          <div>
+            <h2 class="section-title" data-i18n="activities.title">Kegiatan Terbaru</h2>
+            <p class="section-subtitle" data-i18n="activities.subtitle">Update aktivitas harian dan info terbaru di LPK.</p>
+          </div>
+          <a href="/kegiatan.html" class="activities__see-all">
+            <span data-i18n="activities.see_all">Lihat Semua Berita</span> <span class="material-symbols-outlined">arrow_outward</span>
+          </a>
+        </div>
+        
+        <div class="activities__grid">
+          <a href="/kegiatan-detail.html?id=1" class="activities__card reveal-up">
+            <div class="activities__card-image">
+              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAW5KsSWdj9UN3RaJQG6Ztf-3QSAlSMh1f2UTL5LEMEv5UkPDlFL0whnCUgesgmsW8b0xHdNwNl2GLKsphmMzqPma0nNwiZYQXCI0yHO8rI1PvqIkcsoOLVfsS4zuiYxBXiCYNDb6DuKKLxLVhTJQ4RqnYtgRA8DszgCUyoTQHrdFk9UUxjlbJc9PJGcc1xy4y9CDc_nyeLIkfZt7FDN_Ho89VrfrUhUgAflq3q5bbrfoUSkd33FBDjzmHQUvQhW7fBCwaa7dArIKE" alt="Workshop Persiapan Wawancara" loading="lazy" />
+            </div>
+            <div class="activities__card-body">
+              <span class="activities__tag">Event</span>
+              <h4 class="activities__card-title">Workshop Persiapan Wawancara Perusahaan Jepang</h4>
+              <p class="activities__card-desc">Pelajari etika dan cara menjawab pertanyaan mensesu (wawancara) dengan lancar bersama sensei native.</p>
+            </div>
+          </a>
+          
+          <a href="/kegiatan-detail.html?id=2" class="activities__card reveal-up" style="--delay: 0.15s">
+            <div class="activities__card-image">
+              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrjnG8_Ef4rwT-ihqGIkUDtGIl_XwJo8QpVGbwAWMSuDQCH2BJsDUMcGW0MkhFFlMp3ayRY3PD7ZhuR_9eubsi-O_ZJ1tSMduUH27EDlpsmump891bAkuloPB70y1o5-_Fx9jsYeXGmQsYFaDRgm_qyHH1VOLi8eIR212cXWIIpvaUKM5IZE6p8tYnD_umtWEybvsufH2n92PfVFreh1j0nAN7lYbugWfjWBYn3585PIxKiFG1dyhxZ3VcYUuMRZKTlB6Q4RcgBE4" alt="Upacara Minum Teh" loading="lazy" />
+            </div>
+            <div class="activities__card-body">
+              <span class="activities__tag">Culture</span>
+              <h4 class="activities__card-title">Pengenalan Budaya: Upacara Minum Teh di Kampus</h4>
+              <p class="activities__card-desc">Mengenal lebih dalam filosofi 'Omotenashi' melalui praktek langsung Chado bersama instruktur tamu.</p>
+            </div>
+          </a>
+          
+          <a href="/kegiatan-detail.html?id=3" class="activities__card reveal-up" style="--delay: 0.25s">
+            <div class="activities__card-image">
+              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQyw7ButzlX7NBgbTBL68zb-U4GzT5ftCbulhG6xJvw9d9rJwCT-hA6SW6yD0rGo6faNuiwEF4MWWo5kshMEV0plRP21SY8RJBuboQ3yHGPEeEBZakVtX9REXpzQkAXJ88k7kNTqRTwh_R1zWjPwkdYQwacmCobuYlqoLh3ELl3ihze3qZ2OrRns5nFGik45gp0iI19blY7QBxz-7eDm1F2gSV_WtSGNWmjdrmDRS4wQTrXGCglybhj8vCG4kL5w8koxCsPpTV91M" alt="Pendaftaran Batch Baru" loading="lazy" />
+            </div>
+            <div class="activities__card-body">
+              <span class="activities__tag">Update</span>
+              <h4 class="activities__card-title">Pembukaan Pendaftaran Batch Baru SSW Food Processing</h4>
+              <p class="activities__card-desc">Segera daftar untuk kuota terbatas pengolahan makanan untuk keberangkatan musim gugur tahun depan.</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- CTA FINAL SECTION -->
+    <!-- ============================================ -->
+    <section class="cta-final" id="cta">
+      <div class="container">
+        <div class="cta-final__box">
+          <div class="cta-final__content reveal-up">
+            <h2 class="cta-final__title" data-i18n="cta.title">Siap Memulai Langkah Pertama?</h2>
+            <p class="cta-final__subtitle" data-i18n="cta.subtitle">
+              Konsultasi gratis mengenai pilihan karir, biaya, dan proses keberangkatan ke Jepang dengan tim ahli kami.
+            </p>
+            <a href="https://wa.me/6285640090444?text=Halo%20Fujisaki%20Gakuin,%20saya%20tertarik%20untuk%20mendaftar" class="btn btn--whatsapp btn--lg" target="_blank" rel="noopener">
+              <svg class="wa-icon" viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+              </svg>
+              <span data-i18n="cta.btn">Hubungi via WhatsApp</span>
+            </a>
+          </div>
+          <!-- Background blurs -->
+          <div class="cta-final__glow cta-final__glow--1" aria-hidden="true"></div>
+          <div class="cta-final__glow cta-final__glow--2" aria-hidden="true"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================================ -->
+  <!-- FOOTER -->
+  <!-- ============================================ -->
+  <footer class="footer" id="footer">
+    <div class="container footer__grid">
+      <div class="footer__about">
+        <div class="footer__logo">LPK Fujisaki Gakuin</div>
+        <p class="footer__desc" data-i18n="footer.desc">
+          Lembaga Pelatihan Kerja terpercaya untuk menjembatani talenta terbaik Indonesia dengan peluang karir profesional di Jepang.
+        </p>
+        <div class="footer__socials">
+          <a href="#" class="footer__social-btn" aria-label="Share">
+            <span class="material-symbols-outlined">share</span>
+          </a>
+          <a href="#" class="footer__social-btn" aria-label="Website">
+            <span class="material-symbols-outlined">public</span>
+          </a>
+          <a href="mailto:Fujisaki.gakuin1@gmail.com" class="footer__social-btn" aria-label="Email">
+            <span class="material-symbols-outlined">mail</span>
+          </a>
+        </div>
+      </div>
+      
+      <div class="footer__links">
+        <h5 class="footer__heading" data-i18n="footer.nav_title">Navigasi</h5>
+        <ul>
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#program">Program</a></li>
+          <li><a href="/about.html">Tentang Kami</a></li>
+          <li><a href="#galeri">Galeri</a></li>
+          <li><a href="#" class="footer__link--highlight">Student Portal</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer__contact">
+        <h5 class="footer__heading" data-i18n="footer.contact_title">Kontak</h5>
+        <p>📍 Jln Dipo Krembi No 57 Desa Kesugihan Kidul <br> Kec. Kesugihan Kab. Cilacap Prov. Jawa Tengah</p>
+        <p>📞 +62 856-4009-0444</p>
+        <p>✉️ Fujisaki.gakuin1@gmail.com</p>
+      </div>
+    </div>
+    
+    <div class="footer__bottom">
+      <p data-i18n="footer.copyright">© 2026 LPK Fujisaki Gakuin Center. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ============================================ -->
+  <!-- FLOATING WHATSAPP BUTTON -->
+  <!-- ============================================ -->
+  <a href="https://wa.me/6285640090444?text=Halo%20Fujisaki%20Gakuin,%20saya%20ingin%20bertanya" class="floating-wa" id="floatingWa" target="_blank" rel="noopener" aria-label="Chat WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+    </svg>
+    <span class="floating-wa__tooltip">Chat Kami</span>
+  </a>
+
+  <!-- ============================================ -->
+  <!-- STICKY MOBILE CTA -->
+  <!-- ============================================ -->
+  <div class="sticky-mobile-cta" id="stickyMobileCta">
+    <a href="https://wa.me/6285640090444?text=Halo%20Fujisaki%20Gakuin,%20saya%20tertarik%20untuk%20mendaftar" class="btn btn--primary btn--full" target="_blank" rel="noopener">
+      <span data-i18n="sticky.btn">Daftar Sekarang — Gratis Konsultasi</span>
+    </a>
+  </div>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox__close" id="lightboxClose" aria-label="Close">
+      <span class="material-symbols-outlined">close</span>
+    </button>
+    <img src="" alt="" class="lightbox__image" id="lightboxImage" />
+    <p class="lightbox__caption" id="lightboxCaption"></p>
+  </div>
+
+  <!-- Scripts -->
+  <script type="module" src="/js/main.js"></script>
+</body>
+</html>

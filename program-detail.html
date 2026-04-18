@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Program — LPK Fujisaki Gakuin Center</title>
+  <meta name="description" content="Detail program pelatihan kerja ke Jepang di LPK Fujisaki Gakuin Center." />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/detail.css" />
+</head>
+<body>
+
+  <!-- NAVBAR (same as main) -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar__container">
+      <a href="/" class="navbar__logo">
+        <span class="navbar__logo-icon">🏯</span>
+        <span class="navbar__logo-text">LPK Fujisaki Gakuin</span>
+      </a>
+      <ul class="navbar__menu" id="navMenu">
+        <li><a href="/" class="navbar__link" data-i18n="nav.home">Home</a></li>
+        <li><a href="/program.html" class="navbar__link active" data-i18n="nav.program">Program</a></li>
+        <li><a href="/about.html" class="navbar__link" data-i18n="nav.about">Tentang</a></li>
+        <li><a href="/kegiatan.html" class="navbar__link" data-i18n="nav.activities">Kegiatan</a></li>
+        <li><a href="/#footer" class="navbar__link" data-i18n="nav.contact">Kontak</a></li>
+      </ul>
+
+      <!-- Language Switcher -->
+      <div class="lang-switcher" id="langSwitcher">
+        <button class="lang-btn active" data-lang="id" aria-label="Bahasa Indonesia">🇮🇩</button>
+        <button class="lang-btn" data-lang="ja" aria-label="日本語">🇯🇵</button>
+      </div>
+
+      <a href="https://wa.me/6285640090444?text=Halo%20Fujisaki%20Gakuin,%20saya%20tertarik%20untuk%20mendaftar" class="btn btn--primary navbar__cta" target="_blank" rel="noopener">
+        <span data-i18n="nav.cta">Daftar Sekarang</span>
+      </a>
+      <button class="navbar__hamburger" id="hamburgerBtn" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="navbar__mobile-overlay" id="mobileOverlay">
+      <div class="navbar__mobile-menu">
+        <ul>
+          <li><a href="/" class="navbar__mobile-link" data-nav-close data-i18n="nav.home">Home</a></li>
+          <li><a href="/program.html" class="navbar__mobile-link" data-nav-close data-i18n="nav.program">Program</a></li>
+          <li><a href="/about.html" class="navbar__mobile-link" data-nav-close data-i18n="nav.about">Tentang</a></li>
+          <li><a href="/kegiatan.html" class="navbar__mobile-link" data-nav-close data-i18n="nav.activities">Kegiatan</a></li>
+          <li><a href="/#footer" class="navbar__mobile-link" data-nav-close data-i18n="nav.contact">Kontak</a></li>
+        </ul>
+        <div class="lang-switcher lang-switcher--mobile">
+          <button class="lang-btn active" data-lang="id" aria-label="Bahasa Indonesia">🇮🇩 ID</button>
+          <button class="lang-btn" data-lang="ja" aria-label="日本語">🇯🇵 JP</button>
+        </div>
+        <a href="https://wa.me/6285640090444" class="btn btn--primary btn--full" target="_blank" rel="noopener"><span data-i18n="nav.cta">Daftar Sekarang</span></a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- DETAIL HERO -->
+    <section class="detail-hero" id="detailHero">
+      <div class="detail-hero__bg" id="heroBg"></div>
+      <div class="detail-hero__overlay"></div>
+      <div class="container detail-hero__content">
+        <a href="/program.html" class="detail-hero__back">
+          <span class="material-symbols-outlined">arrow_back</span>
+          <span data-i18n="program.detail.back">Kembali ke Program</span>
+        </a>
+        <div class="detail-hero__badge" id="heroBadge"></div>
+        <h1 class="detail-hero__title" id="heroTitle">Loading...</h1>
+        <p class="detail-hero__tagline" id="heroTagline"></p>
+        <div class="detail-hero__meta" id="heroMeta"></div>
+      </div>
+    </section>
+
+    <!-- PROGRAM OVERVIEW -->
+    <section class="detail-section">
+      <div class="container detail-grid">
+        <div class="detail-main">
+          <!-- Overview -->
+          <div class="detail-block reveal-up" id="overviewBlock">
+            <h2 class="detail-block__title">
+              <span class="material-symbols-outlined">info</span>
+              <span data-i18n="program.detail.about">Tentang Program</span>
+            </h2>
+            <div id="overviewContent"></div>
+          </div>
+
+          <!-- Curriculum -->
+          <div class="detail-block reveal-up" id="curriculumBlock">
+            <h2 class="detail-block__title">
+              <span class="material-symbols-outlined">school</span>
+              <span data-i18n="program.detail.curriculum">Kurikulum & Materi</span>
+            </h2>
+            <div id="curriculumContent"></div>
+          </div>
+
+          <!-- Sectors (SSW only) -->
+          <div class="detail-block reveal-up" id="sectorsBlock" style="display:none;">
+            <h2 class="detail-block__title">
+              <span class="material-symbols-outlined">factory</span>
+              <span data-i18n="program.detail.sectors">Sektor Industri</span>
+            </h2>
+            <div class="detail-sectors" id="sectorsContent"></div>
+          </div>
+
+          <!-- Requirements -->
+          <div class="detail-block reveal-up" id="requirementsBlock">
+            <h2 class="detail-block__title">
+              <span class="material-symbols-outlined">checklist</span>
+              <span data-i18n="program.detail.requirements">Persyaratan</span>
+            </h2>
+            <ul class="detail-requirements" id="requirementsContent"></ul>
+          </div>
+        </div>
+
+        <!-- SIDEBAR -->
+        <aside class="detail-sidebar">
+          <div class="detail-sidebar__sticky">
+            <!-- Quick Info Card -->
+            <div class="detail-sidebar__card reveal-up">
+              <h3 class="detail-sidebar__card-title" data-i18n="program.detail.info_title">Informasi Program</h3>
+              <div class="detail-sidebar__info" id="sidebarInfo"></div>
+              <a href="#" class="btn btn--primary btn--full" id="sidebarCta" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                </svg>
+                <span data-i18n="program.detail.cta_sidebar">Daftar via WhatsApp</span>
+              </a>
+            </div>
+
+            <!-- Benefits Card -->
+            <div class="detail-sidebar__card detail-sidebar__card--benefits reveal-up" id="benefitsCard">
+              <h3 class="detail-sidebar__card-title" data-i18n="program.detail.benefits_title">Keuntungan</h3>
+              <div id="benefitsContent"></div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- CTA BOTTOM -->
+    <section class="cta-final" style="padding-top: 0;">
+      <div class="container">
+        <div class="cta-final__box">
+          <div class="cta-final__content">
+            <h2 class="cta-final__title" data-i18n="program.detail.cta_bottom_title">Tertarik dengan Program Ini?</h2>
+            <p class="cta-final__subtitle" data-i18n="program.detail.cta_bottom_desc">Konsultasi gratis untuk mengetahui program yang tepat untuk Anda.</p>
+            <a href="#" class="btn btn--whatsapp btn--lg" id="bottomCta" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+              </svg>
+              Hubungi via WhatsApp
+            </a>
+          </div>
+          <div class="cta-final__glow cta-final__glow--1" aria-hidden="true"></div>
+          <div class="cta-final__glow cta-final__glow--2" aria-hidden="true"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer" id="footer">
+    <div class="container footer__grid">
+      <div class="footer__about">
+        <div class="footer__logo">LPK Fujisaki Gakuin</div>
+        <p class="footer__desc">Lembaga Pelatihan Kerja terpercaya untuk menjembatani talenta terbaik Indonesia dengan peluang karir profesional di Jepang.</p>
+        <div class="footer__socials">
+          <a href="#" class="footer__social-btn" aria-label="Share"><span class="material-symbols-outlined">share</span></a>
+          <a href="#" class="footer__social-btn" aria-label="Website"><span class="material-symbols-outlined">public</span></a>
+          <a href="mailto:Fujisaki.gakuin1@gmail.com" class="footer__social-btn" aria-label="Email"><span class="material-symbols-outlined">mail</span></a>
+        </div>
+      </div>
+      <div class="footer__links">
+        <h5 class="footer__heading" data-i18n="footer.nav_title">Navigasi</h5>
+        <ul>
+          <li><a href="/" data-i18n="nav.home">Home</a></li>
+          <li><a href="/program.html" data-i18n="nav.program">Program</a></li>
+          <li><a href="/about.html" data-i18n="nav.about">Tentang Kami</a></li>
+          <li><a href="/kegiatan.html" data-i18n="nav.activities">Kegiatan</a></li>
+        </ul>
+      </div>
+      <div class="footer__contact">
+        <h5 class="footer__heading" data-i18n="footer.contact_title">Kontak</h5>
+        <p>📍 Jln Dipo Krembi No 57 Desa Kesugihan Kidul <br> Kec. Kesugihan Kab. Cilacap Prov. Jawa Tengah</p>
+        <p>📞 +62 856-4009-0444</p>
+        <p>✉️ Fujisaki.gakuin1@gmail.com</p>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p data-i18n="footer.copyright">© 2026 LPK Fujisaki Gakuin Center. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Floating WA -->
+  <a href="https://wa.me/6285640090444" class="floating-wa" target="_blank" rel="noopener" aria-label="Chat WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    <span class="floating-wa__tooltip">Chat Kami</span>
+  </a>
+
+  <script type="module" src="/js/program-detail.js"></script>
+</body>
+</html>

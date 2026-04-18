@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tentang Kami — LPK Fujisaki Gakuin Center</title>
+  <meta name="description" content="LPKS Fujisaki Gakuin Center adalah Lembaga pelatihan Bahasa Jepang yang Fokus Membimbing siswa agar siap bekerja di Jepang." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/pages.css" />
+  <style>
+    .about-profile {
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      padding: var(--space-2xl);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(0,0,0,0.05);
+      margin-bottom: var(--space-2xl);
+    }
+    .profile-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 16px;
+    }
+    .profile-list li {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      align-items: baseline;
+      border-bottom: 1px solid var(--neutral-100);
+      padding-bottom: 12px;
+    }
+    .profile-list li:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+    .profile-list strong {
+      color: var(--neutral-900);
+      font-weight: 600;
+    }
+    .about-text {
+      color: var(--neutral-600);
+      line-height: 1.8;
+      margin-bottom: var(--space-xl);
+    }
+    .visi-misi {
+      display: grid;
+      gap: var(--space-xl);
+    }
+    @media (min-width: 768px) {
+      .visi-misi {
+        grid-template-columns: 1fr 1.5fr;
+      }
+    }
+    .vm-card {
+      background: var(--white);
+      padding: var(--space-xl);
+      border-radius: var(--radius-lg);
+      border-top: 4px solid var(--primary);
+      box-shadow: var(--shadow-sm);
+    }
+    .vm-card--accent {
+      border-top-color: var(--secondary);
+    }
+    .vm-card h3 {
+      font-family: var(--font-heading);
+      color: var(--neutral-900);
+      font-size: 1.5rem;
+      margin-bottom: var(--space-md);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .vm-card p {
+      color: var(--neutral-600);
+      line-height: 1.7;
+    }
+    .misi-list {
+      padding-left: 20px;
+      color: var(--neutral-600);
+      line-height: 1.7;
+    }
+    .misi-list li {
+      margin-bottom: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar__container">
+      <a href="/" class="navbar__logo">
+        <span class="navbar__logo-icon">🏯</span>
+        <span class="navbar__logo-text">LPK Fujisaki Gakuin</span>
+      </a>
+      <ul class="navbar__menu" id="navMenu">
+        <li><a href="/" class="navbar__link" data-i18n="nav.home">Home</a></li>
+        <li><a href="/program.html" class="navbar__link" data-i18n="nav.program">Program</a></li>
+        <li><a href="/about.html" class="navbar__link active" data-i18n="nav.about">Tentang</a></li>
+        <li><a href="/kegiatan.html" class="navbar__link" data-i18n="nav.activities">Kegiatan</a></li>
+        <li><a href="#footer" class="navbar__link" data-i18n="nav.contact">Kontak</a></li>
+      </ul>
+
+      <!-- Language Switcher -->
+      <div class="lang-switcher" id="langSwitcher">
+        <button class="lang-btn active" data-lang="id" aria-label="Bahasa Indonesia">🇮🇩</button>
+        <button class="lang-btn" data-lang="ja" aria-label="日本語">🇯🇵</button>
+      </div>
+
+      <a href="https://wa.me/6285640090444?text=Halo%20Fujisaki%20Gakuin,%20saya%20tertarik%20untuk%20mendaftar" class="btn btn--primary navbar__cta" target="_blank" rel="noopener">
+        <span data-i18n="nav.cta">Daftar Sekarang</span>
+      </a>
+      <button class="navbar__hamburger" id="hamburgerBtn" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="navbar__mobile-overlay" id="mobileOverlay">
+      <div class="navbar__mobile-menu">
+        <ul>
+          <li><a href="/" class="navbar__mobile-link" data-nav-close data-i18n="nav.home">Home</a></li>
+          <li><a href="/program.html" class="navbar__mobile-link" data-nav-close data-i18n="nav.program">Program</a></li>
+          <li><a href="/about.html" class="navbar__mobile-link" data-nav-close data-i18n="nav.about">Tentang</a></li>
+          <li><a href="/kegiatan.html" class="navbar__mobile-link" data-nav-close data-i18n="nav.activities">Kegiatan</a></li>
+          <li><a href="#footer" class="navbar__mobile-link" data-nav-close data-i18n="nav.contact">Kontak</a></li>
+        </ul>
+        <div class="lang-switcher lang-switcher--mobile">
+          <button class="lang-btn active" data-lang="id" aria-label="Bahasa Indonesia">🇮🇩 ID</button>
+          <button class="lang-btn" data-lang="ja" aria-label="日本語">🇯🇵 JP</button>
+        </div>
+        <a href="https://wa.me/6285640090444?text=Halo%20Fujisaki%20Gakuin,%20saya%20tertarik%20untuk%20mendaftar" class="btn btn--primary btn--full" target="_blank" rel="noopener"><span data-i18n="nav.cta">Daftar Sekarang</span></a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- PAGE HERO -->
+    <section class="page-hero">
+      <div class="page-hero__bg-pattern" aria-hidden="true"></div>
+      <div class="container page-hero__content">
+        <span class="section-label" data-i18n="about.label">Tentang Kami</span>
+        <h1 class="page-hero__title" data-i18n="about.title" data-i18n-html>Profil <span class="text-gradient">Perusahaan</span></h1>
+        <p class="page-hero__subtitle" data-i18n="about.subtitle">Menciptakan generasi muda yang unggul, terampil, dan kompetitif agar siap bersaing di industri Nasional maupun Internasional.</p>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <div class="container">
+        <!-- TENTANG KAMI -->
+        <h2 class="section-title" data-i18n="about.section_title">LPKS FUJISAKI GAKUIN CENTER</h2>
+        <div class="section-underline"></div>
+        <p class="about-text">
+          Adalah Lembaga pelatihan Bahasa Jepang yang Fokus Membimbing siswa/ peserta pelatihan dari Level dasar sampai Mahir agar siap untuk bekerja di Jepang. Tidak hanya membimbing siswa dengan kemampuan Bahasa Jepang, kami juga membekali siswa dengan keterampilan kerja, pengetahuan teknologi, budaya, dan etos kerja di Jepang.
+        </p>
+        <p class="about-text">
+          Berdiri sejak th 2019 dengan kapasitas 300 siswa dan saat ini ada 1668 siswa yang saat ini ada di Jepang (tersebar di berbagai kota di Jepang). Melalui program Magang, Tokutei Ginou, Gijinkoku/ engineering & Study dengan berbagai bidang pekerjaan (Konstruksi, pertanian, peternakan, pengolahan makanan, building cleaning, manufaktur, dsb).
+        </p>
+
+        <!-- DATA PROFIL -->
+        <div class="about-profile reveal-up">
+          <ul class="profile-list">
+            <li><strong data-i18n="profile.name_label">Nama Perusahaan:</strong> <span>LPKS Fujisaki Gakuin Center <br> PT FUJISAKI GLOBAL INSPIRASI</span></li>
+            <li><strong data-i18n="profile.field_label">Bidang:</strong> <span data-i18n="profile.field_val">Sekolah Pelatihan Bahasa Jepang</span></li>
+            <li><strong data-i18n="profile.leader_label">Nama Pimpinan:</strong> <span>SUGENG YATNO</span></li>
+            <li><strong data-i18n="profile.year_label">Tahun Berdiri:</strong> <span>Maret 2019</span></li>
+            <li><strong data-i18n="profile.address_label">Alamat:</strong> <span>Jln Dipo Krembi No 57 Desa Kesugihan Kidul <br> Kec. Kesugihan Kab. Cilacap Prof. Jawa Tengah <br> Post 53274</span></li>
+            <li><strong data-i18n="profile.email_label">Email:</strong> <span>Fujisaki.gakuin1@gmail.com</span></li>
+            <li><strong data-i18n="profile.telp_label">Telp:</strong> <span>(0282) 5567012 / +62-856-4009-0444</span></li>
+            <li><strong data-i18n="profile.jam_label">Jam Operational:</strong> 
+              <span data-i18n="profile.jam_val" data-i18n-html>
+                Senin – Jumat : 08:00 s/d 16:00 <br>
+                Sabtu : 08:00 s/d 12.00 <br>
+                Minggu / Libur Nasional : Libur
+              </span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- VISI & MISI -->
+        <div class="visi-misi reveal-up" style="--delay: 0.1s">
+          <div class="vm-card">
+            <h3 data-i18n="about.visi_title"><span class="material-symbols-outlined">visibility</span> Visi</h3>
+            <p data-i18n="about.visi_desc">Menciptakan generasi muda yang unggul, terampil, dan kompetitif agar siap bersaing di industri Nasional maupun Internasional.</p>
+          </div>
+          <div class="vm-card vm-card--accent">
+            <h3 data-i18n="about.misi_title"><span class="material-symbols-outlined">flag</span> Misi</h3>
+            <ol class="misi-list">
+              <li data-i18n="about.misi.item1">Membekali peserta pelatihan kemampuan Bahasa Jepang dari tingkat dasar sampai mahir secara intensif dan efektif.</li>
+              <li data-i18n="about.misi.item2">Membentuk generasi bangsa yang kompeten dan profesional.</li>
+              <li data-i18n="about.misi.item3">Menjadi Lembaga Pelatihan Kerja Swasta (LPKS) yang berkomitmen memberikan jaminan kualitas program pelatihan yang memenuhi harapan konsumen.</li>
+              <li data-i18n="about.misi.item4">Menjalin kemitraal lokal, regional, nasional dan internasional secara berkesinambungan.</li>
+              <li data-i18n="about.misi.item5">Berkontribusi dalam meningkatkan standar kualitas pembangunan nasional untuk Indonesia yang lebih maju.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MENGAPA MEMILIH KAMI -->
+    <section class="advantages" id="keunggulan">
+      <div class="container advantages__grid">
+        <div class="advantages__content reveal-up">
+          <h2 class="section-title" data-i18n="advantages.title_full" data-i18n-html>
+            Mengapa Memilih <br/><span class="text-gradient">LPK Fujisaki Gakuin Center?</span>
+          </h2>
+          
+          <div class="advantages__list">
+            <div class="advantages__item" style="--delay: 0.1s">
+              <div class="advantages__item-icon">
+                <span class="material-symbols-outlined">verified</span>
+              </div>
+              <div>
+                <h4 class="advantages__item-title" data-i18n="advantages.item1.title">1. Proses RESMI / Legal / Sesuai Prosedur</h4>
+                <p class="advantages__item-desc" data-i18n="advantages.item1.desc">LPKS Fujisaki Gakuin Center berkomitmen untuk mengirimkan tenaga kerja ke Jepang sesuai Prosedur / resmi.</p>
+              </div>
+            </div>
+            
+            <div class="advantages__item" style="--delay: 0.2s">
+              <div class="advantages__item-icon">
+                <span class="material-symbols-outlined">task_alt</span>
+              </div>
+              <div>
+                <h4 class="advantages__item-title" data-i18n="advantages.item2.title">2. Program Pelatihan Jelas</h4>
+                <p class="advantages__item-desc" data-i18n="advantages.item2.desc">Program pelatihan telah terstruktur dari level dasar hingga mahir. Dan pelatihan disesuaikan dengan level Bahasa yang dipelajari.</p>
+              </div>
+            </div>
+            
+            <div class="advantages__item" style="--delay: 0.3s">
+              <div class="advantages__item-icon">
+                <span class="material-symbols-outlined">school</span>
+              </div>
+              <div>
+                <h4 class="advantages__item-title" data-i18n="advantages.item3.title">3. INSTRUKTUR professional</h4>
+                <p class="advantages__item-desc" data-i18n="advantages.item3.desc">Tenaga pelatih / Instruktur / Sensei yang berpengalaman bekerja di Jepang atau Lulusan S1 jurusan Bahasa Jepang yang telah memiliki sertifikasi JLPT Min N3.</p>
+              </div>
+            </div>
+            
+            <div class="advantages__item" style="--delay: 0.4s">
+              <div class="advantages__item-icon">
+                <span class="material-symbols-outlined">record_voice_over</span>
+              </div>
+              <div>
+                <h4 class="advantages__item-title" data-i18n="advantages.item4.title">4. Bimbingan NATIVE</h4>
+                <p class="advantages__item-desc" data-i18n="advantages.item4.desc">LPKS FUJISAKI GAKUIN CENTER rutin mendatangkan Native Speaker / Penutur asli Jepang yang mengajar Bahasa dan budaya jepang secara langsung.</p>
+              </div>
+            </div>
+
+            <div class="advantages__item" style="--delay: 0.5s">
+              <div class="advantages__item-icon">
+                <span class="material-symbols-outlined">apartment</span>
+              </div>
+              <div>
+                <h4 class="advantages__item-title" data-i18n="advantages.item5.title">5. FASILITAS</h4>
+                <p class="advantages__item-desc" data-i18n="advantages.item5.desc">Memiliki fasilitas tempat belajar / ruangan yang nyaman dan perlengkapan pelatihan yang sesuai dengan standar Jepang.</p>
+              </div>
+            </div>
+
+            <div class="advantages__item" style="--delay: 0.6s">
+              <div class="advantages__item-icon">
+                <span class="material-symbols-outlined">handshake</span>
+              </div>
+              <div>
+                <h4 class="advantages__item-title" data-i18n="advantages.item6.title">6. KERJA SAMA LUAS</h4>
+                <p class="advantages__item-desc" data-i18n="advantages.item6.desc">LPKS Fujisaku Gakuin Center bekerja sama langsung dengan perusahaan dalam dan luar negeri untuk pelatihan dan pengiriman tenaga kerja.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="advantages__visual reveal-right">
+          <div class="advantages__image-wrapper">
+            <img 
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAonVwklo5jsP0V34kZpCfjwm_-IkGw_9ZvT4knfkyPedMMIqpnz_ZllLTikmVKqlnHSBeqAh6dtpUPfJN5Q9zPB3LUjx0D9lNicZbfM10HinWEnBCA5xOgQkTdu_SiDJHQ1QNkohkoSbvCb_GB5MEvROgW4WPvbLSGa0TgSB3UG2N-n5AWmhaGjyNIK4d2jWG4HMYMa9_j0l_ClJ952WiGCmHnORVbE0EC5zlFYj_PRFS0ZXw0lKH87qApPX1v-_jiIWssrHRvkDk" 
+              alt="Gedung modern kampus Fujisaki Gakuin dengan sakura"
+              loading="lazy"
+              class="advantages__image"
+            />
+          </div>
+          <div class="advantages__deco-circle" aria-hidden="true"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-final">
+      <div class="container">
+        <div class="cta-final__box">
+          <div class="cta-final__content">
+            <h2 class="cta-final__title" data-i18n="about.cta_title">Mulai Perjalanan Anda Bersama Kami</h2>
+            <p class="cta-final__subtitle" data-i18n="about.cta_subtitle">Konsultasi mengenai pilihan karir dan program yang tepat untuk meraih sukses di Jepang.</p>
+            <a href="https://wa.me/6285640090444?text=Halo%20Fujisaki%20Gakuin,%20saya%20ingin%20konsultasi%20program" class="btn btn--whatsapp btn--lg" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+              </svg>
+              <span data-i18n="hero.btn.wa">Konsultasi via WhatsApp</span>
+            </a>
+          </div>
+          <div class="cta-final__glow cta-final__glow--1" aria-hidden="true"></div>
+          <div class="cta-final__glow cta-final__glow--2" aria-hidden="true"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer" id="footer">
+    <div class="container footer__grid">
+      <div class="footer__about">
+        <div class="footer__logo">LPK Fujisaki Gakuin</div>
+        <p class="footer__desc">Lembaga Pelatihan Kerja terpercaya untuk menjembatani talenta terbaik Indonesia dengan peluang karir profesional di Jepang.</p>
+        <div class="footer__socials">
+          <a href="#" class="footer__social-btn" aria-label="Share"><span class="material-symbols-outlined">share</span></a>
+          <a href="#" class="footer__social-btn" aria-label="Website"><span class="material-symbols-outlined">public</span></a>
+          <a href="mailto:Fujisaki.gakuin1@gmail.com" class="footer__social-btn" aria-label="Email"><span class="material-symbols-outlined">mail</span></a>
+        </div>
+      </div>
+      <div class="footer__links">
+        <h5 class="footer__heading" data-i18n="footer.nav_title">Navigasi</h5>
+        <ul>
+          <li><a href="/" data-i18n="nav.home">Home</a></li>
+          <li><a href="/program.html" data-i18n="nav.program">Program</a></li>
+          <li><a href="/about.html" data-i18n="nav.about">Tentang Kami</a></li>
+          <li><a href="/kegiatan.html" data-i18n="nav.activities">Kegiatan</a></li>
+        </ul>
+      </div>
+      <div class="footer__contact">
+        <h5 class="footer__heading" data-i18n="footer.contact_title">Kontak</h5>
+        <p>📍 Jln Dipo Krembi No 57 Desa Kesugihan Kidul <br> Kec. Kesugihan Kab. Cilacap Prov. Jawa Tengah</p>
+        <p>📞 +62 856-4009-0444</p>
+        <p>✉️ Fujisaki.gakuin1@gmail.com</p>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p data-i18n="footer.copyright">© 2026 LPK Fujisaki Gakuin Center. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Floating WA -->
+  <a href="https://wa.me/6285640090444" class="floating-wa" target="_blank" rel="noopener" aria-label="Chat WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+    </svg>
+    <span class="floating-wa__tooltip">Chat Kami</span>
+  </a>
+
+  <!-- Custom script check -->
+  <script type="module">
+    import { loadHomePage } from './js/content-loader.js';
+    import { loadContact } from './js/content-loader.js';
+    document.addEventListener('DOMContentLoaded', () => {
+      // Basic initialization for scroll reveals
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.reveal-up, .reveal-right').forEach(el => observer.observe(el));
+      
+      // Load contact dynamically
+      loadContact().catch(() => {});
+      
+      // We need to init i18n
+      import('./js/i18n.js').then(module => {
+        module.initI18n();
+      });
+    });
+  </script>
+</body>
+</html>

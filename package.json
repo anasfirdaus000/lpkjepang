@@ -1,0 +1,16 @@
+{
+  "name": "lpk-fujisaki-gakuin",
+  "version": "1.0.0",
+  "description": "LPK Fujisaki Gakuin Center - Website Landing Page",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^5.4.0"
+  },
+  "dependencies": {
+    "firebase": "^12.12.0"
+  }
+}

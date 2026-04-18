@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kegiatan & Berita — LPK Fujisaki Gakuin Center</title>
+  <meta name="description" content="Update kegiatan, berita, dan informasi terbaru dari LPK Fujisaki Gakuin Center." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/pages.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar__container">
+      <a href="/" class="navbar__logo">
+        <span class="navbar__logo-icon">🏯</span>
+        <span class="navbar__logo-text">LPK Fujisaki Gakuin</span>
+      </a>
+      <ul class="navbar__menu" id="navMenu">
+        <li><a href="/" class="navbar__link" data-i18n="nav.home">Home</a></li>
+        <li><a href="/program.html" class="navbar__link" data-i18n="nav.program">Program</a></li>
+        <li><a href="/about.html" class="navbar__link" data-i18n="nav.about">Tentang</a></li>
+        <li><a href="/kegiatan.html" class="navbar__link active" data-i18n="nav.activities">Kegiatan</a></li>
+        <li><a href="/#footer" class="navbar__link" data-i18n="nav.contact">Kontak</a></li>
+      </ul>
+
+      <!-- Language Switcher -->
+      <div class="lang-switcher" id="langSwitcher">
+        <button class="lang-btn active" data-lang="id" aria-label="Bahasa Indonesia">🇮🇩</button>
+        <button class="lang-btn" data-lang="ja" aria-label="日本語">🇯🇵</button>
+      </div>
+
+      <a href="https://wa.me/6285640090444?text=Halo%20Fujisaki%20Gakuin,%20saya%20tertarik%20untuk%20mendaftar" class="btn btn--primary navbar__cta" target="_blank" rel="noopener">
+        <span data-i18n="nav.cta">Daftar Sekarang</span>
+      </a>
+      <button class="navbar__hamburger" id="hamburgerBtn" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="navbar__mobile-overlay" id="mobileOverlay">
+      <div class="navbar__mobile-menu">
+        <ul>
+          <li><a href="/" class="navbar__mobile-link" data-nav-close data-i18n="nav.home">Home</a></li>
+          <li><a href="/program.html" class="navbar__mobile-link" data-nav-close data-i18n="nav.program">Program</a></li>
+          <li><a href="/about.html" class="navbar__mobile-link" data-nav-close data-i18n="nav.about">Tentang</a></li>
+          <li><a href="/kegiatan.html" class="navbar__mobile-link" data-nav-close data-i18n="nav.activities">Kegiatan</a></li>
+          <li><a href="/#footer" class="navbar__mobile-link" data-nav-close data-i18n="nav.contact">Kontak</a></li>
+        </ul>
+        <div class="lang-switcher lang-switcher--mobile">
+          <button class="lang-btn active" data-lang="id" aria-label="Bahasa Indonesia">🇮🇩 ID</button>
+          <button class="lang-btn" data-lang="ja" aria-label="日本語">🇯🇵 JP</button>
+        </div>
+        <a href="https://wa.me/6285640090444" class="btn btn--primary btn--full" target="_blank" rel="noopener"><span data-i18n="nav.cta">Daftar Sekarang</span></a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- PAGE HERO -->
+    <section class="page-hero page-hero--kegiatan">
+      <div class="page-hero__bg-pattern" aria-hidden="true"></div>
+      <div class="container page-hero__content">
+        <span class="section-label" data-i18n="activities.label">News & Activities</span>
+        <h1 class="page-hero__title" data-i18n="page.activities.title" data-i18n-html>Kegiatan & <span class="text-gradient">Berita</span></h1>
+        <p class="page-hero__subtitle" data-i18n="page.activities.subtitle">Update info terbaru seputar kegiatan belajar, event budaya, dan informasi pendaftaran di LPK Fujisaki Gakuin Center.</p>
+      </div>
+    </section>
+
+    <!-- FILTER TABS -->
+    <section class="page-section" style="padding-bottom: 0;">
+      <div class="container">
+        <div class="kegiatan-filter">
+          <button class="kegiatan-filter__btn active" data-filter="all" data-i18n="page.activities.filter_all">Semua</button>
+          <button class="kegiatan-filter__btn" data-filter="Event">Event</button>
+          <button class="kegiatan-filter__btn" data-filter="Culture">Culture</button>
+          <button class="kegiatan-filter__btn" data-filter="Update">Update</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- KEGIATAN LISTING -->
+    <section class="page-section">
+      <div class="container">
+        <div class="kegiatan-grid" id="kegiatanGrid">
+
+          <!-- Card 1 -->
+          <a href="/kegiatan-detail.html?id=1" class="kegiatan-card reveal-up" data-category="Event">
+            <div class="kegiatan-card__image">
+              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAW5KsSWdj9UN3RaJQG6Ztf-3QSAlSMh1f2UTL5LEMEv5UkPDlFL0whnCUgesgmsW8b0xHdNwNl2GLKsphmMzqPma0nNwiZYQXCI0yHO8rI1PvqIkcsoOLVfsS4zuiYxBXiCYNDb6DuKKLxLVhTJQ4RqnYtgRA8DszgCUyoTQHrdFk9UUxjlbJc9PJGcc1xy4y9CDc_nyeLIkfZt7FDN_Ho89VrfrUhUgAflq3q5bbrfoUSkd33FBDjzmHQUvQhW7fBCwaa7dArIKE" alt="Workshop Persiapan Wawancara" loading="lazy" />
+              <span class="kegiatan-card__category">Event</span>
+            </div>
+            <div class="kegiatan-card__body">
+              <div class="kegiatan-card__date">
+                <span class="material-symbols-outlined">calendar_today</span>
+                12 April 2026
+              </div>
+              <h3 class="kegiatan-card__title">Workshop Persiapan Wawancara Perusahaan Jepang</h3>
+              <p class="kegiatan-card__desc">Pelajari etika dan cara menjawab pertanyaan mensesu (wawancara) dengan lancar bersama sensei native.</p>
+              <span class="kegiatan-card__read-more"><span data-i18n="activities.read_more">Baca selengkapnya</span> <span class="material-symbols-outlined">arrow_forward</span></span>
+            </div>
+          </a>
+
+          <!-- Card 2 -->
+          <a href="/kegiatan-detail.html?id=2" class="kegiatan-card reveal-up" data-category="Culture" style="--delay: 0.1s">
+            <div class="kegiatan-card__image">
+              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrjnG8_Ef4rwT-ihqGIkUDtGIl_XwJo8QpVGbwAWMSuDQCH2BJsDUMcGW0MkhFFlMp3ayRY3PD7ZhuR_9eubsi-O_ZJ1tSMduUH27EDlpsmump891bAkuloPB70y1o5-_Fx9jsYeXGmQsYFaDRgm_qyHH1VOLi8eIR212cXWIIpvaUKM5IZE6p8tYnD_umtWEybvsufH2n92PfVFreh1j0nAN7lYbugWfjWBYn3585PIxKiFG1dyhxZ3VcYUuMRZKTlB6Q4RcgBE4" alt="Upacara Minum Teh" loading="lazy" />
+              <span class="kegiatan-card__category kegiatan-card__category--culture">Culture</span>
+            </div>
+            <div class="kegiatan-card__body">
+              <div class="kegiatan-card__date">
+                <span class="material-symbols-outlined">calendar_today</span>
+                8 April 2026
+              </div>
+              <h3 class="kegiatan-card__title">Pengenalan Budaya: Upacara Minum Teh di Kampus</h3>
+              <p class="kegiatan-card__desc">Mengenal lebih dalam filosofi 'Omotenashi' melalui praktek langsung Chado bersama instruktur tamu.</p>
+              <span class="kegiatan-card__read-more"><span data-i18n="activities.read_more">Baca selengkapnya</span> <span class="material-symbols-outlined">arrow_forward</span></span>
+            </div>
+          </a>
+
+          <!-- Card 3 -->
+          <a href="/kegiatan-detail.html?id=3" class="kegiatan-card reveal-up" data-category="Update" style="--delay: 0.2s">
+            <div class="kegiatan-card__image">
+              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQyw7ButzlX7NBgbTBL68zb-U4GzT5ftCbulhG6xJvw9d9rJwCT-hA6SW6yD0rGo6faNuiwEF4MWWo5kshMEV0plRP21SY8RJBuboQ3yHGPEeEBZakVtX9REXpzQkAXJ88k7kNTqRTwh_R1zWjPwkdYQwacmCobuYlqoLh3ELl3ihze3qZ2OrRns5nFGik45gp0iI19blY7QBxz-7eDm1F2gSV_WtSGNWmjdrmDRS4wQTrXGCglybhj8vCG4kL5w8koxCsPpTV91M" alt="Pendaftaran Batch Baru" loading="lazy" />
+              <span class="kegiatan-card__category kegiatan-card__category--update">Update</span>
+            </div>
+            <div class="kegiatan-card__body">
+              <div class="kegiatan-card__date">
+                <span class="material-symbols-outlined">calendar_today</span>
+                1 April 2026
+              </div>
+              <h3 class="kegiatan-card__title">Pembukaan Pendaftaran Batch Baru SSW Food Processing</h3>
+              <p class="kegiatan-card__desc">Segera daftar untuk kuota terbatas pengolahan makanan untuk keberangkatan musim gugur tahun depan.</p>
+              <span class="kegiatan-card__read-more"><span data-i18n="activities.read_more">Baca selengkapnya</span> <span class="material-symbols-outlined">arrow_forward</span></span>
+            </div>
+          </a>
+
+          <!-- Card 4 (bonus content) -->
+          <a href="/kegiatan-detail.html?id=1" class="kegiatan-card reveal-up" data-category="Event" style="--delay: 0.1s">
+            <div class="kegiatan-card__image">
+              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZb96K1b0F7zCpqZJeMU7EYL3iXzHtgMITUme-yfcZgccsupf32N1jThDdKUarbC0_H5Jsy2CvAK3QJBEeOg2dGQLCuL4hJQlnLz5UpmTshcWITqCd5OtrwxYsxTnogcz3onbL2Y3ma4iwPMis3AgOdPbuXTwsaB1GNqCW8_v5kgGDX8jvIPFRyu6c3JopSs4pqDyQJXFtWRWptsmLFi-nvl_6apIpsDXicLbFkf0fkMzQKM6Qf1w7p17EbN8Qx6ujNP-qhSICFGY" alt="Kunjungan Alumni" loading="lazy" />
+              <span class="kegiatan-card__category">Event</span>
+            </div>
+            <div class="kegiatan-card__body">
+              <div class="kegiatan-card__date">
+                <span class="material-symbols-outlined">calendar_today</span>
+                25 Maret 2026
+              </div>
+              <h3 class="kegiatan-card__title">Kunjungan Alumni Batch 12 dari Kyoto</h3>
+              <p class="kegiatan-card__desc">Alumni yang telah berkarir di Jepang kembali untuk berbagi pengalaman dan motivasi kepada peserta pelatihan.</p>
+              <span class="kegiatan-card__read-more"><span data-i18n="activities.read_more">Baca selengkapnya</span> <span class="material-symbols-outlined">arrow_forward</span></span>
+            </div>
+          </a>
+
+          <!-- Card 5 -->
+          <a href="/kegiatan-detail.html?id=2" class="kegiatan-card reveal-up" data-category="Culture" style="--delay: 0.2s">
+            <div class="kegiatan-card__image">
+              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvjATrRe_8EugucnFDEJt-N7UIuCWfpoKFZD7al3sa_T9WEm9veV3AKLu32fxVA3spw1UGdzScnRHLZpZsPkd8E-I41A9DCC8H7jzcu5VFXlajx_HLiKrOOXloBGypjB1ZtVmqF2B093Qc0X0YWR8r86SQvgctfOuOFwxPIIxF85qJgkqpDXaY997Qq7GreP3us4myGFG6WpFj96LkiNO5tl719Ep2j-IK85yodLY2LQEb3hZCBNdi4uVZqo8wK-kBaLY9qVbl5Ds" alt="Workshop Kaligrafi Shodo" loading="lazy" />
+              <span class="kegiatan-card__category kegiatan-card__category--culture">Culture</span>
+            </div>
+            <div class="kegiatan-card__body">
+              <div class="kegiatan-card__date">
+                <span class="material-symbols-outlined">calendar_today</span>
+                18 Maret 2026
+              </div>
+              <h3 class="kegiatan-card__title">Workshop Seni Kaligrafi Shodo untuk Peserta</h3>
+              <p class="kegiatan-card__desc">Pengenalan seni kaligrafi Jepang Shodo sebagai bagian dari program pemahaman budaya dan seni tradisional Jepang.</p>
+              <span class="kegiatan-card__read-more"><span data-i18n="activities.read_more">Baca selengkapnya</span> <span class="material-symbols-outlined">arrow_forward</span></span>
+            </div>
+          </a>
+
+          <!-- Card 6 -->
+          <a href="/kegiatan-detail.html?id=3" class="kegiatan-card reveal-up" data-category="Update" style="--delay: 0.3s">
+            <div class="kegiatan-card__image">
+              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2Bn2JMwizK2xG-PSHmNxqfzkA4gTX9kwiaCPq3DrX85HL17JaJNabi2xjkUnt_Y0weYkiZc8h1cK820N62B6V_uIr03CONsl_bCWBV2AKEGn8-3dK0jr64ivkPRIV2q147xBc4YgxYpfOmBOMem1IvKfpUD29YOcVnC_5WU8WbIJPZShyNdXji9JeV8S91MFJCDHRKN1SrSL46kmEK33RgLpSPYaIInNfyz8qAkBS3829xKklrJBIHUDolgwgRxmUWDhV1VzDGq4" alt="Info Batch Terbaru" loading="lazy" />
+              <span class="kegiatan-card__category kegiatan-card__category--update">Update</span>
+            </div>
+            <div class="kegiatan-card__body">
+              <div class="kegiatan-card__date">
+                <span class="material-symbols-outlined">calendar_today</span>
+                10 Maret 2026
+              </div>
+              <h3 class="kegiatan-card__title">Info Kuota Batch SSW Konstruksi Musim Semi</h3>
+              <p class="kegiatan-card__desc">Update terbaru mengenai ketersediaan kuota untuk sektor konstruksi dengan keberangkatan April 2027.</p>
+              <span class="kegiatan-card__read-more"><span data-i18n="activities.read_more">Baca selengkapnya</span> <span class="material-symbols-outlined">arrow_forward</span></span>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer" id="footer">
+    <div class="container footer__grid">
+      <div class="footer__about">
+        <div class="footer__logo">LPK Fujisaki Gakuin</div>
+        <p class="footer__desc">Lembaga Pelatihan Kerja terpercaya untuk menjembatani talenta terbaik Indonesia dengan peluang karir profesional di Jepang.</p>
+        <div class="footer__socials">
+          <a href="#" class="footer__social-btn" aria-label="Share"><span class="material-symbols-outlined">share</span></a>
+          <a href="#" class="footer__social-btn" aria-label="Website"><span class="material-symbols-outlined">public</span></a>
+          <a href="mailto:Fujisaki.gakuin1@gmail.com" class="footer__social-btn" aria-label="Email"><span class="material-symbols-outlined">mail</span></a>
+        </div>
+      </div>
+      <div class="footer__links">
+        <h5 class="footer__heading" data-i18n="footer.nav_title">Navigasi</h5>
+        <ul>
+          <li><a href="/" data-i18n="nav.home">Home</a></li>
+          <li><a href="/program.html" data-i18n="nav.program">Program</a></li>
+          <li><a href="/about.html" data-i18n="nav.about">Tentang Kami</a></li>
+          <li><a href="/kegiatan.html" data-i18n="nav.activities">Kegiatan</a></li>
+        </ul>
+      </div>
+      <div class="footer__contact">
+        <h5 class="footer__heading" data-i18n="footer.contact_title">Kontak</h5>
+        <p>📍 Jln Dipo Krembi No 57 Desa Kesugihan Kidul <br> Kec. Kesugihan Kab. Cilacap Prov. Jawa Tengah</p>
+        <p>📞 +62 856-4009-0444</p>
+        <p>✉️ Fujisaki.gakuin1@gmail.com</p>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p data-i18n="footer.copyright">© 2026 LPK Fujisaki Gakuin Center. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Floating WA -->
+  <a href="https://wa.me/6285640090444" class="floating-wa" target="_blank" rel="noopener" aria-label="Chat WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    <span class="floating-wa__tooltip">Chat Kami</span>
+  </a>
+
+  <script type="module" src="/js/pages.js"></script>
+</body>
+</html>
