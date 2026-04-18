@@ -3,6 +3,7 @@
    ================================================ */
 import { db } from './firebase-config.js';
 import { collection, doc, getDocs, getDoc, query, orderBy } from 'firebase/firestore';
+import { updateTranslation } from './i18n.js';
 
 // Cache to avoid duplicate fetches
 const cache = {};
@@ -66,8 +67,6 @@ export async function loadContact() {
 export async function loadAbout() {
   const data = await fetchDoc('settings', 'about');
   if (!data) return;
-
-  const { updateTranslation } = await import('./i18n.js');
 
   if (data.desc1) updateTranslation('about.desc1', data.desc1.id, data.desc1.ja);
   if (data.desc2) updateTranslation('about.desc2', data.desc2.id, data.desc2.ja);

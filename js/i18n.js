@@ -371,3 +371,10 @@ export function initI18n() {
     });
   });
 }
+
+
+// Allow dynamically injecting translations from Firebase
+export function updateTranslation(key, idText, jaText) {
+  if (translations.id && idText) translations.id[key] = idText;
+  if (translations.ja && jaText) translations.ja[key] = jaText;
+}
