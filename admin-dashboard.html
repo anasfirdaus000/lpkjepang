@@ -80,7 +80,7 @@
   <main class="admin-main" id="adminMain">
     
     <!-- Admin Language Switcher -->
-    <div class="admin-lang-switcher" style="margin-bottom: 24px; max-width: max-content;">
+    <div class="admin-lang-switcher">
       <button class="admin-lang-btn active" data-lang="id">🇮🇩 Mode Indonesia</button>
       <button class="admin-lang-btn" data-lang="ja">🇯🇵 Mode Jepang</button>
     </div>
@@ -160,15 +160,23 @@
       </div>
 
       <!-- Database Utilities -->
-      <div class="panel-section" style="margin-top: 40px; border-top: 1px solid #eee; padding-top: 30px;">
-        <h3 class="panel-subtitle">Sistem & Sinkronisasi</h3>
-        <p class="panel-desc">Gunakan fitur ini jika data website muncul dalam bentuk kode atau kunci (Key) untuk mengonversi database ke format bilingual yang benar.</p>
-        <div style="margin-top: 20px;">
-          <button class="btn btn--primary" id="repairDbBtn" style="display: flex; align-items: center; gap: 8px;">
-            <span class="material-symbols-outlined">sync</span> Sinkronisasi & Perbaiki Database
+      <div class="system-control-card" style="margin-top: 40px;">
+        <div class="system-control-header">
+          <span class="material-symbols-outlined system-control-icon">terminal</span>
+          <div class="system-control-text">
+            <h3 class="system-control-title">System & Database Synchronization</h3>
+            <p class="system-control-desc">Gunakan fitur ini untuk memperbaiki data yang tampil sebagai kode (Key) dan mengonversi seluruh database ke format bilingual (ID/JA) terbaru.</p>
+          </div>
+        </div>
+        
+        <div class="system-control-actions">
+          <button class="btn-system-sync" id="repairDbBtn">
+            <span class="material-symbols-outlined">sync</span>
+            <span>Sinkronisasi & Perbaiki Database</span>
           </button>
         </div>
-        <div id="seedLog" style="margin-top: 15px; font-family: monospace; font-size: 13px; color: #666; max-height: 150px; overflow-y: auto;"></div>
+
+        <div id="seedLog" class="system-control-log"></div>
       </div>
     </div>
 
@@ -179,30 +187,54 @@
         <p class="panel-desc">Kelola tampilan utama hero di halaman landing page.</p>
       </div>
       <form class="admin-form" id="heroForm">
-        <div class="form-group">
+        <div class="form-group lang-group-id">
           <label>Badge Text</label>
-          <input type="text" id="heroBadge" placeholder="Your Journey Starts Here" />
+          <input type="text" id="heroBadgeId" placeholder="Your Journey Starts Here" />
         </div>
-        <div class="form-group">
+        <div class="form-group lang-group-ja">
+          <label>Badge Text (Japanese)</label>
+          <input type="text" id="heroBadgeJa" placeholder="あなたの旅が始まる" />
+        </div>
+
+        <div class="form-group lang-group-id">
           <label>Judul Hero</label>
-          <input type="text" id="heroTitle" placeholder="Wujudkan Karir ke Jepang..." />
+          <input type="text" id="heroTitleId" placeholder="Wujudkan Karir ke Jepang..." />
         </div>
-        <div class="form-group">
+        <div class="form-group lang-group-ja">
+          <label>Judul Hero (Japanese)</label>
+          <input type="text" id="heroTitleJa" placeholder="" />
+        </div>
+
+        <div class="form-group lang-group-id">
           <label>Highlight Text (warna gradient)</label>
-          <input type="text" id="heroHighlight" placeholder="Jepang" />
+          <input type="text" id="heroHighlightId" placeholder="Jepang" />
         </div>
-        <div class="form-group">
+        <div class="form-group lang-group-ja">
+          <label>Highlight Text (Japanese)</label>
+          <input type="text" id="heroHighlightJa" placeholder="" />
+        </div>
+
+        <div class="form-group lang-group-id">
           <label>Subtitle</label>
-          <textarea id="heroSubtitle" rows="3" placeholder="Raih peluang karir..."></textarea>
+          <textarea id="heroSubtitleId" rows="3" placeholder="Raih peluang karir..."></textarea>
         </div>
+        <div class="form-group lang-group-ja">
+          <label>Subtitle (Japanese)</label>
+          <textarea id="heroSubtitleJa" rows="3" placeholder=""></textarea>
+        </div>
+
         <div class="form-row">
           <div class="form-group">
             <label>Stat Angka</label>
             <input type="text" id="heroStatNumber" placeholder="98%" />
           </div>
-          <div class="form-group">
+          <div class="form-group lang-group-id">
             <label>Stat Label</label>
-            <input type="text" id="heroStatLabel" placeholder="Lulus Sertifikasi..." />
+            <input type="text" id="heroStatLabelId" placeholder="Lulus Sertifikasi..." />
+          </div>
+          <div class="form-group lang-group-ja">
+            <label>Stat Label (Japanese)</label>
+            <input type="text" id="heroStatLabelJa" placeholder="" />
           </div>
         </div>
         <div class="form-group">
@@ -616,15 +648,26 @@
           <input type="text" id="contactWa" placeholder="6285858000088" />
           <small class="form-hint">Tanpa +, spasi, atau strip. Contoh: 6285858000088</small>
         </div>
-        <div class="form-group">
+        <div class="form-group lang-group-id">
           <label>Pesan Default WhatsApp</label>
-          <input type="text" id="contactWaText" placeholder="Halo Fujisaki Gakuin, saya tertarik untuk mendaftar" />
+          <input type="text" id="contactWaTextId" placeholder="Halo Fujisaki Gakuin, saya tertarik untuk mendaftar" />
         </div>
+        <div class="form-group lang-group-ja">
+          <label>Pesan Default WhatsApp (Japanese)</label>
+          <input type="text" id="contactWaTextJa" placeholder="" />
+        </div>
+        
         <hr class="form-divider" />
-        <div class="form-group">
+        
+        <div class="form-group lang-group-id">
           <label>Alamat</label>
-          <input type="text" id="contactAddress" placeholder="Jl. Modern Ikigai No. 8, Jakarta Selatan" />
+          <input type="text" id="contactAddressId" placeholder="Jl. Modern Ikigai No. 8, Jakarta Selatan" />
         </div>
+        <div class="form-group lang-group-ja">
+          <label>Alamat (Japanese)</label>
+          <input type="text" id="contactAddressJa" placeholder="" />
+        </div>
+
         <div class="form-row">
           <div class="form-group"><label>Telepon Display</label><input type="text" id="contactPhone" placeholder="0858-5800-0088" /></div>
           <div class="form-group"><label>Email</label><input type="email" id="contactEmail" placeholder="info@fujisakigakuin.id" /></div>

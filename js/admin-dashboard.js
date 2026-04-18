@@ -133,31 +133,46 @@ setupImageUpload('actImageUpload', 'actImagePreview', 'actImagePlaceholder', 'ac
 async function loadAllData() {
   showLoading(true);
   try {
-    await Promise.all([
+    await Promise.allSettled([
       loadHero(), loadAbout(), loadStats(), loadPrograms(), loadAdvantages(),
       loadTestimonials(), loadGallery(), loadActivities(), loadContact()
     ]);
     updateOverviewStats();
   } catch (e) {
-    console.error(e);
+    console.error('Data load error:', e);
   }
   showLoading(false);
 }
 
+// ---- Language Switcher Listeners ----
+document.querySelectorAll('.admin-lang-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const lang = btn.dataset.lang;
+    document.querySelectorAll('.admin-lang-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    applyAdminLang(lang);
+  });
+});
+
 // ---- Overview Stats ----
 function updateOverviewStats() {
-  const hero = document.getElementById('heroBadge')?.value;
-  document.getElementById('ovHero').textContent = hero ? '✅ Aktif' : '❌ Kosong';
-  const about = document.getElementById('aboutDesc1Id')?.value;
-  document.getElementById('ovAbout').textContent = about ? '✅ Aktif' : '❌ Kosong';
-  document.getElementById('ovStats').textContent = statsData.length;
-  document.getElementById('ovPrograms').textContent = programsData.length;
-  document.getElementById('ovAdvantages').textContent = advantagesData.length;
-  document.getElementById('ovTestimonials').textContent = testimonialsData.length;
-  document.getElementById('ovGallery').textContent = galleryData.length;
-  document.getElementById('ovActivities').textContent = activitiesData.length;
-  const contactWa = document.getElementById('contactWa')?.value;
-  document.getElementById('ovContact').textContent = contactWa ? '✅ Aktif' : '❌ Kosong';
+  const getV = (id) => document.getElementById(id)?.value || '';
+  
+  const heroStatus = (getV('heroTitleId') || getV('heroTitleJa')) ? '✅ Aktif' : '❌ Kosong';
+  document.getElementById('ovHero').textContent = heroStatus;
+  
+  const aboutStatus = (getV('aboutDesc1Id') || getV('aboutDesc1Ja')) ? '✅ Aktif' : '❌ Kosong';
+  document.getElementById('ovAbout').textContent = aboutStatus;
+  
+  document.getElementById('ovStats').textContent = (statsData || []).length;
+  document.getElementById('ovPrograms').textContent = (programsData || []).length;
+  document.getElementById('ovAdvantages').textContent = (advantagesData || []).length;
+  document.getElementById('ovTestimonials').textContent = (testimonialsData || []).length;
+  document.getElementById('ovGallery').textContent = (galleryData || []).length;
+  document.getElementById('ovActivities').textContent = (activitiesData || []).length;
+  
+  const contactStatus = getV('contactWa').length > 5 ? '✅ Aktif' : '❌ Kosong';
+  document.getElementById('ovContact').textContent = contactStatus;
 }
 
 // ---- Repair/Sync Database Button ----
@@ -195,12 +210,20 @@ async function loadHero() {
   const snap = await getDoc(doc(db, 'settings', 'hero'));
   if (snap.exists()) {
     const d = snap.data();
-    document.getElementById('heroBadge').value = d.badge || '';
-    document.getElementById('heroTitle').value = d.title || '';
-    document.getElementById('heroHighlight').value = d.highlight || '';
-    document.getElementById('heroSubtitle').value = d.subtitle || '';
+    const v = (field) => (typeof field === 'object' && field !== null) ? field : { id: field || '', ja: '' };
+    
+    document.getElementById('heroBadgeId').value = v(d.badge).id;
+    document.getElementById('heroBadgeJa').value = v(d.badge).ja;
+    document.getElementById('heroTitleId').value = v(d.title).id;
+    document.getElementById('heroTitleJa').value = v(d.title).ja;
+    document.getElementById('heroHighlightId').value = v(d.highlight).id;
+    document.getElementById('heroHighlightJa').value = v(d.highlight).ja;
+    document.getElementById('heroSubtitleId').value = v(d.subtitle).id;
+    document.getElementById('heroSubtitleJa').value = v(d.subtitle).ja;
     document.getElementById('heroStatNumber').value = d.statNumber || '';
-    document.getElementById('heroStatLabel').value = d.statLabel || '';
+    document.getElementById('heroStatLabelId').value = v(d.statLabel).id;
+    document.getElementById('heroStatLabelJa').value = v(d.statLabel).ja;
+    
     if (d.image) {
       document.getElementById('heroImagePreview').src = d.image;
       document.getElementById('heroImagePreview').style.display = 'block';
@@ -216,15 +239,16 @@ document.getElementById('heroForm').addEventListener('submit', async (e) => {
     const existing = (await getDoc(doc(db, 'settings', 'hero'))).data() || {};
     const image = await handleImageUpload('heroImageFile', existing.image || '');
     await setDoc(doc(db, 'settings', 'hero'), {
-      badge: document.getElementById('heroBadge').value,
-      title: document.getElementById('heroTitle').value,
-      highlight: document.getElementById('heroHighlight').value,
-      subtitle: document.getElementById('heroSubtitle').value,
+      badge: { id: document.getElementById('heroBadgeId').value, ja: document.getElementById('heroBadgeJa').value },
+      title: { id: document.getElementById('heroTitleId').value, ja: document.getElementById('heroTitleJa').value },
+      highlight: { id: document.getElementById('heroHighlightId').value, ja: document.getElementById('heroHighlightJa').value },
+      subtitle: { id: document.getElementById('heroSubtitleId').value, ja: document.getElementById('heroSubtitleJa').value },
       statNumber: document.getElementById('heroStatNumber').value,
-      statLabel: document.getElementById('heroStatLabel').value,
+      statLabel: { id: document.getElementById('heroStatLabelId').value, ja: document.getElementById('heroStatLabelJa').value },
       image
     });
     showToast('Hero section berhasil disimpan!');
+    updateOverviewStats();
   } catch (e) { showToast('Gagal menyimpan: ' + e.message, true); }
   showLoading(false);
 });
@@ -283,18 +307,19 @@ async function loadStats() {
 
 function renderStats() {
   const container = document.getElementById('statsItems');
-  container.innerHTML = statsData.map(s => `
+  container.innerHTML = statsData.map(s => {
+    const sLabel = (typeof s.label === 'object') ? s.label.id : s.label;
+    return `
     <div class="admin-item">
       <span class="material-symbols-outlined admin-item__icon">${s.icon}</span>
       <div class="admin-item__info">
-        <div class="admin-item__title">${s.number}${s.suffix} — ${s.label}</div>
-      </div>
+        <div class="admin-item__title">${s.number}${s.suffix} — ${sLabel}</div>
       <div class="admin-item__actions">
         <button class="btn-admin-icon btn-admin-icon--edit" onclick="editStat('${s.id}')"><span class="material-symbols-outlined">edit</span></button>
         <button class="btn-admin-icon btn-admin-icon--delete" onclick="deleteStat('${s.id}')"><span class="material-symbols-outlined">delete</span></button>
       </div>
     </div>
-  `).join('');
+  `}).join('');
 }
 
 document.getElementById('addStatBtn').addEventListener('click', () => {
@@ -368,12 +393,14 @@ async function loadPrograms() {
 
 function renderPrograms() {
   const container = document.getElementById('programItems');
-  container.innerHTML = programsData.map(p => `
+  container.innerHTML = programsData.map(p => {
+    const pTitle = (typeof p.title === 'object') ? p.title.id : p.title;
+    return `
     <div class="admin-item">
       <span class="material-symbols-outlined admin-item__icon">school</span>
       <div class="admin-item__info">
-        <div class="admin-item__title">${p.title}</div>
-        <div class="admin-item__meta">${p.slug} — ${p.duration || ''}</div>
+        <div class="admin-item__title">${pTitle}</div>
+        <div class="admin-item__meta">${p.slug} — ${ (typeof p.duration === 'object') ? p.duration.id : (p.duration || '') }</div>
       </div>
       ${p.heroImage ? `<img src="${p.heroImage}" class="admin-item__thumb" alt="" />` : ''}
       <div class="admin-item__actions">
@@ -381,7 +408,7 @@ function renderPrograms() {
         <button class="btn-admin-icon btn-admin-icon--delete" onclick="deleteProgram('${p.id}')"><span class="material-symbols-outlined">delete</span></button>
       </div>
     </div>
-  `).join('');
+  `}).join('');
 }
 
 document.getElementById('addProgramBtn').addEventListener('click', () => {
@@ -509,19 +536,22 @@ async function loadAdvantages() {
 
 function renderAdvantages() {
   const container = document.getElementById('advantageItems');
-  container.innerHTML = advantagesData.map(a => `
+  container.innerHTML = advantagesData.map(a => {
+    const aTitle = (typeof a.title === 'object') ? a.title.id : a.title;
+    const aDesc = (typeof a.description === 'object') ? a.description.id : (a.description || '');
+    return `
     <div class="admin-item">
       <span class="material-symbols-outlined admin-item__icon">${a.icon}</span>
       <div class="admin-item__info">
-        <div class="admin-item__title">${a.title}</div>
-        <div class="admin-item__meta">${(a.description || '').substring(0, 60)}...</div>
+        <div class="admin-item__title">${aTitle}</div>
+        <div class="admin-item__meta">${aDesc.substring(0, 60)}...</div>
       </div>
       <div class="admin-item__actions">
         <button class="btn-admin-icon btn-admin-icon--edit" onclick="editAdvantage('${a.id}')"><span class="material-symbols-outlined">edit</span></button>
         <button class="btn-admin-icon btn-admin-icon--delete" onclick="deleteAdvantage('${a.id}')"><span class="material-symbols-outlined">delete</span></button>
       </div>
     </div>
-  `).join('');
+  `}).join('');
 }
 
 document.getElementById('addAdvantageBtn').addEventListener('click', () => {
@@ -758,11 +788,13 @@ async function loadActivities() {
 
 function renderActivities() {
   const container = document.getElementById('activityItems');
-  container.innerHTML = activitiesData.map(a => `
+  container.innerHTML = activitiesData.map(a => {
+    const aTitle = (typeof a.title === 'object') ? a.title.id : a.title;
+    return `
     <div class="admin-item">
       ${a.image ? `<img src="${a.image}" class="admin-item__thumb" alt="" />` : '<span class="material-symbols-outlined admin-item__icon">newspaper</span>'}
       <div class="admin-item__info">
-        <div class="admin-item__title">${a.title}</div>
+        <div class="admin-item__title">${aTitle}</div>
         <div class="admin-item__meta">${a.category} — ${a.date}</div>
       </div>
       <div class="admin-item__actions">
@@ -770,7 +802,7 @@ function renderActivities() {
         <button class="btn-admin-icon btn-admin-icon--delete" onclick="deleteActivity('${a.id}')"><span class="material-symbols-outlined">delete</span></button>
       </div>
     </div>
-  `).join('');
+  `}).join('');
 }
 
 document.getElementById('addActivityBtn').addEventListener('click', () => {
@@ -865,9 +897,13 @@ async function loadContact() {
   const snap = await getDoc(doc(db, 'settings', 'contact'));
   if (snap.exists()) {
     const d = snap.data();
+    const v = (field) => (typeof field === 'object' && field !== null) ? field : { id: field || '', ja: '' };
+    
     document.getElementById('contactWa').value = d.whatsapp || '';
-    document.getElementById('contactWaText').value = d.whatsappText || '';
-    document.getElementById('contactAddress').value = d.address || '';
+    document.getElementById('contactWaTextId').value = v(d.whatsappText).id;
+    document.getElementById('contactWaTextJa').value = v(d.whatsappText).ja;
+    document.getElementById('contactAddressId').value = v(d.address).id;
+    document.getElementById('contactAddressJa').value = v(d.address).ja;
     document.getElementById('contactPhone').value = d.phone || '';
     document.getElementById('contactEmail').value = d.email || '';
   }
@@ -879,12 +915,13 @@ document.getElementById('contactForm').addEventListener('submit', async (e) => {
   try {
     await setDoc(doc(db, 'settings', 'contact'), {
       whatsapp: document.getElementById('contactWa').value,
-      whatsappText: document.getElementById('contactWaText').value,
-      address: document.getElementById('contactAddress').value,
+      whatsappText: { id: document.getElementById('contactWaTextId').value, ja: document.getElementById('contactWaTextJa').value },
+      address: { id: document.getElementById('contactAddressId').value, ja: document.getElementById('contactAddressJa').value },
       phone: document.getElementById('contactPhone').value,
       email: document.getElementById('contactEmail').value
     });
     showToast('Kontak berhasil disimpan!');
+    updateOverviewStats();
   } catch (e) { showToast('Gagal: ' + e.message, true); }
   showLoading(false);
 });
