@@ -13,6 +13,7 @@ export default defineConfig({
         kegiatan: resolve(__dirname, 'kegiatan.html'),
         programDetail: resolve(__dirname, 'program-detail.html'),
         kegiatanDetail: resolve(__dirname, 'kegiatan-detail.html'),
+        about: resolve(__dirname, 'about.html'),
         admin: resolve(__dirname, 'admin.html'),
         adminDashboard: resolve(__dirname, 'admin-dashboard.html'),
       }
