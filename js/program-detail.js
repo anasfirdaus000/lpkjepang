@@ -63,11 +63,15 @@ async function initProgramDetail() {
       <div class="detail-hero__meta-item"><span class="material-symbols-outlined">group</span> ${tVal(seats)}</div>
     `;
 
-    // Overview
-    const curDesc = tVal(program.description);
+    // Overview (Long Description)
     const curOverview = tArr(overview);
-    document.getElementById('overviewContent').innerHTML =
-      `<p>${curDesc}</p>` + curOverview.map(p => `<p>${p}</p>`).join('');
+    const curDesc = tVal(program.description);
+    
+    if (curOverview.length > 0) {
+      document.getElementById('overviewContent').innerHTML = curOverview.map(p => `<p>${p}</p>`).join('');
+    } else {
+      document.getElementById('overviewContent').innerHTML = `<p>${curDesc}</p>`;
+    }
 
     // Curriculum & Materi
     const curCurriculum = tArr(curriculum);

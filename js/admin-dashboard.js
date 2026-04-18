@@ -852,11 +852,19 @@ window.editActivity = function(id) {
   document.getElementById('actSummary').value = v(a.summary).id;
   document.getElementById('actSummaryJa').value = v(a.summary).ja;
   
-  const vArr = (field) => field && field.id ? field : { id: Array.isArray(field)?field:[], ja: [] };
-  document.getElementById('actContent').value = vArr(a.content).id.join('\n\n');
-  document.getElementById('actContentJa').value = vArr(a.content).ja.join('\n\n');
-  document.getElementById('actHighlights').value = vArr(a.highlights).id.join('\n');
-  document.getElementById('actHighlightsJa').value = vArr(a.highlights).ja.join('\n');
+  const vArr = (field) => {
+    if (!field) return { id: [], ja: [] };
+    if (field.id && field.ja) return field;
+    if (Array.isArray(field)) return { id: field, ja: [] };
+    return { id: [], ja: [] };
+  };
+  const toCleanArr = (arr) => arr.map(item => (typeof item === 'object' && item !== null) ? (item.id || '') : item);
+
+  document.getElementById('actContent').value = toCleanArr(vArr(a.content).id).join('\n\n');
+  document.getElementById('actContentJa').value = toCleanArr(vArr(a.content).ja).join('\n\n');
+  document.getElementById('actHighlights').value = toCleanArr(vArr(a.highlights).id).join('\n');
+  document.getElementById('actHighlightsJa').value = toCleanArr(vArr(a.highlights).ja).join('\n');
+  
   if (a.image) {
     document.getElementById('actImagePreview').src = a.image;
     document.getElementById('actImagePreview').style.display = 'block';

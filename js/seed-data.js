@@ -182,38 +182,62 @@ export async function seedAllData(onProgress, overwrite = false) {
     if (!overwrite) {
       const snap = await getDocs(collection(db, collName));
       if (snap.size > 0) {
-        if (onProgress) onProgress(`\u23ED\uFE0F ${collName}: sudah ada, di-skip.`);
+        if (onProgress) onProgress(`⏭️ ${collName}: sudah ada, di-skip.`);
         report.skipped++;
         return;
       }
     } else {
-      // Clear existing first
-      const snap = await getDocs(collection(db, collName));
-      for (const d of snap.docs) {
-        await deleteDoc(doc(db, collName, d.id));
-      }
-      if (onProgress) onProgress(`\uD83E\uDDF9 Membersihkan ${collName}...`);
+      if (onProgress) onProgress(`🧹 Membersihkan ${collName} (sambil menjaga gambar)...`);
     }
 
     for (const item of items) {
       try {
-        if (useSlug && item.slug) {
-          await setDoc(doc(db, collName, item.slug), item);
+        const docId = (useSlug && item.slug) ? item.slug : null;
+        let existingData = {};
+
+        if (docId) {
+          const oldSnap = await getDoc(doc(db, collName, docId));
+          if (oldSnap.exists()) existingData = oldSnap.data();
+        }
+
+        // Preserve images if they belong to Cloudinary (user uploads)
+        const finalItem = { ...item };
+        const imgFields = ['image', 'heroImage', 'aboutImage', 'thumb'];
+        imgFields.forEach(f => {
+          if (existingData[f] && existingData[f].includes('cloudinary')) {
+            finalItem[f] = existingData[f];
+          }
+        });
+
+        if (docId) {
+          await setDoc(doc(db, collName, docId), finalItem);
         } else {
-          await addDoc(collection(db, collName), item);
+          await addDoc(collection(db, collName), finalItem);
         }
       } catch (e) {
         report.errors.push(`${collName}: ${e.message}`);
       }
     }
-    if (onProgress) onProgress(`\u2705 ${collName}: ${items.length} item berhasil disinkronkan.`);
+    if (onProgress) onProgress(`✅ ${collName}: ${items.length} item berhasil disinkronkan.`);
     report.success++;
   }
 
   async function seedSettingsDoc(docId, data) {
     try {
-      await setDoc(doc(db, 'settings', docId), data);
-      if (onProgress) onProgress(`\u2705 settings/${docId}: berhasil disinkronkan.`);
+      const oldSnap = await getDoc(doc(db, 'settings', docId));
+      let existingData = {};
+      if (oldSnap.exists()) existingData = oldSnap.data();
+
+      const finalData = { ...data };
+      const imgFields = ['image', 'heroImage', 'aboutImage'];
+      imgFields.forEach(f => {
+        if (existingData[f] && existingData[f].includes('cloudinary')) {
+          finalData[f] = existingData[f];
+        }
+      });
+
+      await setDoc(doc(db, 'settings', docId), finalData);
+      if (onProgress) onProgress(`✅ settings/${docId}: berhasil disinkronkan.`);
       report.success++;
     } catch (e) {
       report.errors.push(`settings/${docId}: ${e.message}`);
