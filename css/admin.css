@@ -427,3 +427,15 @@ body[data-admin-lang='ja'] .lang-group-id { display: none !important; }
   box-shadow: var(--shadow-sm);
 }
 
+
+/* Admin Lang Toggling */
+[data-admin-lang="id"] .lang-group-ja { display: none !important; }
+[data-admin-lang="id"] .lang-group-id { display: block; }
+[data-admin-lang="ja"] .lang-group-id { display: none !important; }
+[data-admin-lang="ja"] .lang-group-ja { display: block; }
+
+/* Switcher Buttons contrast */
+.admin-lang-switcher { display: flex; gap: 8px; margin-bottom: 24px; max-width: max-content; background: #f0f0f0; padding: 4px; border-radius: 8px; }
+.admin-lang-btn { display: flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 6px; border: none; background: transparent; color: #444; font-weight: 500; cursor: pointer; transition: 0.2s; }
+.admin-lang-btn.active { background: #fff; color: #000; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+

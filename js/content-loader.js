@@ -3,7 +3,10 @@
    ================================================ */
 import { db } from './firebase-config.js';
 import { collection, doc, getDocs, getDoc, query, orderBy } from 'firebase/firestore';
-import { updateTranslation } from './i18n.js';
+import { updateTranslation, getLang } from './i18n.js';
+
+const tVal = (obj) => typeof obj === 'string' ? obj : (obj ? obj[getLang()] || obj.id || '' : '');
+const tArr = (obj) => Array.isArray(obj) && typeof obj[0] === 'string' ? obj : (obj ? obj[getLang()] || obj.id || [] : []);
 
 // Cache to avoid duplicate fetches
 const cache = {};
@@ -155,6 +158,15 @@ export async function loadHomePrograms() {
     const icon = icons[i % icons.length];
     const delay = i * 0.15;
 
+    const pTitle = tVal(p.title);
+    const pDesc = tVal(p.description);
+    const pTagline = tVal(p.tagline);
+    
+    // Inject Translations
+    if (p.title && p.title.id) updateTranslation(`home.prog.${p.slug}.title`, p.title.id, p.title.ja);
+    if (p.description && p.description.id) updateTranslation(`home.prog.${p.slug}.desc`, p.description.id, p.description.ja);
+    if (p.tagline && p.tagline.id) updateTranslation(`home.prog.${p.slug}.tagline`, p.tagline.id, p.tagline.ja);
+
     if (i === 0) {
       // Large Card
       html += `
@@ -163,10 +175,10 @@ export async function loadHomePrograms() {
             <div class="programs__card-icon-wrap programs__card-icon-wrap--blue">
               <span class="material-symbols-outlined">${icon}</span>
             </div>
-            <h3 class="programs__card-title">${p.title}</h3>
-            <p class="programs__card-desc">${p.description || ''}</p>
+            <h3 class="programs__card-title" data-i18n="home.prog.${p.slug}.title">${pTitle}</h3>
+            <p class="programs__card-desc" data-i18n="home.prog.${p.slug}.desc">${pDesc}</p>
             <ul class="programs__card-features">
-              ${(p.features || []).slice(0, 3).map(f => `
+              ${tArr(p.features).slice(0, 3).map(f => `
                 <li><span class="material-symbols-outlined">check_circle</span> ${f}</li>
               `).join('')}
             </ul>
@@ -175,7 +187,7 @@ export async function loadHomePrograms() {
             </a>
           </div>
           <div class="programs__card-bg-image">
-            <img src="${p.heroImage}" alt="${p.title}" loading="lazy" />
+            <img src="${p.heroImage}" alt="${pTitle}" loading="lazy" />
           </div>
         </div>`;
     } else if (i === 1) {
@@ -186,8 +198,8 @@ export async function loadHomePrograms() {
             <div class="programs__card-icon-wrap programs__card-icon-wrap--white">
               <span class="material-symbols-outlined">${icon}</span>
             </div>
-            <h3 class="programs__card-title">${p.title}</h3>
-            <p class="programs__card-desc">${p.tagline || p.description || ''}</p>
+            <h3 class="programs__card-title" data-i18n="home.prog.${p.slug}.title">${pTitle}</h3>
+            <p class="programs__card-desc" data-i18n="home.prog.${p.slug}.tagline">${pTagline || pDesc}</p>
             <a href="/program-detail.html?id=${p.slug}" class="btn btn--white btn--full">
               <span data-i18n="programs.join">Join Program</span>
             </a>
@@ -200,10 +212,10 @@ export async function loadHomePrograms() {
         <div class="programs__card programs__card--wide reveal-up" style="--delay: ${delay}s">
           <div class="programs__card-content">
             <span class="programs__badge">${p.badge || 'Program'}</span>
-            <h3 class="programs__card-title">${p.title}</h3>
-            <p class="programs__card-desc">${p.description || ''}</p>
+            <h3 class="programs__card-title" data-i18n="home.prog.${p.slug}.title">${pTitle}</h3>
+            <p class="programs__card-desc" data-i18n="home.prog.${p.slug}.desc">${pDesc}</p>
             <div class="programs__card-tags">
-              ${(p.benefits || []).slice(0, 2).map(b => `
+              ${tArr(p.benefits).slice(0, 2).map(b => `
                 <div class="programs__tag">
                   <span class="material-symbols-outlined">${b.icon}</span>
                   ${b.title}
@@ -215,7 +227,7 @@ export async function loadHomePrograms() {
             </a>
           </div>
           <div class="programs__card-image">
-            <img src="${p.heroImage}" alt="${p.title}" loading="lazy" />
+            <img src="${p.heroImage}" alt="${pTitle}" loading="lazy" />
           </div>
         </div>`;
     }
@@ -245,17 +257,23 @@ export async function loadAdvantages() {
   const list = document.querySelector('.advantages__list');
   if (!list) return;
 
-  list.innerHTML = items.map((a, i) => `
+  list.innerHTML = items.map((a, i) => {
+    const aTitle = tVal(a.title);
+    const aDesc = tVal(a.description);
+    if (a.title && a.title.id) updateTranslation(`adv.${a.id}.title`, a.title.id, a.title.ja);
+    if (a.description && a.description.id) updateTranslation(`adv.${a.id}.desc`, a.description.id, a.description.ja);
+    
+    return `
     <div class="advantages__item" style="--delay: ${(i + 1) * 0.1}s">
       <div class="advantages__item-icon">
         <span class="material-symbols-outlined">${a.icon}</span>
       </div>
       <div>
-        <h4 class="advantages__item-title">${a.title}</h4>
-        <p class="advantages__item-desc">${a.description}</p>
+        <h4 class="advantages__item-title" data-i18n="adv.${a.id}.title">${aTitle}</h4>
+        <p class="advantages__item-desc" data-i18n="adv.${a.id}.desc">${aDesc}</p>
       </div>
     </div>
-  `).join('');
+  `}).join('');
 }
 
 // ====================================================
@@ -320,18 +338,24 @@ export async function loadHomeActivities() {
 
   // Show max 3 on home
   const shown = items.slice(0, 3);
-  grid.innerHTML = shown.map((a, i) => `
+  grid.innerHTML = shown.map((a, i) => {
+    const aTitle = tVal(a.title);
+    const aSum = tVal(a.summary);
+    if (a.title && a.title.id) updateTranslation(`home.act.${a.id}.title`, a.title.id, a.title.ja);
+    if (a.summary && a.summary.id) updateTranslation(`home.act.${a.id}.sum`, a.summary.id, a.summary.ja);
+    
+    return `
     <a href="/kegiatan-detail.html?id=${a.id}" class="activities__card reveal-up" ${i > 0 ? `style="--delay: ${i * 0.15}s"` : ''}>
       <div class="activities__card-image">
-        <img src="${a.image}" alt="${a.title}" loading="lazy" />
+        <img src="${a.image}" alt="${aTitle}" loading="lazy" />
       </div>
       <div class="activities__card-body">
         <span class="activities__tag">${a.category}</span>
-        <h4 class="activities__card-title">${a.title}</h4>
-        <p class="activities__card-desc">${a.summary}</p>
+        <h4 class="activities__card-title" data-i18n="home.act.${a.id}.title">${aTitle}</h4>
+        <p class="activities__card-desc" data-i18n="home.act.${a.id}.sum">${aSum}</p>
       </div>
     </a>
-  `).join('');
+  `}).join('');
 }
 
 // ====================================================
