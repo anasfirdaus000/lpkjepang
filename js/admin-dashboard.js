@@ -310,11 +310,14 @@ document.getElementById('cancelStat').addEventListener('click', () => {
 window.editStat = function(id) {
   const s = statsData.find(x => x.id === id);
   if (!s) return;
+  const v = (field) => typeof field === 'object' && field !== null ? field : { id: field || '', ja: '' };
+  
   document.getElementById('statId').value = s.id;
   document.getElementById('statIcon').value = s.icon;
   document.getElementById('statNumber').value = s.number;
   document.getElementById('statSuffix').value = s.suffix;
-  document.getElementById('statLabel').value = s.label;
+  document.getElementById('statLabel').value = v(s.label).id;
+  document.getElementById('statLabelJa').value = v(s.label).ja;
   document.getElementById('statFormTitle').textContent = 'Edit Pencapaian';
   document.getElementById('statFormWrap').style.display = 'block';
 };
@@ -337,7 +340,10 @@ document.getElementById('statForm').addEventListener('submit', async (e) => {
       icon: document.getElementById('statIcon').value,
       number: parseInt(document.getElementById('statNumber').value),
       suffix: document.getElementById('statSuffix').value,
-      label: document.getElementById('statLabel').value,
+      label: { 
+        id: document.getElementById('statLabel').value, 
+        ja: document.getElementById('statLabelJa').value 
+      },
       order: statsData.length
     };
     if (id) { await updateDoc(doc(db, 'stats', id), data); }
@@ -402,8 +408,10 @@ window.editProgram = function(id) {
   document.getElementById('progTaglineJa').value = v(p.tagline).ja;
   document.getElementById('progDesc').value = v(p.description).id;
   document.getElementById('progDescJa').value = v(p.description).ja;
-  document.getElementById('progDuration').value = p.duration || '';
-  document.getElementById('progLevel').value = p.level || '';
+  document.getElementById('progDuration').value = v(p.duration).id;
+  document.getElementById('progDurationJa').value = v(p.duration).ja;
+  document.getElementById('progLevel').value = v(p.level).id;
+  document.getElementById('progLevelJa').value = v(p.level).ja;
   document.getElementById('progCertificate').value = p.certificate || '';
   document.getElementById('progSeats').value = p.seats || '';
   
@@ -457,8 +465,8 @@ document.getElementById('programForm').addEventListener('submit', async (e) => {
       tagline: { id: document.getElementById('progTagline').value, ja: document.getElementById('progTaglineJa').value },
       description: { id: document.getElementById('progDesc').value, ja: document.getElementById('progDescJa').value },
       heroImage,
-      duration: document.getElementById('progDuration').value,
-      level: document.getElementById('progLevel').value,
+      duration: { id: document.getElementById('progDuration').value, ja: document.getElementById('progDurationJa').value },
+      level: { id: document.getElementById('progLevel').value, ja: document.getElementById('progLevelJa').value },
       certificate: document.getElementById('progCertificate').value,
       seats: document.getElementById('progSeats').value,
       overview: { 
@@ -529,10 +537,14 @@ document.getElementById('cancelAdvantage').addEventListener('click', () => {
 window.editAdvantage = function(id) {
   const a = advantagesData.find(x => x.id === id);
   if (!a) return;
+  const v = (field) => typeof field === 'object' && field !== null ? field : { id: field || '', ja: '' };
+  
   document.getElementById('advId').value = a.id;
   document.getElementById('advIcon').value = a.icon;
-  document.getElementById('advTitle').value = a.title;
-  document.getElementById('advDesc').value = a.description;
+  document.getElementById('advTitle').value = v(a.title).id;
+  document.getElementById('advTitleJa').value = v(a.title).ja;
+  document.getElementById('advDesc').value = v(a.description).id;
+  document.getElementById('advDescJa').value = v(a.description).ja;
   document.getElementById('advantageFormTitle').textContent = 'Edit Keunggulan';
   document.getElementById('advantageFormWrap').style.display = 'block';
 };
@@ -553,8 +565,8 @@ document.getElementById('advantageForm').addEventListener('submit', async (e) =>
     const id = document.getElementById('advId').value;
     const data = {
       icon: document.getElementById('advIcon').value,
-      title: document.getElementById('advTitle').value,
-      description: document.getElementById('advDesc').value,
+      title: { id: document.getElementById('advTitle').value, ja: document.getElementById('advTitleJa').value },
+      description: { id: document.getElementById('advDesc').value, ja: document.getElementById('advDescJa').value },
       order: advantagesData.length
     };
     if (id) { await updateDoc(doc(db, 'advantages', id), data); }

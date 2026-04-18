@@ -5,8 +5,13 @@ import { db } from './firebase-config.js';
 import { collection, doc, getDocs, getDoc, query, orderBy } from 'firebase/firestore';
 import { updateTranslation, getLang } from './i18n.js';
 
-const tVal = (obj) => typeof obj === 'string' ? obj : (obj ? obj[getLang()] || obj.id || '' : '');
-const tArr = (obj) => Array.isArray(obj) && typeof obj[0] === 'string' ? obj : (obj ? obj[getLang()] || obj.id || [] : []);
+const tVal = (obj) => typeof obj === 'string' ? obj : (obj && typeof obj === 'object') ? (obj[getLang()] || obj.id || '') : '';
+const tArr = (obj) => {
+  if (!obj) return [];
+  if (Array.isArray(obj)) return obj;
+  if (typeof obj === 'object') return obj[getLang()] || obj.id || [];
+  return [];
+};
 
 // Cache to avoid duplicate fetches
 const cache = {};
@@ -127,15 +132,18 @@ export async function loadStats() {
   const grid = document.querySelector('.trust__grid');
   if (!grid) return;
 
-  grid.innerHTML = items.map((s, i) => `
+  grid.innerHTML = items.map((s, i) => {
+    const sLabel = tVal(s.label);
+    if (s.label && s.label.id) updateTranslation(`stats.${s.id || i}.label`, s.label.id, s.label.ja);
+    return `
     <div class="trust__card reveal-up" ${i > 0 ? `style="--delay: ${i * 0.1}s"` : ''}>
       <span class="material-symbols-outlined trust__icon">${s.icon}</span>
       <div class="trust__value">
         <span class="trust__number" data-target="${s.number}">0</span><span class="trust__suffix">${s.suffix}</span>
       </div>
-      <p class="trust__label">${s.label}</p>
+      <p class="trust__label" data-i18n="stats.${s.id || i}.label">${sLabel}</p>
     </div>
-  `).join('');
+  `}).join('');
 }
 
 // ====================================================
@@ -362,18 +370,26 @@ export async function loadHomeActivities() {
 // LOAD ALL FOR HOME PAGE
 // ====================================================
 export async function loadHomePage() {
+  const safeLoad = async (fn, name) => {
+    try {
+      await fn();
+    } catch (e) {
+      console.error(`[Load Error] Gagal merender section ${name}:`, e);
+    }
+  };
+
   try {
     await Promise.all([
-      loadContact(),
-      loadHero(),
-      loadStats(),
-      loadHomePrograms(),
-      loadAdvantages(),
-      loadTestimonials(),
-      loadGallery(),
-      loadHomeActivities()
+      safeLoad(loadContact, 'Contact'),
+      safeLoad(loadHero, 'Hero'),
+      safeLoad(loadStats, 'Stats'),
+      safeLoad(loadHomePrograms, 'Programs'),
+      safeLoad(loadAdvantages, 'Advantages'),
+      safeLoad(loadTestimonials, 'Testimonials'),
+      safeLoad(loadGallery, 'Gallery'),
+      safeLoad(loadHomeActivities, 'Activities')
     ]);
   } catch (e) {
-    console.warn('Firebase belum tersedia, menggunakan konten statis.', e);
+    console.warn('Firebase gagal dimuat dengan Promise.all', e);
   }
 }

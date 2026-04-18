@@ -286,9 +286,13 @@
               <input type="text" id="statSuffix" placeholder="+" />
             </div>
           </div>
-          <div class="form-group">
+          <div class="form-group lang-group-id">
             <label>Label</label>
             <input type="text" id="statLabel" placeholder="Alumni Sukses" />
+          </div>
+          <div class="form-group lang-group-ja">
+            <label>Label (Jepang)</label>
+            <input type="text" id="statLabelJa" placeholder="" />
           </div>
           <div class="form-actions">
             <button type="submit" class="btn-admin-primary"><span class="material-symbols-outlined">save</span> Simpan</button>
@@ -358,8 +362,10 @@
             </div>
           </div>
           <div class="form-row form-row--4">
-            <div class="form-group"><label>Durasi</label><input type="text" id="progDuration" placeholder="6-12 Bulan" /></div>
-            <div class="form-group"><label>Level</label><input type="text" id="progLevel" placeholder="N4-N3" /></div>
+            <div class="form-group lang-group-id"><label>Durasi</label><input type="text" id="progDuration" placeholder="6-12 Bulan" /></div>
+            <div class="form-group lang-group-ja"><label>Durasi (JA)</label><input type="text" id="progDurationJa" placeholder="" /></div>
+            <div class="form-group lang-group-id"><label>Level</label><input type="text" id="progLevel" placeholder="N4-N3" /></div>
+            <div class="form-group lang-group-ja"><label>Level (JA)</label><input type="text" id="progLevelJa" placeholder="" /></div>
             <div class="form-group"><label>Sertifikat</label><input type="text" id="progCertificate" placeholder="SSW Certificate" /></div>
             <div class="form-group"><label>Kapasitas</label><input type="text" id="progSeats" placeholder="30 Peserta/Batch" /></div>
           </div>
@@ -426,13 +432,21 @@
             <label>Icon</label>
             <input type="text" id="advIcon" placeholder="verified" />
           </div>
-          <div class="form-group">
+          <div class="form-group lang-group-id">
             <label>Judul</label>
             <input type="text" id="advTitle" placeholder="Kurikulum Terakreditasi" />
           </div>
-          <div class="form-group">
+          <div class="form-group lang-group-ja">
+            <label>Judul (Jepang)</label>
+            <input type="text" id="advTitleJa" placeholder="" />
+          </div>
+          <div class="form-group lang-group-id">
             <label>Deskripsi</label>
             <textarea id="advDesc" rows="2"></textarea>
+          </div>
+          <div class="form-group lang-group-ja">
+            <label>Deskripsi (Jepang)</label>
+            <textarea id="advDescJa" rows="2"></textarea>
           </div>
           <div class="form-actions">
             <button type="submit" class="btn-admin-primary"><span class="material-symbols-outlined">save</span> Simpan</button>
