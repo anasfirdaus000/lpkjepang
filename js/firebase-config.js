@@ -27,21 +27,36 @@ enableIndexedDbPersistence(db).catch((err) => {
 // Cloudinary config
 export const cloudinaryConfig = {
   cloudName: 'dvpauyqlw',
-  uploadPreset: 'lpk_fujisaki_unsigned' // Create this unsigned preset in Cloudinary dashboard
+  apiKey: '476627687116893',
+  apiSecret: 'LjnjEf34WDNBZiiCnx35u1-L6jQ'
 };
 
 export async function uploadToCloudinary(file) {
+  const timestamp = Math.round((new Date).getTime() / 1000);
+  const folder = 'lpk-fujisaki';
+  
+  // Create signature string
+  const str = 'folder=' + folder + '&timestamp=' + timestamp + cloudinaryConfig.apiSecret;
+  
+  // Calculate SHA-1 hash for signature
+  const msgBuffer = new TextEncoder().encode(str);
+  const hashBuffer = await crypto.subtle.digest('SHA-1', msgBuffer);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  const signature = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+
   const formData = new FormData();
   formData.append('file', file);
-  formData.append('upload_preset', cloudinaryConfig.uploadPreset);
-  formData.append('folder', 'lpk-fujisaki');
+  formData.append('api_key', cloudinaryConfig.apiKey);
+  formData.append('timestamp', timestamp);
+  formData.append('signature', signature);
+  formData.append('folder', folder);
 
   const res = await fetch(`https://api.cloudinary.com/v1_1/${cloudinaryConfig.cloudName}/image/upload`, {
     method: 'POST',
     body: formData
   });
 
-  if (!res.ok) throw new Error('Upload gagal');
+  if (!res.ok) throw new Error('Upload ke Cloudinary gagal, mohon periksa konfigurasi.');
   const data = await res.json();
   return data.secure_url;
 }
