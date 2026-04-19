@@ -33,12 +33,21 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ---- Auth Guard ----
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(auth, async (user) => {
   if (!user) {
     window.location.href = '/admin.html';
     return;
   }
   document.getElementById('adminUserEmail').textContent = user.email;
+
+  // Auto-seed missing data on first load to ensure Dashboard is populated
+  try {
+    const heroSnap = await getDoc(doc(db, 'settings', 'hero'));
+    if (!heroSnap.exists()) {
+      await seedAllData(null, false);
+    }
+  } catch (e) {}
+
   loadAllData();
 });
 
@@ -175,33 +184,7 @@ function updateOverviewStats() {
   document.getElementById('ovContact').textContent = contactStatus;
 }
 
-// ---- Repair/Sync Database Button ----
-document.getElementById('repairDbBtn').addEventListener('click', async () => {
-  if (!confirm('Apakah Anda yakin ingin menyinkronkan ulang seluruh database? Data lama Anda akan diperbarui ke format bilingual (ID/JA) sesuai standar sistem baru. Pastikan Anda telah mencadangkan data penting jika ada.')) return;
-  
-  showLoading(true);
-  const logEl = document.getElementById('seedLog');
-  logEl.innerHTML = '';
-
-  try {
-    const result = await seedAllData((msg) => {
-      const line = document.createElement('div');
-      line.textContent = msg;
-      logEl.appendChild(line);
-      logEl.scrollTop = logEl.scrollHeight;
-    }, true); // true = overwrite mode
-
-    if (result.errors.length > 0) {
-      showToast('Sinkronisasi selesai dengan beberapa error', true);
-    } else {
-      showToast('Database berhasil disinkronkan & diperbaiki!');
-      await loadAllData();
-    }
-  } catch (e) {
-    showToast('Gagal sinkronisasi: ' + e.message, true);
-  }
-  showLoading(false);
-});
+// Button removed
 
 // ====================================================
 // 1. HERO SECTION

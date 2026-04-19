@@ -4,7 +4,7 @@
    ================================================ */
 import { db } from './firebase-config.js';
 import {
-  collection, doc, setDoc, addDoc, getDocs, deleteDoc
+  collection, doc, setDoc, addDoc, getDocs, deleteDoc, getDoc
 } from 'firebase/firestore';
 
 // ====================================================
