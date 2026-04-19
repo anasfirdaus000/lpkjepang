@@ -59,8 +59,8 @@ export async function loadContact() {
   const footerContact = document.querySelector('.footer__contact');
   if (footerContact) {
     footerContact.innerHTML = `
-      <h5 class="footer__heading">Kontak</h5>
-      <p>📍 ${data.address || ''}</p>
+      <h5 class="footer__heading" data-i18n="footer.contact_title">Kontak</h5>
+      <p>📍 ${tVal(data.address)}</p>
       <p>📞 ${data.phone || ''}</p>
       <p>✉️ ${data.email || ''}</p>
     `;
