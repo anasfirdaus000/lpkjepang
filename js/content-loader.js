@@ -38,8 +38,8 @@ async function fetchDoc(collectionName, docId) {
 // CONTACT / WHATSAPP — used across all pages
 // ====================================================
 export async function loadContact() {
-  const data = await fetchDoc('settings', 'contact');
-  if (!data) return;
+  let data = await fetchDoc('settings', 'contact');
+  data = data || {};
 
   const waNumber = data.whatsapp || '6285858000088';
   const waText = encodeURIComponent(data.whatsappText || 'Halo Fujisaki Gakuin, saya tertarik untuk mendaftar');
