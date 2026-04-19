@@ -205,7 +205,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Load Firebase content
   try {
     await loadContact();
-    if (document.getElementById('cardSsw')) {
+    if (document.getElementById('cardMagang') || document.querySelector('.program-list-card')) {
       await loadProgramsPage();
     }
     if (document.getElementById('kegiatanGrid')) {
@@ -213,6 +213,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   } catch (e) {
     console.warn('Firebase belum tersedia, menggunakan konten statis.', e);
+  }
+
+  // Hide page loader
+  const loader = document.getElementById('page-loader');
+  if (loader) {
+    loader.style.opacity = '0';
+    setTimeout(() => loader.remove(), 500);
   }
 
   // Initialize bilingual

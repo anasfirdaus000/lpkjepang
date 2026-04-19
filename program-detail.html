@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
@@ -16,8 +16,11 @@
   <link rel="icon" type="image/png" href="/favicon.png" />
 </head>
 <body>
-
-  <!-- NAVBAR (same as main) -->
+  <!-- Page Loader to prevent flash of old data -->
+  <div id="page-loader" style="position: fixed; inset: 0; background: #ffffff; z-index: 99999; display: flex; align-items: center; justify-content: center; transition: opacity 0.5s ease;">
+    <div style="width: 48px; height: 48px; border: 4px solid #f3f3f3; border-top: 4px solid #d32f2f; border-radius: 50%; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1)); animation: spin 1s linear infinite;"></div>
+    <style>@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }</style>
+  </div>  <!-- NAVBAR (same as main) -->
   <nav class="navbar" id="navbar">
     <div class="navbar__container">
       <a href="/" class="navbar__logo">

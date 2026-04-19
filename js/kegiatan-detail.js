@@ -159,9 +159,16 @@ function initScrollReveal() {
   els.forEach(el => observer.observe(el));
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   initNavbar();
-  initKegiatanDetail();
+  await initKegiatanDetail();
   initScrollReveal();
   initI18n();
+
+  // Hide page loader
+  const loader = document.getElementById('page-loader');
+  if (loader) {
+    loader.style.opacity = '0';
+    setTimeout(() => loader.remove(), 500);
+  }
 });

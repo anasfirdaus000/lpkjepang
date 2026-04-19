@@ -6,13 +6,13 @@ import { getFirestore, enableIndexedDbPersistence } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAds-PUzhjCIeXX6-JI1duxmYVGYQyawgU",
-  authDomain: "lpk-fujisaki.firebaseapp.com",
-  projectId: "lpk-fujisaki",
-  storageBucket: "lpk-fujisaki.firebasestorage.app",
-  messagingSenderId: "817776679001",
-  appId: "1:817776679001:web:40fe7445a255e3de8b3948",
-  measurementId: "G-41N3TJVSZL"
+  apiKey: "AIzaSyA-f8tRMbd3pWqL_dQ0lAtDoJy8ajMliiw",
+  authDomain: "lpk-fujisaki-9e1ff.firebaseapp.com",
+  projectId: "lpk-fujisaki-9e1ff",
+  storageBucket: "lpk-fujisaki-9e1ff.firebasestorage.app",
+  messagingSenderId: "549621172403",
+  appId: "1:549621172403:web:26c542e172c3844ef588c6",
+  measurementId: "G-ZY0G3F7DGT"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -26,7 +26,7 @@ enableIndexedDbPersistence(db).catch((err) => {
 
 // Cloudinary config
 export const cloudinaryConfig = {
-  cloudName: 'doaarwjjs',
+  cloudName: 'dvpauyqlw',
   uploadPreset: 'lpk_fujisaki_unsigned' // Create this unsigned preset in Cloudinary dashboard
 };
 

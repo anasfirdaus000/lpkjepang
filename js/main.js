@@ -395,6 +395,13 @@ document.addEventListener('DOMContentLoaded', () => {
     initCarousel();
     initGallery();
     setLang(getLang());
+    
+    // Hide page loader
+    const loader = document.getElementById('page-loader');
+    if (loader) {
+      loader.style.opacity = '0';
+      setTimeout(() => loader.remove(), 500);
+    }
   });
 
   // Initialize bilingual system
