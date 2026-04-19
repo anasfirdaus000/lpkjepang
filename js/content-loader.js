@@ -66,6 +66,26 @@ export async function loadContact() {
     `;
   }
 
+  // Update footer socials
+  const footerSocials = document.querySelector('.footer__socials');
+  if (footerSocials) {
+    const ig = data.ig || 'https://www.instagram.com/fujisaki.gc?igsh=MWk2eDg4MHhtdXFyZA==';
+    const tiktok = data.tiktok || 'https://www.tiktok.com/@fujisakijapan.official?_r=1&_t=ZS-95dVVF6mTgm';
+    const fb = data.fb || 'https://www.facebook.com/fujisaki.academy?mibextid=LQQJ4d';
+
+    footerSocials.innerHTML = `
+      <a href="${ig}" class="footer__social-btn" aria-label="Instagram" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+      </a>
+      <a href="${tiktok}" class="footer__social-btn" aria-label="TikTok" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path><path d="M15 8v8a4 4 0 0 1-4 4"></path></svg>
+      </a>
+      <a href="${fb}" class="footer__social-btn" aria-label="Facebook" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+      </a>
+    `;
+  }
+
   return data;
 }
 

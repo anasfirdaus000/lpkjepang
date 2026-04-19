@@ -922,6 +922,9 @@ async function loadContact() {
     document.getElementById('contactAddressJa').value = v(d.address).ja;
     document.getElementById('contactPhone').value = d.phone || '';
     document.getElementById('contactEmail').value = d.email || '';
+    document.getElementById('contactIg').value = d.ig || '';
+    document.getElementById('contactTiktok').value = d.tiktok || '';
+    document.getElementById('contactFb').value = d.fb || '';
   }
 }
 
@@ -934,8 +937,11 @@ document.getElementById('contactForm').addEventListener('submit', async (e) => {
       whatsappText: { id: document.getElementById('contactWaTextId').value, ja: document.getElementById('contactWaTextJa').value },
       address: { id: document.getElementById('contactAddressId').value, ja: document.getElementById('contactAddressJa').value },
       phone: document.getElementById('contactPhone').value,
-      email: document.getElementById('contactEmail').value
-    });
+      email: document.getElementById('contactEmail').value,
+      ig: document.getElementById('contactIg').value,
+      tiktok: document.getElementById('contactTiktok').value,
+      fb: document.getElementById('contactFb').value
+    }, { merge: true });
     showToast('Kontak berhasil disimpan!');
     updateOverviewStats();
   } catch (e) { showToast('Gagal: ' + e.message, true); }

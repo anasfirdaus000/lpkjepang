@@ -343,7 +343,7 @@ const translations = {
 };
 
 // Current language
-let currentLang = localStorage.getItem('lpk_lang') || 'ja';
+let currentLang = localStorage.getItem('lpk_lang_v2') || 'ja';
 
 /**
  * Get translation by key
@@ -365,7 +365,7 @@ export function getLang() {
 export function setLang(lang) {
   if (!translations[lang]) return;
   currentLang = lang;
-  localStorage.setItem('lpk_lang', lang);
+  localStorage.setItem('lpk_lang_v2', lang);
   document.documentElement.lang = lang;
 
   // Update all elements with data-i18n
