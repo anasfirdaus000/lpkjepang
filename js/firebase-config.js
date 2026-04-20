@@ -6,13 +6,13 @@ import { getFirestore, enableIndexedDbPersistence } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyA-f8tRMbd3pWqL_dQ0lAtDoJy8ajMliiw",
-  authDomain: "lpk-fujisaki-9e1ff.firebaseapp.com",
-  projectId: "lpk-fujisaki-9e1ff",
-  storageBucket: "lpk-fujisaki-9e1ff.firebasestorage.app",
-  messagingSenderId: "549621172403",
-  appId: "1:549621172403:web:26c542e172c3844ef588c6",
-  measurementId: "G-ZY0G3F7DGT"
+  apiKey: "AIzaSyAds-PUzhjCIeXX6-JI1duxmYVGYQyawgU",
+  authDomain: "lpk-fujisaki.firebaseapp.com",
+  projectId: "lpk-fujisaki",
+  storageBucket: "lpk-fujisaki.firebasestorage.app",
+  messagingSenderId: "817776679001",
+  appId: "1:817776679001:web:40fe7445a255e3de8b3948",
+  measurementId: "G-41N3TJVSZL"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -26,9 +26,9 @@ enableIndexedDbPersistence(db).catch((err) => {
 
 // Cloudinary config
 export const cloudinaryConfig = {
-  cloudName: 'dvpauyqlw',
-  apiKey: '476627687116893',
-  apiSecret: 'LjnjEf34WDNBZiiCnx35u1-L6jQ'
+  cloudName: 'doaarwjjs',
+  apiKey: '792737298387886',
+  apiSecret: 'sj80fmB_w9SVKvieYSfyJ-nJ7Zs'
 };
 
 export async function uploadToCloudinary(file) {
